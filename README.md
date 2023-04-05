@@ -11,7 +11,7 @@
 [shell]: https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html#tag_02_10_02
 
 <details>
-<summary>External functions</summary>
+<summary>External functions : readline, printf, write, malloc, free </summary>
 <div markdown="1">
 
 ### readline
@@ -95,6 +95,26 @@ int main() {
 }
 ```
 
+### write
+Writes a specified number of bytes from a buffer to a file descriptor.   
+```c
+#include <unistd.h>
+#include <fcntl.h>
+
+int main() {
+    int fd = open("test.txt", O_WRONLY | O_CREAT, 0644);
+    if (fd == -1) {
+        return 1;
+    }
+
+    const char *text = "Hello, World!";
+    ssize_t bytes_written = write(fd, text, 13);
+
+    close(fd);
+    return 0;
+}
+```
+
 ### malloc & free
 malloc allocates a specified size of memory in bytes and returns a pointer to the allocated memory. free deallocates previously allocated memory pointed to by the provided pointer.   
 ```c
@@ -119,25 +139,12 @@ int main() {
 }
 ```
 
-### write
-Writes a specified number of bytes from a buffer to a file descriptor.   
-```c
-#include <unistd.h>
-#include <fcntl.h>
+</div>
+</details>
 
-int main() {
-    int fd = open("test.txt", O_WRONLY | O_CREAT, 0644);
-    if (fd == -1) {
-        return 1;
-    }
-
-    const char *text = "Hello, World!";
-    ssize_t bytes_written = write(fd, text, 13);
-
-    close(fd);
-    return 0;
-}
-```
+<details>
+<summary>External functions : access, open, opendir, read </summary>
+<div markdown="1">
 
 ### access
 Checks the access permissions of a file based on the specified mode.   
@@ -174,6 +181,29 @@ int main() {
 }
 ```
 
+### opendir, readdir, closedir
+opendir opens a directory stream, readdir reads entries from the directory stream, and closedir closes the directory stream.   
+```c
+#include <dirent.h>
+#include <stdio.h>
+
+int main() {
+    DIR *dir = opendir(".");
+    if (dir == NULL) {
+        perror("Failed to open directory");
+        return 1;
+    }
+
+    struct dirent *entry;
+    while ((entry = readdir(dir)) != NULL) {
+        printf("Found file: %s\n", entry->d_name);
+    }
+
+    closedir(dir);
+    return 0;
+}
+```
+
 ### read
 Reads a specified number of bytes from a file descriptor into a buffer.   
 ```c
@@ -197,6 +227,13 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+
+<details>
+<summary>External functions : fork, wait, waitpid, execve, dup, pipe </summary>
+<div markdown="1">
 
 ### fork
 Creates a new process by duplicating the calling process, resulting in a parent and child process with separate memory spaces.
@@ -290,6 +327,85 @@ int main() {
 }
 ```
 
+### execve
+Replaces the current process image with a new process image specified by the given file. The new process starts executing at its main() function.
+```c
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    char *argv[] = { "ls", "-l", NULL };
+    char *envp[] = { NULL };
+
+    if (execve("/bin/ls", argv, envp) == -1) {
+        perror("Failed to execute ls");
+    }
+    return 0;
+}
+```
+
+### dup & dup2
+dup creates a new file descriptor that is a duplicate of the specified file descriptor, whereas dup2 duplicates a file descriptor to a specified file descriptor.   
+```c
+#include <fcntl.h>
+#include <unistd.h>
+
+int main() {
+    int fd = open("test.txt", O_RDONLY);
+    int new_fd = dup(fd);
+    // new_fd now refers to the same file as fd.
+
+    int another_fd = open("another.txt", O_RDONLY);
+    dup2(fd, another_fd);
+    // another_fd now refers to the same file as fd, and the previous file is closed.
+
+    close(fd);
+    close(new_fd);
+    close(another_fd);
+    return 0;
+}
+```
+
+### pipe
+Creates a unidirectional pipe, with one end for reading and the other for writing.   
+```c
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    int pipefd[2];
+    if (pipe(pipefd) == -1) {
+        perror("Failed to create pipe");
+        return 1;
+    }
+
+    pid_t pid = fork();
+
+    if (pid == 0) {
+        // Child process
+        close(pipefd[0]); // Close read end
+        write(pipefd[1], "Hello from child!", 17);
+        close(pipefd[1]);
+    } else {
+        // Parent process
+        close(pipefd[1]); // Close write end
+        char buffer[256];
+        ssize_t bytes_read = read(pipefd[0], buffer, sizeof(buffer) - 1);
+        buffer[bytes_read] = '\0';
+        printf("Received from child: %s\n", buffer);
+        close(pipefd[0]);
+    }
+    return 0;
+}
+```
+</div>
+</details>
+
+
+<details>
+<summary>External functions : signal, kill</summary>
+<div markdown="1">
+
 ### signal
 Sets a function to handle a specific signal. When the signal is received, the specified handler function is called.   
 ```c
@@ -377,6 +493,14 @@ int main() {
 }
 ```
 
+</div>
+</details>
+
+
+<details>
+<summary>External functions : exit, strerror & perror </summary>
+<div markdown="1">
+
 ### exit
 Terminates the calling process and returns the specified exit status.   
 ```c
@@ -388,6 +512,31 @@ int main() {
     exit(0);
 }
 ```
+
+### strerror & perror
+strerror returns a string describing an error number, and perror prints a string describing the last error encountered.   
+```c
+#include <errno.h>
+#include <string.h>
+#include <stdio.h>
+
+int main() {
+    FILE *file = fopen("nonexistent.txt", "r");
+    if (file == NULL) {
+        printf("Error: %s\n", strerror(errno));
+        perror("Failed to open nonexistent.txt");
+    }
+    return 0;
+}
+```
+
+</div>
+</details>
+
+
+<details>
+<summary>External functions : getcwd, chdir, stat, unlink </summary>
+<div markdown="1">
 
 ### getcwd
 Gets the current working directory and stores it in the provided buffer.
@@ -454,118 +603,14 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
 
-### execve
-Replaces the current process image with a new process image specified by the given file. The new process starts executing at its main() function.
-```c
-#include <unistd.h>
-#include <stdio.h>
 
-int main() {
-    char *argv[] = { "ls", "-l", NULL };
-    char *envp[] = { NULL };
+<details>
+<summary>External functions : isatty, ttyname, ttyslot, ioctl, getenv, tcsetattr </summary>
+<div markdown="1">
 
-    if (execve("/bin/ls", argv, envp) == -1) {
-        perror("Failed to execute ls");
-    }
-    return 0;
-}
-```
-
-### dup & dup2
-dup creates a new file descriptor that is a duplicate of the specified file descriptor, whereas dup2 duplicates a file descriptor to a specified file descriptor.   
-```c
-#include <fcntl.h>
-#include <unistd.h>
-
-int main() {
-    int fd = open("test.txt", O_RDONLY);
-    int new_fd = dup(fd);
-    // new_fd now refers to the same file as fd.
-
-    int another_fd = open("another.txt", O_RDONLY);
-    dup2(fd, another_fd);
-    // another_fd now refers to the same file as fd, and the previous file is closed.
-
-    close(fd);
-    close(new_fd);
-    close(another_fd);
-    return 0;
-}
-```
-
-### pipe
-Creates a unidirectional pipe, with one end for reading and the other for writing.   
-```c
-#include <unistd.h>
-#include <stdio.h>
-
-int main() {
-    int pipefd[2];
-    if (pipe(pipefd) == -1) {
-        perror("Failed to create pipe");
-        return 1;
-    }
-
-    pid_t pid = fork();
-
-    if (pid == 0) {
-        // Child process
-        close(pipefd[0]); // Close read end
-        write(pipefd[1], "Hello from child!", 17);
-        close(pipefd[1]);
-    } else {
-        // Parent process
-        close(pipefd[1]); // Close write end
-        char buffer[256];
-        ssize_t bytes_read = read(pipefd[0], buffer, sizeof(buffer) - 1);
-        buffer[bytes_read] = '\0';
-        printf("Received from child: %s\n", buffer);
-        close(pipefd[0]);
-    }
-    return 0;
-}
-```
-
-### opendir, readdir, closedir
-opendir opens a directory stream, readdir reads entries from the directory stream, and closedir closes the directory stream.   
-```c
-#include <dirent.h>
-#include <stdio.h>
-
-int main() {
-    DIR *dir = opendir(".");
-    if (dir == NULL) {
-        perror("Failed to open directory");
-        return 1;
-    }
-
-    struct dirent *entry;
-    while ((entry = readdir(dir)) != NULL) {
-        printf("Found file: %s\n", entry->d_name);
-    }
-
-    closedir(dir);
-    return 0;
-}
-```
-
-### strerror & perror
-strerror returns a string describing an error number, and perror prints a string describing the last error encountered.   
-```c
-#include <errno.h>
-#include <string.h>
-#include <stdio.h>
-
-int main() {
-    FILE *file = fopen("nonexistent.txt", "r");
-    if (file == NULL) {
-        printf("Error: %s\n", strerror(errno));
-        perror("Failed to open nonexistent.txt");
-    }
-    return 0;
-}
-```
 
 ### isatty
 Checks if a given file descriptor is associated with a terminal device.   
@@ -677,6 +722,13 @@ int main() {
     return 0;
 }
 ```
+</div>
+</details>
+
+
+<details>
+<summary>External functions : tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs </summary>
+<div markdown="1">
 
 ### tgetent
 Loads the termcap entry for a terminal into a provided buffer.   
