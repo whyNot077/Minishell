@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/05 19:38:35 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/05 19:46:11 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,15 +40,20 @@ $(NAME): $(OBJECTS)
 clean:
 	$(RM) $(OBJECTS)
 	$(RM) $(OBJECTS:.o=.d)
+	@echo -e "$(YELLOW)object files deleted!$(DEFAULT)"
 
 fclean: clean
 	@$(RM) $(EXEC)
+	@echo -e "$(PINK)all deleted!$(DEFAULT)"
 
 re:
 	@make fclean
 	@make all
 
-.PHONY: all clean fclean re
+norm:
+	norminette -R CheckDefine
+
+.PHONY: all clean fclean re norm
 
 -include $(OBJECTS:.o=.d)
 
