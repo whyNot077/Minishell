@@ -10,8 +10,9 @@
 [posix]: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/contents.html
 [shell]: https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html#tag_02_10_02
 
+### External Functions
 <details>
-<summary>External functions : readline, printf, write, malloc, free </summary>
+<summary>readline, printf, write, malloc, free </summary>
 <div markdown="1">
 
 ### readline
@@ -143,7 +144,7 @@ int main() {
 </details>
 
 <details>
-<summary>External functions : access, open, opendir, read </summary>
+<summary>access, open, opendir, read </summary>
 <div markdown="1">
 
 ### access
@@ -232,7 +233,7 @@ int main() {
 
 
 <details>
-<summary>External functions : fork, wait, waitpid, execve, dup, pipe </summary>
+<summary>fork, wait, waitpid, execve, dup, pipe </summary>
 <div markdown="1">
 
 ### fork
@@ -403,7 +404,7 @@ int main() {
 
 
 <details>
-<summary>External functions : signal, kill</summary>
+<summary>signal, kill</summary>
 <div markdown="1">
 
 ### signal
@@ -498,7 +499,7 @@ int main() {
 
 
 <details>
-<summary>External functions : exit, strerror & perror </summary>
+<summary>exit, strerror & perror </summary>
 <div markdown="1">
 
 ### exit
@@ -535,7 +536,7 @@ int main() {
 
 
 <details>
-<summary>External functions : getcwd, chdir, stat, unlink </summary>
+<summary>getcwd, chdir, stat, unlink </summary>
 <div markdown="1">
 
 ### getcwd
@@ -608,7 +609,7 @@ int main() {
 
 
 <details>
-<summary>External functions : isatty, ttyname, ttyslot, ioctl, getenv, tcsetattr </summary>
+<summary>isatty, ttyname, ttyslot, ioctl, getenv, tcsetattr </summary>
 <div markdown="1">
 
 
@@ -727,7 +728,7 @@ int main() {
 
 
 <details>
-<summary>External functions : tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs </summary>
+<summary>tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs </summary>
 <div markdown="1">
 
 ### tgetent
