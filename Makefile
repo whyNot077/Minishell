@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/05 21:11:08 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/05 21:12:01 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ $(NAME): $(OBJECTS)
 clean:
 	@$(RM) $(OBJECTS)
 	@$(RM) $(OBJECTS:.o=.d)
-	@echo -e "$(YELLOW)object files deleted!$(DEFAULT)"
+	@echo -e "$(BLUE)object files deleted!$(DEFAULT)"
 
 fclean: clean
 	@$(RM) $(EXEC)
