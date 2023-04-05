@@ -858,3 +858,28 @@ int main() {
 
 </div>
 </details>
+
+### Setting
+**install brew**  
+```
+rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew && export PATH=$HOME/.brew/bin:$PATH && brew update && echo "export PATH=$HOME/.brew/bin:$PATH" >> ~/.zshrc
+```
+
+**install readline**  
+```
+brew install readline && mkdir $HOME/.brew && curl -fsSLhttps://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C $HOME/.brew
+mkdir -p /tmp/.$(whoami)-brew-locks
+mkdir -p $HOME/.brew/var/homebrew
+ln -s /tmp/.$(whoami)-brew-locks $HOME/.brew/var/homebrew/locks
+export PATH="$HOME/.brew/bin:$PATH"
+```
+
+**upgrade brew**
+```
+brew update && brew upgrade
+```
+
+**upgrade bash**
+```
+brew install bash
+```
