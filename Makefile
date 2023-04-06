@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/06 15:31:34 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/06 15:32:24 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,18 +20,18 @@ RM              = rm -f
 EXEC            = minishell
 SRCS_PATH       = ./srcs/
 
-MAIN_PATH    = ./main/
-MAIN_SRCS    = main.c
-MAIN         = $(addprefix $(MAIN_PATH), $(MAIN_SRCS))
+MAIN_PATH  	    = ./main/
+MAIN_SRCS       = main.c
+MAIN            = $(addprefix $(MAIN_PATH), $(MAIN_SRCS))
 
 PARSING_PATH    = ./parsing/
 PARSING_SRCS    = init.c
 PARSING         = $(addprefix $(PARSING_PATH), $(PARSING_SRCS))
 
-UTILS_PATH    = ./utils/
-UTILS_SRCS    = linked_list.c\
-				destroy.c
-UTILS         = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
+UTILS_PATH      = ./utils/
+UTILS_SRCS      = linked_list.c\
+			    	destroy.c
+UTILS           = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
 
 EXECUTE_PATH    = ./execute/
 EXECUTE_SRCS    = execute.c
