@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/06 15:32:24 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/06 18:38:09 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,11 +68,11 @@ $(NAME): $(OBJECTS)
 clean:
 	@$(RM) $(OBJECTS)
 	@$(RM) $(OBJECTS:.o=.d)
-	@echo -e "$(BLUE)delete object files!$(DEFAULT)"
+	@echo -e "$(PINK)delete object files!$(DEFAULT)"
 
 fclean: clean
 	@$(RM) $(EXEC)
-	@echo -e "$(PINK)delete all!$(DEFAULT)"
+	@echo -e "$(YELLOW)delete all!$(DEFAULT)"
 
 re:
 	@make fclean

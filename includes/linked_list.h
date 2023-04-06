@@ -6,12 +6,12 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:22:34 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/06 15:22:35 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:46:31 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LINKED_LIST_H
-# define LINKED_LIST_H
+#ifndef TREE_H
+# define TREE_H
 
 typedef struct node {
 	char		*data;
