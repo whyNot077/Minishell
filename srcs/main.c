@@ -2,6 +2,7 @@
 
 int main() {
     char *line;
+	init();
     while ((line = readline("Enter a command: ")) != NULL) {
         if (strcmp(line, "clear_history") == 0) {
             rl_clear_history();

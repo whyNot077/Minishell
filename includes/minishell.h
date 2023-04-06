@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:35:37 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/05 18:43:56 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/06 14:04:53 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 #include <sys/ioctl.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "parsing.h"
 
 # define RED "\033[1;31m"
 # define PINK "\033[1;35m"
