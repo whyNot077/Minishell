@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+         #
+#    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/04/06 19:22:40 by hyojocho         ###   ########.fr        #
-=======
-#    Updated: 2023/04/06 18:59:06 by minkim3          ###   ########.fr        #
->>>>>>> 92fb2a32712ab212e5c6520dce4f8c4a34a8f78f
+#    Updated: 2023/04/06 19:43:05 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +16,10 @@ COMFILE_FLAGS   = -lreadline -L${HOME}/.brew/opt/readline/lib
 OBJ_FLAGS       = -I${HOME}/.brew/opt/readline/include
 NAME            = minishell
 RM              = rm -f
+
+P_LIBFT			= ./libft/
+A_LIBFT         = libft.a
+LIBFT			= $(addprefix $(P_LIBFT), $(A_LIBFT))
 
 EXEC            = minishell
 SRCS_PATH       = ./srcs/
@@ -69,7 +69,8 @@ DEFAULT         = \033[0m
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	@$(CC) $(CFLAGS) $(COMFILE_FLAGS) $(OBJECTS) -o $(EXEC)
+	@make -C $(P_LIBFT)
+	@$(CC) $(CFLAGS) $(COMFILE_FLAGS) $(OBJECTS) $(LIBFT) -o $(EXEC)
 	@echo -e "$(GREEN)create $(EXEC)!$(DEFAULT)"
 
 %.o: %.c $(HEADER)
@@ -78,10 +79,11 @@ $(NAME): $(OBJECTS)
 clean:
 	@$(RM) $(OBJECTS)
 	@$(RM) $(OBJECTS:.o=.d)
+	@make clean -C $(P_LIBFT)
 	@echo -e "$(PINK)delete object files!$(DEFAULT)"
 
 fclean: clean
-	@$(RM) $(EXEC)
+	@$(RM) $(EXEC) $(LIBFT)
 	@echo -e "$(YELLOW)delete all!$(DEFAULT)"
 
 re:

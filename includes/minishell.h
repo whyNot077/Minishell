@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/05 13:35:37 by minkim3           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/04/06 19:16:27 by hyojocho         ###   ########.fr       */
-=======
-/*   Updated: 2023/04/06 18:58:34 by minkim3          ###   ########.fr       */
->>>>>>> 92fb2a32712ab212e5c6520dce4f8c4a34a8f78f
+/*   Created: 2023/04/06 19:26:53 by minkim3           #+#    #+#             */
+/*   Updated: 2023/04/06 19:33:40 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +31,9 @@
 # include <readline/history.h>
 # include "parsing.h"
 # include "execute.h"
-<<<<<<< HEAD
 # include "built_in.h"
-=======
+# include "../libft/libft.h"
 # include "binary_tree.h"
-# include "structure.h"
->>>>>>> 92fb2a32712ab212e5c6520dce4f8c4a34a8f78f
 
 # define RED "\033[1;31m"
 # define PINK "\033[1;35m"
