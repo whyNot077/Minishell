@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
+#    By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/06 15:32:24 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/06 19:22:40 by hyojocho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,15 @@ EXECUTE_PATH    = ./execute/
 EXECUTE_SRCS    = execute.c
 EXECUTE         = $(addprefix $(EXECUTE_PATH), $(EXECUTE_SRCS))
 
+BUILT_IN_PATH    = ./built_in/
+BUILT_IN_SRCS    = built_in.c
+BUILT_IN         = $(addprefix $(BUILT_IN_PATH), $(BUILT_IN_SRCS))
+
 SOURCES         = $(addprefix $(SRCS_PATH), $(MAIN))\
 				  $(addprefix $(SRCS_PATH), $(PARSING))\
 				  $(addprefix $(SRCS_PATH), $(UTILS))\
-				  $(addprefix $(SRCS_PATH), $(EXECUTE))
+				  $(addprefix $(SRCS_PATH), $(EXECUTE))\
+				  $(addprefix $(SRCS_PATH), $(BUILT_IN))
 
 OBJECTS         = $(SOURCES:.c=.o)
 
