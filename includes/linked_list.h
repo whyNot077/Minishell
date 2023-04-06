@@ -1,8 +1,5 @@
 #ifndef LINKED_LIST_H
 # define LINKED_LIST_H
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
 
 typedef struct node {
 	char		*data;
