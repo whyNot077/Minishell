@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/06 13:32:14 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/06 13:32:55 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ all: $(NAME)
 
 $(NAME): $(OBJECTS)
 	@$(CC) $(CFLAGS) $(COMFILE_FLAGS) $(OBJECTS) -o $(EXEC)
-	@echo -e "$(GREEN)$(EXEC) created!$(DEFAULT)"
+	@echo -e "$(GREEN)create $(EXEC)!$(DEFAULT)"
 
 %.o: %.c $(HEADER)
 	@$(CC) $(CFLAGS) $(OBJ_FLAGS) -c $< -o $@
