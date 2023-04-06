@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/06 15:20:45 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/06 15:29:05 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ RM              = rm -f
 EXEC            = minishell
 SRCS_PATH       = ./srcs/
 SRCS            = main.c
-SOURCES         = $(addprefix $(SRCS_PATH), $(SRCS))
 
 PARSING_PATH    = ./parsing/
 PARSING_SRCS    = init.c
@@ -31,9 +30,16 @@ UTILS_SRCS    = linked_list.c\
 				destroy.c
 UTILS         = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
 
-OBJECTS         = $(SOURCES:.c=.o)\
-                  $(PARSING:.c=.o)\
-				  $(UTILS:.c=.o)
+EXECUTE_PATH    = ./execute/
+EXECUTE_SRCS    = execute.c
+EXECUTE         = $(addprefix $(EXECUTE_PATH), $(EXECUTE_SRCS))
+
+SOURCES         = $(addprefix $(SRCS_PATH), $(SRCS))\
+				  $(addprefix $(SRCS_PATH), $(PARSING))\
+				  $(addprefix $(SRCS_PATH), $(UTILS))\
+				  $(addprefix $(SRCS_PATH), $(EXECUTE))
+
+OBJECTS         = $(SOURCES:.c=.o)
 
 HEADER_PATH     = ./includes/
 S_HEADER        = minishell.h\

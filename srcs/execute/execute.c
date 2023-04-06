@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/06 15:29:20 by minkim3          ###   ########.fr       */
+/*   Created: 2023/04/06 15:25:38 by minkim3           #+#    #+#             */
+/*   Updated: 2023/04/06 15:28:21 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-int main() {
-	init();
-	printf("hello world\n");
-	execute();
-    return 0;
+void execute(void)
+{
+	printf("execute\n");
 }

@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 14:01:27 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/06 15:03:13 by minkim3          ###   ########.fr       */
+/*   Created: 2023/04/06 15:26:23 by minkim3           #+#    #+#             */
+/*   Updated: 2023/04/06 15:29:47 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#ifndef EXECUTE_H
+# define EXECUTE_H
 
-void	init(void)
-{
-	list *linked_list;
+void	execute(void);
 
-	linked_list = create_linkedlist();
-	add_data(linked_list, "hahaha\n");
-	add_data(linked_list, "hehehe\n");
-	display_list(linked_list);
-}
+#endif
