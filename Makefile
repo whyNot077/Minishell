@@ -6,7 +6,11 @@
 #    By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/04/06 19:22:40 by hyojocho         ###   ########.fr        #
+=======
+#    Updated: 2023/04/06 18:59:06 by minkim3          ###   ########.fr        #
+>>>>>>> 92fb2a32712ab212e5c6520dce4f8c4a34a8f78f
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +33,10 @@ PARSING_SRCS    = init.c
 PARSING         = $(addprefix $(PARSING_PATH), $(PARSING_SRCS))
 
 UTILS_PATH      = ./utils/
-UTILS_SRCS      = linked_list.c\
-			    	destroy.c
+UTILS_SRCS      = binary_tree.c\
+					linked_queue.c\
+					linked_stack.c\
+					remove_recursive.c
 UTILS           = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
 
 EXECUTE_PATH    = ./execute/
@@ -50,8 +56,7 @@ SOURCES         = $(addprefix $(SRCS_PATH), $(MAIN))\
 OBJECTS         = $(SOURCES:.c=.o)
 
 HEADER_PATH     = ./includes/
-S_HEADER        = minishell.h\
-				  linked_list.h
+S_HEADER        = minishell.h
 HEADER          = $(addprefix $(HEADER_PATH), $(S_HEADER))
 
 RED             = \033[1;31m
@@ -73,11 +78,11 @@ $(NAME): $(OBJECTS)
 clean:
 	@$(RM) $(OBJECTS)
 	@$(RM) $(OBJECTS:.o=.d)
-	@echo -e "$(BLUE)delete object files!$(DEFAULT)"
+	@echo -e "$(PINK)delete object files!$(DEFAULT)"
 
 fclean: clean
 	@$(RM) $(EXEC)
-	@echo -e "$(PINK)delete all!$(DEFAULT)"
+	@echo -e "$(YELLOW)delete all!$(DEFAULT)"
 
 re:
 	@make fclean
