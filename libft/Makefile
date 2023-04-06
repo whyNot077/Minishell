@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/03 13:37:57 by minkim3           #+#    #+#              #
-#    Updated: 2023/03/20 15:27:26 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/06 19:55:15 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,14 @@ SRCS_BONUS = linked_list/ft_lstnew_bonus.c\
 			linked_list/ft_lstclear_bonus.c\
 			linked_list/ft_lstiter_bonus.c\
 			linked_list/ft_lstmap_bonus.c
+
+RED             = \033[1;31m
+PINK            = \033[1;35m
+GREEN           = \033[1;32m
+YELLOW          = \033[1;33m
+BLUE            = \033[1;34m
+DEFAULT         = \033[0m
+
 OBJS        = $(SRCS:.c=.o)
 OBJS_BONUS  = $(SRCS_BONUS:.c=.o)
 
@@ -91,22 +99,23 @@ endif
 all: $(NAME)
 	
 $(NAME): $(OBJECTS)
-	$(AR) $@ $^
+	@$(AR) $@ $^
+	@echo -e "$(BLUE)create $(NAME)!$(DEFAULT)"
 
 bonus:
-	make WITH_BONUS=1 all
+	@make WITH_BONUS=1 all
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:      
-	$(RM) $(OBJS) $(OBJS_BONUS)
+	@$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re:
-	make fclean
-	make all
+	@make fclean
+	@make all
 
 .PHONY: all clean fclean re bonus
