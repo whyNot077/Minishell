@@ -6,16 +6,13 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:35:37 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/06 14:04:53 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/06 14:37:18 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 #include <signal.h>
 #include <errno.h>
@@ -30,6 +27,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "parsing.h"
+#include "linked_list.h"
 
 # define RED "\033[1;31m"
 # define PINK "\033[1;35m"
