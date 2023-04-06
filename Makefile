@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/06 14:08:06 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/06 15:20:45 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,18 @@ PARSING_PATH    = ./parsing/
 PARSING_SRCS    = init.c
 PARSING         = $(addprefix $(PARSING_PATH), $(PARSING_SRCS))
 
+UTILS_PATH    = ./utils/
+UTILS_SRCS    = linked_list.c\
+				destroy.c
+UTILS         = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
+
 OBJECTS         = $(SOURCES:.c=.o)\
-                  $(PARSING:.c=.o)
+                  $(PARSING:.c=.o)\
+				  $(UTILS:.c=.o)
 
 HEADER_PATH     = ./includes/
-S_HEADER        = minishell.h
+S_HEADER        = minishell.h\
+				  linked_list.h
 HEADER          = $(addprefix $(HEADER_PATH), $(S_HEADER))
 
 RED             = \033[1;31m

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:33 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/06 14:49:01 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:08:09 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int		insert_data_to_the_index(list *linked_list, int index, char *data)
 		linked_list->headnode = new_node;
 		return (1);
 	}
-	before_node = get_node(linked_list, index - 1);
+	before_node = get_node_by_the_index(linked_list, index - 1);
 	if (before_node == NULL)
 		return (0);
 	new_node->next = before_node->next;
@@ -129,7 +129,7 @@ int		remove_node(list *linked_list, int index)
 		free(remove_node);
 		return (1);
 	}
-	before_node = get_node(linked_list, index - 1);
+	before_node = get_node_by_the_index(linked_list, index - 1);
 	if (before_node == NULL)
 		return (0);
 	remove_node = before_node->next;
@@ -155,7 +155,7 @@ void	display_list(list *linked_list)
 	printf("\ndisplay_list\n");
 	while (dummy)
 	{
-		printf("[%d] %d ", index++, dummy->data);
+		printf("[%d] %s ", index++, dummy->data);
 		dummy = dummy->next;
 	}
 	printf("\n");

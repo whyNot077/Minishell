@@ -6,28 +6,31 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 13:35:37 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/06 14:37:18 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/06 15:03:47 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-#include <unistd.h>
-#include <signal.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <term.h>
-#include <termios.h>
-#include <sys/wait.h>
-#include <sys/resource.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/ioctl.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "parsing.h"
-#include "linked_list.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <unistd.h>
+# include <signal.h>
+# include <errno.h>
+# include <fcntl.h>
+# include <term.h>
+# include <termios.h>
+# include <sys/wait.h>
+# include <sys/resource.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <sys/ioctl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "parsing.h"
+# include "linked_list.h"
 
 # define RED "\033[1;31m"
 # define PINK "\033[1;35m"
