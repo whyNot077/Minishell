@@ -6,15 +6,9 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/06 15:31:43 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/06 18:49:45 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int main() {
-	init();
-	printf("hello world\n");
-	execute();
-    return 0;
-}
