@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:55:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 17:55:37 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/07 20:05:24 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ t_token	*create_tokens_by_lexical_analysis(const char *input)
 	}
 	handle_remaining_buffer(buffer, buffer_index, tokens, &token_index);
 	tokens[token_index].value = NULL;
-	special_tokens(tokens, token_index);
+	tokens = special_tokens(tokens, token_index);
 	return (tokens);
 }
