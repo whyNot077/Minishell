@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:55:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 20:05:24 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/07 22:03:40 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	handle_buffer(char *buffer, int *buffer_index, t_token *tokens,
 	if (*buffer_index > 0)
 	{
 		buffer[*buffer_index] = '\0';
-		tokens[(*token_index)++] = *create_token(buffer);
+		tokens[(*token_index)++].value = ft_strdup(buffer);
 		*buffer_index = 0;
 	}
 }
@@ -32,7 +32,7 @@ static void	handle_operator(const char *input, int i, t_token *tokens,
 	{
 		operator_str[0] = input[i];
 		operator_str[1] = '\0';
-		tokens[(*token_index)++] = *create_token(operator_str);
+		tokens[(*token_index)++].value = ft_strdup(operator_str);
 	}
 }
 
@@ -42,7 +42,7 @@ static void	handle_remaining_buffer(char *buffer, int buffer_index,
 	if (buffer_index > 0)
 	{
 		buffer[buffer_index] = '\0';
-		tokens[(*token_index)++] = *create_token(buffer);
+		tokens[(*token_index)++].value = ft_strdup(buffer);
 		type_of_token(tokens, *token_index - 1);
 	}
 }
@@ -55,7 +55,7 @@ t_token	*create_tokens_by_lexical_analysis(const char *input)
 	int		token_index;
 	int		i;
 
-	tokens = (t_token *)malloc(MAX_TOKENS * sizeof(t_token));
+	tokens = ft_calloc(MAX_TOKENS, sizeof(t_token));
 	if (tokens == NULL)
 		error_exit("malloc error");
 	buffer_index = 0;

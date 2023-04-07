@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:55:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 20:51:48 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/07 21:46:55 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ t_token	*special_tokens(t_token *tokens, int token_index)
 	if (new_tokens == NULL)
 		error_exit("malloc failed");
 	new_tokens = copy_tokens(tokens, new_tokens, token_index, count);
-	free_tokens(tokens);
+	free_tokens(&tokens);
 	return (new_tokens);
 }

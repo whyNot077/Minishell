@@ -6,12 +6,13 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/07 17:56:44 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/07 21:35:49 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC              = cc
-CFLAGS          = -Wall -Wextra -Werror -MMD -fsanitize=address
+CFLAGS          = -Wall -Wextra -Werror -MMD
+# CFLAGS          = -Wall -Wextra -Werror -MMD -fsanitize=address
 COMFILE_FLAGS   = -lreadline -L${HOME}/.brew/opt/readline/lib
 OBJ_FLAGS       = -I${HOME}/.brew/opt/readline/include
 NAME            = minishell
@@ -28,9 +29,9 @@ MAIN_PATH  	    = ./main/
 MAIN_SRCS       = main.c read_input.c check_argc.c error.c
 MAIN            = $(addprefix $(MAIN_PATH), $(MAIN_SRCS))
 
-PARSING_PATH    = ./parsing/
-PARSING_SRCS    = init.c token.c lexical_analysis.c special_tokens.c
-PARSING         = $(addprefix $(PARSING_PATH), $(PARSING_SRCS))
+TOKEN_PATH    = ./token/
+TOKEN_SRCS    = token.c lexical_analysis.c special_tokens.c
+TOKEN         = $(addprefix $(TOKEN_PATH), $(TOKEN_SRCS))
 
 UTILS_PATH      = ./utils/
 UTILS_SRCS      = binary_tree.c remove_recursive.c
@@ -45,7 +46,7 @@ BUILT_IN_SRCS    = built_in.c
 BUILT_IN         = $(addprefix $(BUILT_IN_PATH), $(BUILT_IN_SRCS))
 
 SOURCES         = $(addprefix $(SRCS_PATH), $(MAIN))\
-				  $(addprefix $(SRCS_PATH), $(PARSING))\
+				  $(addprefix $(SRCS_PATH), $(TOKEN))\
 				  $(addprefix $(SRCS_PATH), $(UTILS))\
 				  $(addprefix $(SRCS_PATH), $(EXECUTE))\
 				  $(addprefix $(SRCS_PATH), $(BUILT_IN))

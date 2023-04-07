@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:47:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 15:47:34 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/07 21:35:43 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include <sys/ioctl.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "parsing.h"
+# include "token.h"
 # include "execute.h"
 # include "built_in.h"
 # include "../libft/libft.h"

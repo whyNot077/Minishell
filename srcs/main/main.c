@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 20:58:22 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/07 22:04:28 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ int	main(int argc, char *argv[], char *envp[])
 			break ;
 		tokens = create_tokens_by_lexical_analysis(input);
 		if (tokens == NULL)
-			break ;
+			error_exit("malloc error");
 		free(input);
-		free_tokens(tokens);
+		free_tokens(&tokens);
 	}
+	// system("leaks --list minishell > tmp.txt");
 	return (0);
 }
