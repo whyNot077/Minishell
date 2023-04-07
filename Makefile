@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/07 17:49:26 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/07 17:56:44 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ MAIN_SRCS       = main.c read_input.c check_argc.c error.c
 MAIN            = $(addprefix $(MAIN_PATH), $(MAIN_SRCS))
 
 PARSING_PATH    = ./parsing/
-PARSING_SRCS    = init.c token.c lexical_analysis.c
+PARSING_SRCS    = init.c token.c lexical_analysis.c special_tokens.c
 PARSING         = $(addprefix $(PARSING_PATH), $(PARSING_SRCS))
 
 UTILS_PATH      = ./utils/
