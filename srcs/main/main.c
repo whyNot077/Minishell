@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 13:58:47 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/07 14:04:07 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char *read_input(void)
     return (input);
 }
 
-int	main(void)
+int	main(int argc, char *argv[], char *envp[])
 {
     char	*input;
 
