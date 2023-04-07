@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:07:14 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 14:07:30 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/07 15:41:25 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MAIN_H
 
 char	*read_input(void);
+int		check_argc(int argc, char *argv[]);
 
 #endif
 

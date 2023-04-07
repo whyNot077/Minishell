@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:26:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 14:07:49 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/07 15:38:59 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,10 @@
 # define BLUE "\033[1;34m"
 # define CYAN "\033[1;36m"
 # define DEFAULT "\033[0m"
+
+enum e_definition
+{
+	ERROR = -1
+};
 
 #endif
