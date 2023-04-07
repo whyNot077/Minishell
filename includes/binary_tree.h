@@ -12,18 +12,4 @@ void		levelorder(binarytree *tree);
 void		display_tree(binarytree *tree);
 void		destroy_tree(binarytree **tree);
 
-//linked queue
-queue		*create_queue(void);
-int			enqueue(queue *list, tree_node *data);
-tree_node	*dequeue(queue *list);
-void		display_queue(queue *list);
-void		destroy_queue(queue **list);
-
-//linked stack
-stack		*create_stack(void);
-int			push(stack *list, tree_node *data);
-int			pop(stack *list);
-void		display_stack(stack *list);
-void		destroy_stack(stack **list);
-
 #endif

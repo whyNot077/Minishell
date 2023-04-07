@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/07 15:41:40 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/07 17:08:53 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ EXEC            = minishell
 SRCS_PATH       = ./srcs/
 
 MAIN_PATH  	    = ./main/
-MAIN_SRCS       = main.c read_input.c check_argc.c
+MAIN_SRCS       = main.c read_input.c check_argc.c token.c lexical_analysis.c
 MAIN            = $(addprefix $(MAIN_PATH), $(MAIN_SRCS))
 
 PARSING_PATH    = ./parsing/
@@ -33,10 +33,7 @@ PARSING_SRCS    = init.c
 PARSING         = $(addprefix $(PARSING_PATH), $(PARSING_SRCS))
 
 UTILS_PATH      = ./utils/
-UTILS_SRCS      = binary_tree.c\
-					linked_queue.c\
-					linked_stack.c\
-					remove_recursive.c
+UTILS_SRCS      = binary_tree.c remove_recursive.c
 UTILS           = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
 
 EXECUTE_PATH    = ./execute/
