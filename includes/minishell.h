@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:26:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 14:03:01 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/07 14:07:49 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # include "built_in.h"
 # include "../libft/libft.h"
 # include "binary_tree.h"
+# include "main.h"
 
 # define RED "\033[1;31m"
 # define PINK "\033[1;35m"

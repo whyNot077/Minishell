@@ -1,34 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 14:09:35 by minkim3          ###   ########.fr       */
+/*   Created: 2023/04/07 14:07:14 by minkim3           #+#    #+#             */
+/*   Updated: 2023/04/07 14:07:30 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#ifndef MAIN_H
+# define MAIN_H
 
-int	main(int argc, char *argv[], char *envp[])
-{
-	char	*input;
+char	*read_input(void);
 
-	if (argc != 1)
-	{
-		(void)argv;
-		(void)envp;
-		printf("Usage: ./minishell");
-		return (0);
-	}
-	while (1)
-	{
-		printf("%sMinishell >%s", BLUE, DEFAULT);
-		input = read_input();
-		if (input == NULL)
-			break ;
-	}
-	return (0);
-}
+#endif
+
