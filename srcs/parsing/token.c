@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:09:12 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 17:37:48 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/07 17:50:25 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_token	*create_token(const char *value)
 	t_token	*token;
 
 	token = (t_token *)malloc(sizeof(t_token));
+	if (token == NULL)
+		error_exit("malloc failed");
 	token->value = ft_strdup(value);
 	return (token);
 }

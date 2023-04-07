@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:55:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 17:38:21 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/07 17:53:04 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ static void	handle_remaining_buffer(char *buffer, int buffer_index,
 	}
 }
 
+// static void	special_tokens(t_token *tokens, int token_index)
+// {
+// 	// >> << && ||
+
+// }
+
 t_token	*create_tokens_by_lexical_analysis(const char *input)
 {
 	t_token	*tokens;
@@ -56,6 +62,8 @@ t_token	*create_tokens_by_lexical_analysis(const char *input)
 	int		i;
 
 	tokens = (t_token *)malloc(MAX_TOKENS * sizeof(t_token));
+	if (tokens == NULL)
+		error_exit("malloc error");
 	buffer_index = 0;
 	token_index = 0;
 	i = -1;
@@ -72,5 +80,6 @@ t_token	*create_tokens_by_lexical_analysis(const char *input)
 	}
 	handle_remaining_buffer(buffer, buffer_index, tokens, &token_index);
 	tokens[token_index].value = NULL;
+	// special_tokens(tokens, token_index);
 	return (tokens);
 }

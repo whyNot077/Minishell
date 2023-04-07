@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 17:35:59 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/07 17:41:30 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(int argc, char *argv[], char *envp[])
 		if (input == NULL)
 			break ;
 		tokens = create_tokens_by_lexical_analysis(input);
+		if (tokens == NULL)
+			break ;
 		for (i = 0; tokens[i].value != NULL; i++)
 			printf("type: %d, value: %s\n", tokens[i].type, tokens[i].value);
 		free(input);
