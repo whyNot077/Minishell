@@ -16,6 +16,7 @@ char	*read_input(void)
 {
 	char	*input;
 
+	printf("%sMinishell >%s", BLUE, DEFAULT);
 	input = readline(" ");
 	if (input && *input)
 		add_history(input);
