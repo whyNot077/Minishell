@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/08 13:57:21 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/08 13:59:55 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		input = read_input();
 		tokens = create_tokens_by_lexical_analysis(input);
-		if (tokens == NULL)
-			error_exit("malloc error");
 		free(input);
 		free_tokens(&tokens);
 	}
