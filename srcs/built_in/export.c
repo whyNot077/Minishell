@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in.c                                         :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 17:02:06 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/07 19:56:59 by hyojocho         ###   ########.fr       */
+/*   Created: 2023/04/07 18:25:24 by hyojocho          #+#    #+#             */
+/*   Updated: 2023/04/07 19:31:50 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	built_in(void)
+void	export(char **args)
 {
-	if (ft_strcmp(g_cmd[0], "echo") == 0)
-		echo();
-	else if (ft_strcmp(g_cmd[0], "cd") == 0)
-		cd();
-	else if (ft_strcmp(g_cmd[0], "pwd") == 0)
-		pwd();
-	else if (ft_strcmp(g_cmd[0], "export") == 0)
-		export();
-	else if (ft_strcmp(g_cmd[0], "unset") == 0)
-		unset();
-	else if (ft_strcmp(g_cmd[0], "env") == 0)
-		env();
-	else if (ft_strcmp(g_cmd[0], "exit") == 0)
-		ft_exit();
-	// printf("built_in\n");
+	
 }
