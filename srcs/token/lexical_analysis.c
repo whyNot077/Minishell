@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:55:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 22:03:40 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/08 14:11:35 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,33 +47,39 @@ static void	handle_remaining_buffer(char *buffer, int buffer_index,
 	}
 }
 
-t_token	*create_tokens_by_lexical_analysis(const char *input)
+static void	process_input(const char *input, t_token *tokens, int *token_index)
 {
-	t_token	*tokens;
 	char	buffer[MAX_INPUT_SIZE];
 	int		buffer_index;
-	int		token_index;
 	int		i;
 
-	tokens = ft_calloc(MAX_TOKENS, sizeof(t_token));
-	if (tokens == NULL)
-		error_exit("malloc error");
 	buffer_index = 0;
-	token_index = 0;
 	i = -1;
 	while (input[++i] != '\0')
 	{
 		if (is_operator(input[i]))
 		{
-			handle_buffer(buffer, &buffer_index, tokens, &token_index);
-			handle_operator(input, i, tokens, &token_index);
-			type_of_token(tokens, token_index - 1);
+			handle_buffer(buffer, &buffer_index, tokens, token_index);
+			handle_operator(input, i, tokens, token_index);
+			type_of_token(tokens, *token_index - 1);
 		}
 		else
 			buffer[buffer_index++] = input[i];
 	}
-	handle_remaining_buffer(buffer, buffer_index, tokens, &token_index);
-	tokens[token_index].value = NULL;
+	handle_remaining_buffer(buffer, buffer_index, tokens, token_index);
+	tokens[*token_index].value = NULL;
+}
+
+t_token	*create_tokens_by_lexical_analysis(const char *input)
+{
+	t_token	*tokens;
+	int		token_index;
+
+	token_index = 0;
+	tokens = ft_calloc(MAX_TOKENS, sizeof(t_token));
+	if (tokens == NULL)
+		error_exit("malloc error");
+	process_input(input, tokens, &token_index);
 	tokens = special_tokens(tokens, token_index);
 	return (tokens);
 }
