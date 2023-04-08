@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:02:22 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/08 20:42:02 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/08 21:27:53 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		is_quote_char(char c);
 int		is_backslash(char c);
 int		find_quote_to_the_end(char *buffer, int *buffer_index,
 			const char *input, int *i);
+void	buffer_to_token_value(char *buffer, int *buffer_index, t_token *tokens,
+			int *token_index);
 void	read_input_until_finding_the_quote(char quote_char, char *buffer,
 			int *buffer_index);
 int		num_of_special_tokens(t_token *tokens, int token_index);

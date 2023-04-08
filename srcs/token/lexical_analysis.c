@@ -6,13 +6,13 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:55:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/08 21:15:06 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/08 21:32:29 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	buffer_to_token_value(char *buffer, int *buffer_index,
+void	buffer_to_token_value(char *buffer, int *buffer_index,
 		t_token *tokens, int *token_index)
 {
 	if (*buffer_index > 0)
@@ -47,6 +47,7 @@ static void	handle_remaining_buffer(char *buffer, int buffer_index,
 		tokens[(*token_index)++].value = ft_strdup(buffer);
 		type_of_token(tokens, *token_index - 1);
 	}
+	tokens[*token_index].value = NULL;
 }
 
 static void	process_input(const char *input, t_token *tokens, int *token_index)
@@ -65,9 +66,11 @@ static void	process_input(const char *input, t_token *tokens, int *token_index)
 			buffer_to_token_value(buffer, &buffer_index, tokens, token_index);
 			quote_char = input[i];
 			if (find_quote_to_the_end(buffer, &buffer_index, input, &i) == FALSE)
-				read_input_until_finding_the_quote(quote_char, buffer, &buffer_index);
+				read_input_until_finding_the_quote(quote_char, \
+					buffer, &buffer_index);
 			buffer_to_token_value(buffer, &buffer_index, tokens, token_index);
-			return ;
+			if (input[i] == '\0')
+				return ;
 		}
 		else if (is_operator(input[i]))
 		{
@@ -78,7 +81,6 @@ static void	process_input(const char *input, t_token *tokens, int *token_index)
 			buffer[buffer_index++] = input[i];
 	}
 	handle_remaining_buffer(buffer, buffer_index, tokens, token_index);
-	tokens[*token_index].value = NULL;
 }
 
 t_token	*create_tokens_by_lexical_analysis(const char *input)
