@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:09:12 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 22:00:08 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/08 14:16:09 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,12 @@ void	free_tokens(t_token **tokens_ptr)
 	tokens = *tokens_ptr;
 	if (tokens == NULL)
 		return ;
-	for (i = 0; tokens[i].value != NULL; i++)
+	i = 0;
+	while (tokens[i].value != NULL)
 	{
 		free(tokens[i].value);
 		tokens[i].value = NULL;
+		i++;
 	}
 	free(tokens);
 	*tokens_ptr = NULL;

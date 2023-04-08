@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:02:22 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 21:52:28 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/08 14:14:42 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		is_space(char c);
 void	type_of_token(t_token *tokens, int token_index);
 t_token	*create_tokens_by_lexical_analysis(const char *input);
 t_token	*special_tokens(t_token *tokens, int token_index);
+int		is_special_token(char *token);
+int		num_of_special_tokens(t_token *tokens, int token_index);
 void	free_tokens(t_token **tokens_ptr);
 
 #endif
