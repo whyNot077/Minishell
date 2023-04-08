@@ -6,19 +6,20 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:55:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/08 14:11:35 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/08 18:30:57 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	handle_buffer(char *buffer, int *buffer_index, t_token *tokens,
-		int *token_index)
+static void	buffer_to_token_value(char *buffer, int *buffer_index,
+		t_token *tokens, int *token_index)
 {
 	if (*buffer_index > 0)
 	{
 		buffer[*buffer_index] = '\0';
 		tokens[(*token_index)++].value = ft_strdup(buffer);
+		type_of_token(tokens, *token_index - 1);
 		*buffer_index = 0;
 	}
 }
@@ -33,6 +34,7 @@ static void	handle_operator(const char *input, int i, t_token *tokens,
 		operator_str[0] = input[i];
 		operator_str[1] = '\0';
 		tokens[(*token_index)++].value = ft_strdup(operator_str);
+		type_of_token(tokens, *token_index - 1);
 	}
 }
 
@@ -57,11 +59,16 @@ static void	process_input(const char *input, t_token *tokens, int *token_index)
 	i = -1;
 	while (input[++i] != '\0')
 	{
-		if (is_operator(input[i]))
+		if (is_quote_char(input[i]))
 		{
-			handle_buffer(buffer, &buffer_index, tokens, token_index);
+			buffer_to_token_value(buffer, &buffer_index, tokens, token_index);
+			handle_quotes(input, &i, buffer, &buffer_index);
+			buffer_to_token_value(buffer, &buffer_index, tokens, token_index);
+		}
+		else if (is_operator(input[i]))
+		{
+			buffer_to_token_value(buffer, &buffer_index, tokens, token_index);
 			handle_operator(input, i, tokens, token_index);
-			type_of_token(tokens, *token_index - 1);
 		}
 		else
 			buffer[buffer_index++] = input[i];
@@ -80,6 +87,11 @@ t_token	*create_tokens_by_lexical_analysis(const char *input)
 	if (tokens == NULL)
 		error_exit("malloc error");
 	process_input(input, tokens, &token_index);
+	for (int i = 0; tokens[i].value != NULL; i++)
+		printf("token[%d].value = %s\n", i, tokens[i].value);
 	tokens = special_tokens(tokens, token_index);
+	printf("\nafter special_tokens\n");
+	for (int i = 0; tokens[i].value != NULL; i++)
+		printf("token[%d].value = %s\n", i, tokens[i].value);
 	return (tokens);
 }

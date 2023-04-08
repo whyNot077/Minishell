@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 14:13:45 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/08 14:14:11 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/08 15:50:12 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,14 @@ int	num_of_special_tokens(t_token *tokens, int token_index)
 					num_of_special_tokens++;
 	}
 	return (num_of_special_tokens);
+}
+
+int	is_quote_char(char c)
+{
+	return (c == '"' || c == '\'');
+}
+
+int	is_backslash(char c)
+{
+	return (c == '\\');
 }
