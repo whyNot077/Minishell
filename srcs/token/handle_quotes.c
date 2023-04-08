@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 15:54:20 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/08 18:31:43 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/08 21:13:28 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,53 +27,52 @@ static char	*get_line(char quote_char)
 	}
 }
 
-static void	read_input_until_find_quote(char quote_char, char *buffer,
-		int *buffer_index)
-{
-	char	*line;
-	int		i;
-	int		flag;
-
-	flag = 0;
-	while (1)
-	{
-		line = get_line(quote_char);
-		i = 0;
-		while (line[i] != '\0')
-		{
-			if (line[i] == quote_char)
-				flag = 1;
-			else
-				buffer[(*buffer_index)++] = line[i];
-			i++;
-		}
-		free(line);
-		if (flag == 1)
-		{
-			buffer[(*buffer_index)++] = quote_char;
-			break ;
-		}
-	}
-}
-
-void	handle_quotes(const char *input, int *i, char *buffer,
-		int *buffer_index)
+int	find_quote_to_the_end(char *buffer, int *buffer_index,
+		const char *input, int *i)
 {
 	char	quote_char;
 
 	quote_char = input[*i];
 	buffer[(*buffer_index)++] = quote_char;
 	(*i)++;
-	while (input[*i] != quote_char)
+	while (input[*i] != '\0' && input[*i] != quote_char)
 	{
-		if (input[*i] == '\0')
-		{
-			read_input_until_find_quote(quote_char, buffer, buffer_index);
-			return ;
-		}
-		else
-			buffer[(*buffer_index)++] = input[*i];
+		buffer[(*buffer_index)++] = input[*i];
 		(*i)++;
+	}
+	if (input[*i] == quote_char)
+	{
+		buffer[(*buffer_index)++] = quote_char;
+		buffer[(*buffer_index)] = '\0';
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+void	read_input_until_finding_the_quote(char quote_char, char *buffer,
+		int *buffer_index)
+{
+	char *line;
+	int i;
+	int find;
+
+	find = FALSE;
+	buffer[(*buffer_index)++] = '\n';
+	while (!find)
+	{
+		line = get_line(quote_char);
+		i = 0;
+		while (line[i] != '\0')
+		{
+			if (line[i] == quote_char)
+				find = TRUE;
+			else
+				buffer[(*buffer_index)++] = line[i];
+			i++;
+		}
+		if (!find)
+			buffer[(*buffer_index)++] = '\n';
+		free(line);
 	}
 	buffer[(*buffer_index)++] = quote_char;
 }

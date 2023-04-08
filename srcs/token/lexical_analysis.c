@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:55:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/08 18:30:57 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/08 21:13:47 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	process_input(const char *input, t_token *tokens, int *token_index)
 {
 	char	buffer[MAX_INPUT_SIZE];
 	int		buffer_index;
+	char	quote_char;
 	int		i;
 
 	buffer_index = 0;
@@ -62,8 +63,18 @@ static void	process_input(const char *input, t_token *tokens, int *token_index)
 		if (is_quote_char(input[i]))
 		{
 			buffer_to_token_value(buffer, &buffer_index, tokens, token_index);
-			handle_quotes(input, &i, buffer, &buffer_index);
-			buffer_to_token_value(buffer, &buffer_index, tokens, token_index);
+			quote_char = input[i];
+			if (find_quote_to_the_end(buffer, &buffer_index, input, &i) == FALSE)
+			{
+				read_input_until_finding_the_quote(quote_char, buffer, &buffer_index);
+				buffer_to_token_value(buffer, &buffer_index, tokens, token_index);
+				return ;
+			}
+			else
+			{
+				buffer_to_token_value(buffer, &buffer_index, tokens, token_index);
+				return ;
+			}
 		}
 		else if (is_operator(input[i]))
 		{
