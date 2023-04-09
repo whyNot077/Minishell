@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 15:54:20 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 21:33:29 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/09 21:48:22 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,18 +93,17 @@ int	the_quote_is_found(int find, char **line, char *buffer,
 	return (FALSE);
 }
 
-void	read_remaining_line_and_handle_operators(const char *line, int *i,
-		char quote_char, char *buffer, int *buffer_index,
-		t_process_input_data *data)
+void	read_remaining_line_and_handle_operators(const char *line, int *i, \
+		char *buffer, int *buffer_index, t_process_input_data *data)
 {
-	while (line[*i] != '\0' && line[*i] != quote_char)
+	while (line[*i] != '\0' && !is_quote_char(line[*i]))
 	{
-		if (!is_operator(line[*i]) && line[*i] != quote_char)
+		if (!is_operator(line[*i]) && !is_quote_char(line[*i]))
 		{
 			buffer[(*buffer_index)++] = line[*i];
 			(*i)++;
 		}
-		else if (is_operator(line[*i]) && line[*i] != quote_char)
+		else if (is_operator(line[*i]) && !is_quote_char(line[*i]))
 		{
 			buffer_to_token_value(buffer, buffer_index, data->tokens,
 					data->token_index);
@@ -116,11 +115,16 @@ void	read_remaining_line_and_handle_operators(const char *line, int *i,
 			data->token_index);
 }
 
-int	quote_char_is_found(const char *line, int *i, char *buffer,
-		int *buffer_index)
+int	quote_char_is_found(const char *line, int *i, t_process_input_data *data, char *quote_char)
 {
+	char	*buffer;
+	int		*buffer_index;
+
+	buffer = data->buffer;
+	buffer_index = &data->buffer_index;
 	if (line[*i] == '\0')
 		return (FALSE);
+	(*quote_char) = line[*i];
 	while (line[*i] != '\0')
 	{
 		buffer[(*buffer_index)++] = line[*i];
@@ -146,8 +150,8 @@ void read_input_until_finding_the_quote(char quote_char,
 		line_to_buffer_until_the_quote_is_found(line, &i, quote_char, buffer, buffer_index, &find);
         if (the_quote_is_found(find, &line, buffer, buffer_index))
         {
-            read_remaining_line_and_handle_operators(line, &i, quote_char, buffer, buffer_index, data);
-            if (!quote_char_is_found(line, &i, buffer, buffer_index))
+            read_remaining_line_and_handle_operators(line, &i, buffer, buffer_index, data);
+            if (!quote_char_is_found(line, &i, data, &quote_char))
 				break ;
         }
     }
