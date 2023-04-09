@@ -6,25 +6,69 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:17:23 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/07 22:05:20 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/08 19:52:48 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+static void validate_n_option(char **args, int *args_idx, int *n_option_flag)
+{
+	int		string_idx;
+	int		current_n_flag;
+	
+	current_n_flag = 0;
+	string_idx = 1;
+	while (args[*args_idx][string_idx])
+	{
+		*n_option_flag = 1;
+		if (args[*args_idx][string_idx] != 'n')
+		{
+			current_n_flag = 1;
+			break ;
+		}
+		string_idx++;
+	}
+}
+
+static void	find_print_idx(char **args, int *args_idx, int *n_option_flag)
+{
+	int		string_idx;
+	int		current_n_flag;
+	
+	current_n_flag = 0;
+	while (args[*args_idx])
+	{
+		if (args[*args_idx][0] == '-')
+		{
+			string_idx = 1;
+			while (args[*args_idx][string_idx])
+			{
+				*n_option_flag = 1;
+				if (args[*args_idx][string_idx] != 'n')
+				{
+					current_n_flag = 1;
+					break ;
+				}
+				string_idx++;
+			}
+		}
+		else
+			break ;
+		if (current_n_flag == 1)
+			break ;
+		(*args_idx)++;
+	}
+}
+
 void	echo(char **args)
 {
 	int		args_idx;
-	int		string_idx;
 	int		n_option_flag;
 
 	args_idx = 1;
 	n_option_flag = 0;
-	if (args[1] && ft_strcmp(args[1], "-n") == 0)
-	{
-		n_option_flag = 1;
-		args_idx++;
-	}
+	find_print_idx(args, &args_idx, &n_option_flag);
 	while (args[args_idx])
 	{
 		ft_putstr_fd(args[args_idx], 1);
