@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   definition.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:47:16 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/08 19:12:26 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/09 22:20:50 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ enum e_definition
 	ERROR = -1,
 	TRUE = 1,
 	FALSE = 0,
+	EXIST = 1,
+	NOT_EXIST = -1,
+	ERROR = -1,
+	SUCCESS = 1
 };
 
 enum e_type

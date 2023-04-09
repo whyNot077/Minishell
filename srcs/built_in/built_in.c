@@ -6,13 +6,13 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:06 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/08 14:16:57 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/09 17:34:55 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	built_in(void)
+void	built_in(char **args, char **envp, int outfile_fd)
 {
 	// if (ft_strcmp(g_cmd[0], "echo") == 0)
 	// 	echo();
@@ -28,5 +28,4 @@ void	built_in(void)
 	// 	env();
 	// else if (ft_strcmp(g_cmd[0], "exit") == 0)
 	// 	ft_exit();
-	// printf("built_in\n");
 }
