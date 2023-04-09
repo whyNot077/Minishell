@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 15:54:20 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 18:00:19 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/09 21:33:29 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,11 @@ int	quote_char_is_found(const char *line, int *i, char *buffer,
 {
 	if (line[*i] == '\0')
 		return (FALSE);
-	buffer[(*buffer_index)++] = line[*i];
+	while (line[*i] != '\0')
+	{
+		buffer[(*buffer_index)++] = line[*i];
+		(*i)++;
+	}
 	buffer[(*buffer_index)++] = '\n';
 	return (TRUE);
 }
