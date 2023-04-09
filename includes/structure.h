@@ -17,6 +17,12 @@ typedef struct s_process_input_data
 	int					buffer_index;
 }						t_process_input_data;
 
+typedef struct s_find
+{
+	char				quote_char;
+	int					*find;
+}						t_find;
+
 typedef struct tree_node
 {
 	char				*data;

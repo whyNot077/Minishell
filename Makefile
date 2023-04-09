@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/08 16:11:11 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/09 22:11:28 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ MAIN            = $(addprefix $(MAIN_PATH), $(MAIN_SRCS))
 
 TOKEN_PATH    = ./token/
 TOKEN_SRCS    = token.c lexical_analysis.c special_tokens.c special_tokens2.c\
-				handle_quotes.c
+				handle_quotes.c read_input_until_finding_the_quote.c process_input.c
 TOKEN         = $(addprefix $(TOKEN_PATH), $(TOKEN_SRCS))
 
 UTILS_PATH      = ./utils/

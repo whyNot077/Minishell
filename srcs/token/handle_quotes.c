@@ -6,27 +6,11 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 15:54:20 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 21:51:51 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/09 22:09:23 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static char	*get_line(char quote_char)
-{
-	char	*line;
-
-	while (1)
-	{
-		line = readline(" > ");
-		if (line == NULL)
-			printf("Minishell: unexpected EOF while looking for \
-				matching `%c'\n",
-					quote_char);
-		else
-			return (line);
-	}
-}
 
 int	find_quote_to_the_end(char *buffer, int *buffer_index, const char *input,
 		int *i)
@@ -50,111 +34,27 @@ int	find_quote_to_the_end(char *buffer, int *buffer_index, const char *input,
 	return (FALSE);
 }
 
-// bash-5.2$ aaa"vv
-// vv">>aaa
-// bash: $'aaavv\nvv': command not found
-
-// bash-5.2$ cat "
-// > sdfsdf
-// > dffsdf
-// > ff" >> a >> aa "
-// > adfffsdf" >> aa "
-// > sdfsdf"
-// cat:
-// sdfsdf
-// dffsdf
-// ff: No such file or directory
-// cat:
-// adfffsdf: No such file or directory
-// cat:
-// sdfsdf: No such file or directory
-
-void	add_buffer_until_the_quote_is_found(const char *line, int *i, char quote_char,
-		char *buffer, int *buffer_index, int *find)
+int	is_quote_char(char c)
 {
-	while (line[*i] != '\0')
+	return (c == '"' || c == '\'');
+}
+
+int	is_backslash(char c)
+{
+	return (c == '\\');
+}
+
+char	*get_line(char quote_char)
+{
+	char	*line;
+
+	while (1)
 	{
-		buffer[(*buffer_index)++] = line[*i];
-		if (line[(*i)++] == quote_char)
-		{
-			*find = TRUE;
-			break ;
-		}
+		line = readline(" > ");
+		if (line == NULL)
+			printf("Minishell: unexpected EOF while looking for \
+				matching `%c'\n", quote_char);
+		else
+			return (line);
 	}
-}
-
-int	the_quote_is_found(int find, char **line, char *buffer,
-		int *buffer_index)
-{
-	if (find)
-		return (TRUE);
-	free(*line);
-	buffer[(*buffer_index)++] = '\n';
-	return (FALSE);
-}
-
-void	read_remaining_line_dealing_operators(const char *line, int *i, \
-		char *buffer, int *buffer_index, t_process_input_data *data)
-{
-	while (line[*i] != '\0' && !is_quote_char(line[*i]))
-	{
-		if (!is_operator(line[*i]) && !is_quote_char(line[*i]))
-		{
-			buffer[(*buffer_index)++] = line[*i];
-			(*i)++;
-		}
-		else if (is_operator(line[*i]) && !is_quote_char(line[*i]))
-		{
-			buffer_to_token_value(buffer, buffer_index, data->tokens,
-					data->token_index);
-			handle_operator(line, *i, data->tokens, data->token_index);
-			(*i)++;
-		}
-	}
-	buffer_to_token_value(buffer, buffer_index, data->tokens,
-			data->token_index);
-}
-
-int	another_quote_is_found(const char *line, int *i, t_process_input_data *data, char *quote_char)
-{
-	char	*buffer;
-	int		*buffer_index;
-
-	buffer = data->buffer;
-	buffer_index = &data->buffer_index;
-	if (line[*i] == '\0')
-		return (FALSE);
-	(*quote_char) = line[*i];
-	while (line[*i] != '\0')
-	{
-		buffer[(*buffer_index)++] = line[*i];
-		(*i)++;
-	}
-	buffer[(*buffer_index)++] = '\n';
-	return (TRUE);
-}
-
-void read_input_until_finding_the_quote(char quote_char,
-                                       char *buffer, int *buffer_index, t_process_input_data *data)
-{
-    char *line;
-    int i;
-    int find;
-
-    buffer[(*buffer_index)++] = '\n';
-    while (1)
-    {
-        line = get_line(quote_char);
-        i = 0;
-        find = FALSE;
-		add_buffer_until_the_quote_is_found(line, &i, quote_char, buffer, buffer_index, &find);
-        if (the_quote_is_found(find, &line, buffer, buffer_index))
-        {
-            read_remaining_line_dealing_operators(line, &i, buffer, buffer_index, data);
-            if (!another_quote_is_found(line, &i, data, &quote_char))
-				break ;
-        }
-    }
-    if (find)
-        free(line);
 }
