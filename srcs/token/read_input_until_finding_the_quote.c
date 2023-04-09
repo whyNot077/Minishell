@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:52:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 22:27:56 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/09 22:42:33 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ void	read_input_until_finding_the_quote(char quote_char, \
 			read_remaining_line_dealing_operators(line, &i, data);
 			if (!another_quote_is_found(line, &i, data, &quote_char))
 				break ;
+			else
+				free(line);
 		}
 	}
 	if (find)
