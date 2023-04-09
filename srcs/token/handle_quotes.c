@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 15:54:20 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 21:48:22 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/09 21:51:51 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	find_quote_to_the_end(char *buffer, int *buffer_index, const char *input,
 // cat:
 // sdfsdf: No such file or directory
 
-void	line_to_buffer_until_the_quote_is_found(const char *line, int *i, char quote_char,
+void	add_buffer_until_the_quote_is_found(const char *line, int *i, char quote_char,
 		char *buffer, int *buffer_index, int *find)
 {
 	while (line[*i] != '\0')
@@ -93,7 +93,7 @@ int	the_quote_is_found(int find, char **line, char *buffer,
 	return (FALSE);
 }
 
-void	read_remaining_line_and_handle_operators(const char *line, int *i, \
+void	read_remaining_line_dealing_operators(const char *line, int *i, \
 		char *buffer, int *buffer_index, t_process_input_data *data)
 {
 	while (line[*i] != '\0' && !is_quote_char(line[*i]))
@@ -115,7 +115,7 @@ void	read_remaining_line_and_handle_operators(const char *line, int *i, \
 			data->token_index);
 }
 
-int	quote_char_is_found(const char *line, int *i, t_process_input_data *data, char *quote_char)
+int	another_quote_is_found(const char *line, int *i, t_process_input_data *data, char *quote_char)
 {
 	char	*buffer;
 	int		*buffer_index;
@@ -147,11 +147,11 @@ void read_input_until_finding_the_quote(char quote_char,
         line = get_line(quote_char);
         i = 0;
         find = FALSE;
-		line_to_buffer_until_the_quote_is_found(line, &i, quote_char, buffer, buffer_index, &find);
+		add_buffer_until_the_quote_is_found(line, &i, quote_char, buffer, buffer_index, &find);
         if (the_quote_is_found(find, &line, buffer, buffer_index))
         {
-            read_remaining_line_and_handle_operators(line, &i, buffer, buffer_index, data);
-            if (!quote_char_is_found(line, &i, data, &quote_char))
+            read_remaining_line_dealing_operators(line, &i, buffer, buffer_index, data);
+            if (!another_quote_is_found(line, &i, data, &quote_char))
 				break ;
         }
     }
