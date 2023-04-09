@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 22:11:04 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 22:12:34 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/09 22:23:58 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void	handle_quote_char(t_process_input_data *data, int *i)
 	char	quote_char;
 
 	quote_char = data->input[*i];
-	if (find_quote_to_the_end(data->buffer, &data->buffer_index, data->input,
-			i) == FALSE)
+	if (find_quote_to_the_end(data->buffer, &data->buffer_index, \
+		data->input, i) == FALSE)
 	{
 		read_input_until_finding_the_quote(quote_char, data->buffer, \
 				&data->buffer_index, data);

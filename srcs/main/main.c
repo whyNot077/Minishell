@@ -6,11 +6,16 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/08 13:59:55 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/09 22:19:01 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void leaks(void)
+{
+	system("leaks --list minishell > tmp.txt");
+}
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -18,6 +23,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_token	*tokens;
 
 	(void)envp;
+	atexit(leaks);
 	if (check_argc(argc, argv))
 		return (0);
 	while (1)
