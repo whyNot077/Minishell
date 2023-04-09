@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:55:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/08 21:52:08 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/09 16:02:50 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	buffer_to_token_value(char *buffer, int *buffer_index,
 	}
 }
 
-static void	handle_operator(const char *input, int i, t_token *tokens,
+void	handle_operator(const char *input, int i, t_token *tokens,
 		int *token_index)
 {
 	char	operator_str[2];
@@ -50,50 +50,54 @@ static void	handle_remaining_buffer(char *buffer, int buffer_index,
 	tokens[*token_index].value = NULL;
 }
 
-// bash-5.2$ aaa"aaa"bb
-// bash: aaaaaabb: command not found
-// bash-5.2$ aaa"bb
-// > bb
-// > b
-// > b
-// > bb"ccc
-// bash: $'aaabb\nbb\nb\nb\nbbccc': command not found
-// ➜  mini git:(master) ✗ bash
-// bash-5.2$ "ls"cat"wc -l"
-// bash: lscatwc -l: command not found
-static void	process_input(const char *input, t_token *tokens, int *token_index)
+static void handle_quote_char(t_process_input_data *data, int *i)
 {
-	char	buffer[MAX_INPUT_SIZE];
-	int		buffer_index;
-	char	quote_char;
-	int		i;
+    char quote_char;
 
-	buffer_index = 0;
-	i = -1;
-	while (input[++i] != '\0')
-	{
-		if (is_quote_char(input[i]))
-		{
-			quote_char = input[i];
-			if (find_quote_to_the_end(buffer, &buffer_index, input, &i) == FALSE)
-			{
-				read_input_until_finding_the_quote(quote_char, \
-					buffer, &buffer_index);
-				buffer_to_token_value(buffer, &buffer_index, tokens, token_index);
-			}
-			if (input[i] == '\0')
-				return ;
-		}
-		else if (is_operator(input[i]))
-		{
-			buffer_to_token_value(buffer, &buffer_index, tokens, token_index);
-			handle_operator(input, i, tokens, token_index);
-		}
-		else
-			buffer[buffer_index++] = input[i];
-	}
-	handle_remaining_buffer(buffer, buffer_index, tokens, token_index);
+    quote_char = data->input[*i];
+    if (find_quote_to_the_end(data->buffer, &data->buffer_index, data->input, i) == FALSE)
+    {
+        read_input_until_finding_the_quote(quote_char, data->buffer, &data->buffer_index, data);
+    }
 }
+
+static void handle_operator_char(t_process_input_data *data, int *i)
+{
+    buffer_to_token_value(data->buffer, &data->buffer_index, data->tokens, data->token_index);
+    handle_operator(data->input, *i, data->tokens, data->token_index);
+}
+
+static void process_input(const char *input, t_token *tokens, int *token_index)
+{
+    t_process_input_data data;
+    int i;
+
+    data.input = input;
+    data.tokens = tokens;
+    data.token_index = token_index;
+    data.buffer_index = 0;
+
+    i = -1;
+    while (data.input[++i] != '\0')
+    {
+        if (is_quote_char(data.input[i]))
+        {
+            handle_quote_char(&data, &i);
+			if (data.input[i] == '\0')
+        		return;
+		}
+        else if (is_operator(data.input[i]))
+        {
+            handle_operator_char(&data, &i);
+        }
+        else
+        {
+            data.buffer[data.buffer_index++] = data.input[i];
+        }
+    }
+    handle_remaining_buffer(data.buffer, data.buffer_index, data.tokens, data.token_index);
+}
+
 
 t_token	*create_tokens_by_lexical_analysis(const char *input)
 {
