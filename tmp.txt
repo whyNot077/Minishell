@@ -1,35 +1,38 @@
-Process:         minishell [26586]
+Process:         minishell [30264]
 Path:            /Volumes/VOLUME/*/minishell
-Load Address:    0x10789b000
+Load Address:    0x10a96a000
 Identifier:      minishell
 Version:         0
 Code Type:       X86-64
 Parent Process:  zsh [12555]
 
-Date/Time:       2023-04-09 22:19:20.889 +0900
-Launch Time:     2023-04-09 22:19:10.030 +0900
+Date/Time:       2023-04-09 22:40:09.179 +0900
+Launch Time:     2023-04-09 22:39:09.652 +0900
 OS Version:      Mac OS X 10.15.7 (19H2026)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
 Analysis Tool Version:  Xcode 12.3 (12C33)
 
-Physical footprint:         1800K
-Physical footprint (peak):  1800K
+Physical footprint:         1824K
+Physical footprint (peak):  1824K
 ----
 
 leaks Report Version: 3.0
-Process 26586: 384 nodes malloced for 359 KB
-Process 26586: 1 leak for 16 total leaked bytes.
+Process 30264: 385 nodes malloced for 359 KB
+Process 30264: 2 leaks for 32 total leaked bytes.
 
-Leak: 0x7f9e02504080  size=16  zone: DefaultMallocZone_0x1078ad000   length: 9  "fff">>'vv"
-	Call stack: 0x7fff66f99cc9 (libdyld.dylib) start | 0x10789cc9d (minishell) main | 0x10789d37e (minishell) create_tokens_by_lexical_analysis | 0x10789e002 (minishell) process_input | 0x10789e170 (minishell) handle_quote_char | 0x10789db2d (minishell) read_input_until_finding_the_quote | 0x10789d9d8 (minishell) get_line | 0x1078b4bb5 (libreadline.8.dylib) readline | 0x1078b5097 (libreadline.8.dylib) readline_internal_teardown | 0x1078d7c45 (libreadline.8.dylib) xmalloc | 0x7fff6714fcf5 (libsystem_malloc.dylib) malloc | 0x7fff6714fd9e (libsystem_malloc.dylib) malloc_zone_malloc 
+Leak: 0x7ffd5ac05bf0  size=16  zone: DefaultMallocZone_0x10a97c000   length: 8  "sss'fff""
+	Call stack: 0x7fff66f99cc9 (libdyld.dylib) start | 0x10a96bccd (minishell) main | 0x10a96c3ae (minishell) create_tokens_by_lexical_analysis | 0x10a96d032 (minishell) process_input | 0x10a96d1a0 (minishell) handle_quote_char | 0x10a96cb5d (minishell) read_input_until_finding_the_quote | 0x10a96ca08 (minishell) get_line | 0x10a981bb5 (libreadline.8.dylib) readline | 0x10a982097 (libreadline.8.dylib) readline_internal_teardown | 0x10a9a4c45 (libreadline.8.dylib) xmalloc | 0x7fff6714fcf5 (libsystem_malloc.dylib) malloc | 0x7fff6714fd9e (libsystem_malloc.dylib) malloc_zone_malloc 
+
+Leak: 0x7ffd5ae040f0  size=16  zone: DefaultMallocZone_0x10a97c000   length: 8  "fff"vvv'"
+	Call stack: 0x7fff66f99cc9 (libdyld.dylib) start | 0x10a96bccd (minishell) main | 0x10a96c3ae (minishell) create_tokens_by_lexical_analysis | 0x10a96d032 (minishell) process_input | 0x10a96d1a0 (minishell) handle_quote_char | 0x10a96cb5d (minishell) read_input_until_finding_the_quote | 0x10a96ca08 (minishell) get_line | 0x10a981bb5 (libreadline.8.dylib) readline | 0x10a982097 (libreadline.8.dylib) readline_internal_teardown | 0x10a9a4c45 (libreadline.8.dylib) xmalloc | 0x7fff6714fcf5 (libsystem_malloc.dylib) malloc | 0x7fff6714fd9e (libsystem_malloc.dylib) malloc_zone_malloc 
 
 
 
 Binary Images:
-       0x10789b000 -        0x10789efff +minishell (0) <0A2710F6-9836-3A3E-A23D-FB1287DF59E9> /Volumes/*/minishell
-       0x1078b2000 -        0x1078d9fff +libreadline.8.dylib (0) <D85B1A6E-8E21-349C-961E-FD7F036709F0> /Volumes/*/libreadline.8.dylib
-       0x10b711000 -        0x10b7a3267  dyld (750.7) <9F48F7F8-94D0-3793-99B7-DDEF657EF956> /usr/lib/dyld
+       0x10a96a000 -        0x10a96dff3 +minishell (0) <355201EA-8815-3C34-A4CC-7FE87DA3D39C> /Volumes/*/minishell
+       0x10a97f000 -        0x10a9a6fff +libreadline.8.dylib (0) <D85B1A6E-8E21-349C-961E-FD7F036709F0> /Volumes/*/libreadline.8.dylib
+       0x119195000 -        0x119227267  dyld (750.7) <9F48F7F8-94D0-3793-99B7-DDEF657EF956> /usr/lib/dyld
     0x7fff5315f000 -     0x7fff5316afff  com.apple.MallocStackLogging (1.0 - 1) <BE0C1E1E-F986-3776-83EB-701CDBD5D931> /System/Library/PrivateFrameworks/MallocStackLogging.framework/Versions/A/MallocStackLogging
     0x7fff63f7c000 -     0x7fff63f7dfff  libSystem.B.dylib (1281.100.1) <5A20AE6C-BF4D-3689-B7D2-19F0721F6375> /usr/lib/libSystem.B.dylib
     0x7fff64262000 -     0x7fff642b4fff  libc++.1.dylib (902.1) <59A8239F-C28A-3B59-B8FA-11340DC85EDC> /usr/lib/libc++.1.dylib

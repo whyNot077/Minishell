@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:52:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 22:08:37 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/09 22:27:56 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	the_quote_is_found(int find, char **line, char *buffer, \
 	if (find)
 		return (TRUE);
 	free(*line);
+	(*line) = NULL;
 	buffer[(*buffer_index)++] = '\n';
 	return (FALSE);
 }
