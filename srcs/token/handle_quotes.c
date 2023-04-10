@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 15:54:20 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 22:09:23 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 21:44:26 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ int	find_quote_to_the_end(char *buffer, int *buffer_index, const char *input,
 int	is_quote_char(char c)
 {
 	return (c == '"' || c == '\'');
-}
-
-int	is_backslash(char c)
-{
-	return (c == '\\');
 }
 
 char	*get_line(char quote_char)

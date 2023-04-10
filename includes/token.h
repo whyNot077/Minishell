@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:02:22 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 14:57:07 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 21:44:32 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ t_token	*special_tokens(t_token *tokens, int token_index);
 int		is_special_token(char *token);
 int		is_special_char(char c);
 int		is_quote_char(char c);
-int		is_backslash(char c);
 int		is_space_token(char *token);
 char	*get_line(char quote_char);
 int		find_quote_to_the_end(char *buffer, int *buffer_index,
