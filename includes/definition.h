@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:47:16 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 22:33:28 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 13:46:13 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ enum e_type
 	HEREDOC = 6,
 	AND = 7,
 	OR = 8,
-	OPEN_PAREN = 9,
-	CLOSE_PAREN = 10,
-	WORD = 11
+	WORD = 9
 };
 
 #endif

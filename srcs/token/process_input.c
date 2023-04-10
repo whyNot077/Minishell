@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 22:11:04 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 22:39:05 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:05:58 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ void	process_input(const char *input, t_token *tokens, int *token_index)
 			handle_quote_char(&data, &i);
 			if (data.input[i] == '\0')
 				return ;
+		}
+		else if (is_unexpected_parameter(data.input[i]))
+		{
+			printf("minishell: unexpected parameter: %c\n", data.input[i]);
+			return ;
 		}
 		else if (is_operator(data.input[i]))
 			handle_operator_char(&data, &i);

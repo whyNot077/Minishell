@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:55:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 22:38:09 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 13:02:28 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_token	*create_tokens_by_lexical_analysis(const char *input)
 		error_exit("malloc error");
 	process_input(input, tokens, &token_index);
 	tokens = special_tokens(tokens, token_index);
-	// for (int i = 0; tokens[i].value; i++)
-	// 	printf("tokens[%d].value = %s\n", i, tokens[i].value);
+	for (int i = 0; tokens[i].value; i++)
+		printf("tokens[%d].value = %s\n", i, tokens[i].value);
 	return (tokens);
 }

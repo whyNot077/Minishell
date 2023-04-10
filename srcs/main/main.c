@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 22:38:36 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/09 22:51:51 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ int	main(int argc, char *argv[], char *envp[])
 		free(input);
 		free_tokens(&tokens);
 	}
-	// system("leaks --list minishell > tmp.txt");
 	return (0);
 }

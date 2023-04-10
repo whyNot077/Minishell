@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:09:12 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/08 14:16:09 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:03:53 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ t_token	*create_token(const char *value)
 
 int	is_operator(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == ';' || c == '('
-		|| c == ')' || c == '|' || c == '&' || c == '<' || c == '>');
+	return (c == ' ' || c == '|' || c == '&' || c == '<' || c == '>');
 }
 
 int	is_space(char c)
@@ -56,10 +55,6 @@ void	type_of_token(t_token *tokens, int token_index)
 		tokens[token_index].type = AND;
 	else if (ft_strncmp(value, "||", 2) == 0)
 		tokens[token_index].type = OR;
-	else if (ft_strncmp(value, "(", 1) == 0)
-		tokens[token_index].type = OPEN_PAREN;
-	else if (ft_strncmp(value, ")", 1) == 0)
-		tokens[token_index].type = CLOSE_PAREN;
 	else
 		tokens[token_index].type = WORD;
 }

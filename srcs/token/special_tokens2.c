@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 14:13:45 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/09 21:52:25 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:06:58 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_special_token(char *token)
 {
 	if (token == NULL)
 		return (ERROR);
-	return (ft_strncmp(token, ">", 1) == 0 || ft_strncmp(token, "<", 1) == 0
+	return (ft_strncmp(token, ">", 1) == 0 || ft_strncmp(token, "<", 1) == 0 \
 		|| ft_strncmp(token, "&", 1) == 0 || ft_strncmp(token, "|", 1) == 0);
 }
 
@@ -35,4 +35,11 @@ int	num_of_special_tokens(t_token *tokens, int token_index)
 					num_of_special_tokens++;
 	}
 	return (num_of_special_tokens);
+}
+
+
+int	is_unexpected_parameter(char c)
+{
+	return (c == '(' || c == ')' || c == '\\' || c == '^' || \
+		c == '?' || c == '*' || c == '+' || c == ';');
 }

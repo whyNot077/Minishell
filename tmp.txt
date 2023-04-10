@@ -1,23 +1,23 @@
-Process:         minishell [30985]
+Process:         minishell [74226]
 Path:            /Volumes/VOLUME/*/minishell
-Load Address:    0x10e61b000
+Load Address:    0x1017c3000
 Identifier:      minishell
-Version:         0
+Version:         ???
 Code Type:       X86-64
-Parent Process:  zsh [12555]
+Parent Process:  zsh [70880]
 
-Date/Time:       2023-04-09 22:43:22.630 +0900
-Launch Time:     2023-04-09 22:43:02.986 +0900
+Date/Time:       2023-04-10 14:07:07.048 +0900
+Launch Time:     2023-04-10 14:07:01.544 +0900
 OS Version:      Mac OS X 10.15.7 (19H2026)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
 Analysis Tool Version:  Xcode 12.3 (12C33)
 
-Physical footprint:         1836K
-Physical footprint (peak):  1836K
+Physical footprint:         740K
+Physical footprint (peak):  740K
 ----
 
 leaks Report Version: 3.0
-Process 30985: 383 nodes malloced for 359 KB
-Process 30985: 0 leaks for 0 total leaked bytes.
+Process 74226: 379 nodes malloced for 359 KB
+Process 74226: 0 leaks for 0 total leaked bytes.
 
