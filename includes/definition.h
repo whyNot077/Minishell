@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:47:16 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 13:46:13 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 21:47:21 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,14 @@ enum e_definition
 
 enum e_type
 {
-	SEMICOLON = 1,
-	PIPE = 2,
-	REDIRECT_OUT = 3,
-	REDIRECT_IN = 4,
-	REDIRECT_APPEND = 5,
-	HEREDOC = 6,
-	AND = 7,
-	OR = 8,
-	WORD = 9
+	PIPE = 1,
+	REDIRECT_OUT = 2,  // >
+	REDIRECT_IN = 3,  // <
+	REDIRECT_APPEND = 4, // >>
+	HEREDOC = 5, // <<
+	AND = 6,
+	OR = 7,
+	WORD = 8
 };
 
 #endif
