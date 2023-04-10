@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 14:13:45 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 20:58:49 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 21:22:29 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ void	num_of_special_tokens_and_space(t_token *tokens, \
 
 int	is_unexpected_parameter(char c)
 {
-	return (c == '(' || c == ')' || c == '\\' || c == '^' || \
-		c == '?' || c == '*' || c == '+' || c == ';');
+	return (c == '(' || c == ')' || c == '\\' || c == '^' \
+		|| c == '*' || c == '+' || c == ';' \
+		|| c == '{' || c == '}' || c == '[' || c == ']' \
+		|| c == '@' || c == '!' || c == '%');
 }
 
 void	fill_data(t_process_input_data *data, const char *input, \
