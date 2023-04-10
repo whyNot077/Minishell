@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 22:11:04 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 14:18:01 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:35:48 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	handle_operator(const char *input, int i, t_token *tokens,
 {
 	char	operator_str[2];
 
-	if (!is_space(input[i]))
+	if (!is_space(input[i]) || (is_space(input[i]) \
+		&& is_special_char(input[i - 1]) && is_special_char(input[i + 1])))
 	{
 		operator_str[0] = input[i];
 		operator_str[1] = '\0';

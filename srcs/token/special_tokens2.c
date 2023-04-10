@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 14:13:45 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 14:18:47 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:35:42 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,9 @@ void	fill_data(t_process_input_data *data, const char *input, \
 	data->tokens = tokens;
 	data->token_index = token_index;
 	data->buffer_index = 0;
+}
+
+int	is_special_char(char c)
+{
+	return (c == '>' || c == '<' || c == '&' || c == '|');
 }
