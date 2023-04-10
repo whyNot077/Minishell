@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:02:22 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 14:35:38 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:57:07 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		is_special_token(char *token);
 int		is_special_char(char c);
 int		is_quote_char(char c);
 int		is_backslash(char c);
+int		is_space_token(char *token);
 char	*get_line(char quote_char);
 int		find_quote_to_the_end(char *buffer, int *buffer_index,
 			const char *input, int *i);
@@ -32,7 +33,8 @@ void	buffer_to_token_value(char *buffer, int *buffer_index, t_token *tokens,
 			int *token_index);
 void	read_input_until_finding_the_quote(char quote_char, \
 		char *buffer, int *buffer_index, t_process_input_data *data);
-int		num_of_special_tokens(t_token *tokens, int token_index);
+void	num_of_special_tokens_and_space(t_token *tokens, \
+		int token_index, int *count, int *space);
 void	free_tokens(t_token **tokens_ptr);
 void	handle_operator(const char *input, int i, t_token *tokens,
 		int *token_index);

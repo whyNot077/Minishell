@@ -6,30 +6,34 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:55:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 14:37:35 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 20:55:51 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	duplicate_token_value(t_token *new_tokens, t_token *tokens, int i,
-		int j)
-{
-	if (tokens[j].value != NULL)
-	{
-		new_tokens[i].value = ft_strdup(tokens[j].value);
-		type_of_token(new_tokens, i);
-	}
-	else
-		new_tokens[i].value = NULL;
-}
-
-static void	join_token_values(t_token *new_tokens, t_token *tokens, int i,
+static void	duplicate_token_value(t_token *new_tokens, t_token *tokens, int *i,
 		int *j)
 {
-	new_tokens[i].value = ft_strjoin(tokens[*j].value, tokens[*j + 1].value);
-	type_of_token(new_tokens, i);
+	if (tokens[*j].value != NULL)
+	{
+		new_tokens[(*i)].value = ft_strdup(tokens[*j].value);
+		type_of_token(new_tokens, *i);
+	}
+	else
+		new_tokens[*i].value = NULL;
+	(*i)++;
 	(*j)++;
+}
+
+static void	join_token_values(t_token *new_tokens, t_token *tokens, int *i,
+		int *j)
+{
+	new_tokens[*i].value = ft_strjoin(tokens[*j].value, tokens[*j + 1].value);
+	type_of_token(new_tokens, *i);
+	(*j)++;
+	(*j)++;
+	(*i)++;
 }
 
 static t_token	*copy_tokens(t_token *tokens, t_token *new_tokens,
@@ -40,20 +44,22 @@ static t_token	*copy_tokens(t_token *tokens, t_token *new_tokens,
 
 	i = 0;
 	j = 0;
-	while (i < token_index - count)
+	while (i < token_index - count && j < token_index)
 	{
 		if (is_special_token(tokens[j].value))
 		{
 			if (j + 1 < token_index && is_special_token(tokens[j + 1].value)
 				&& tokens[j].type == tokens[j + 1].type)
-				join_token_values(new_tokens, tokens, i, &j);
-			else
-				duplicate_token_value(new_tokens, tokens, i, j);
+				join_token_values(new_tokens, tokens, &i, &j);
+			else if (!is_space_token(tokens[j].value))
+				duplicate_token_value(new_tokens, tokens, &i, &j);
+		}
+		else if (!is_space_token(tokens[j].value))
+		{
+			duplicate_token_value(new_tokens, tokens, &i, &j);
 		}
 		else
-			duplicate_token_value(new_tokens, tokens, i, j);
-		i++;
-		j++;
+			j++;
 	}
 	new_tokens[i].value = NULL;
 	return (new_tokens);
@@ -62,15 +68,18 @@ static t_token	*copy_tokens(t_token *tokens, t_token *new_tokens,
 t_token	*special_tokens(t_token *tokens, int token_index)
 {
 	int		count;
+	int		space;
 	t_token	*new_tokens;
 
-	count = num_of_special_tokens(tokens, token_index);
-	if (count == 0)
+	count = 0;
+	space = 0;
+	num_of_special_tokens_and_space(tokens, token_index, &count, &space);
+	if (count == 0 && space == 0)
 		return (tokens);
-	new_tokens = ft_calloc(token_index - count + 1, sizeof(t_token));
+	new_tokens = ft_calloc(token_index - count - space + 1, sizeof(t_token));
 	if (new_tokens == NULL)
 		error_exit("malloc failed");
-	new_tokens = copy_tokens(tokens, new_tokens, token_index, count);
+	new_tokens = copy_tokens(tokens, new_tokens, token_index, count + space);
 	free_tokens(&tokens);
 	return (new_tokens);
 }
