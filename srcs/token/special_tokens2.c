@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 14:13:45 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 14:06:58 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:18:47 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,17 @@ int	num_of_special_tokens(t_token *tokens, int token_index)
 	return (num_of_special_tokens);
 }
 
-
 int	is_unexpected_parameter(char c)
 {
 	return (c == '(' || c == ')' || c == '\\' || c == '^' || \
 		c == '?' || c == '*' || c == '+' || c == ';');
+}
+
+void	fill_data(t_process_input_data *data, const char *input, \
+		t_token *tokens, int *token_index)
+{
+	data->input = input;
+	data->tokens = tokens;
+	data->token_index = token_index;
+	data->buffer_index = 0;
 }

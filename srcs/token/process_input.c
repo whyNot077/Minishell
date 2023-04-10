@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 22:11:04 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 14:05:58 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:18:01 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ void	process_input(const char *input, t_token *tokens, int *token_index)
 	t_process_input_data	data;
 	int						i;
 
-	data.input = input;
-	data.tokens = tokens;
-	data.token_index = token_index;
-	data.buffer_index = 0;
+	fill_data(&data, input, tokens, token_index);
 	i = -1;
 	while (data.input[++i] != '\0')
 	{

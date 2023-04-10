@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:02:22 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 14:05:29 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/10 14:18:28 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	handle_operator(const char *input, int i, t_token *tokens,
 		int *token_index);
 void	process_input(const char *input, t_token *tokens, int *token_index);
 int		is_unexpected_parameter(char c);
-
+void	fill_data(t_process_input_data *data, const char *input, \
+		t_token *tokens, int *token_index);
 
 #endif
