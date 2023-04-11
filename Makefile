@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/11 13:18:51 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/11 13:45:20 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,10 @@ MAIN_PATH  	    = ./main/
 MAIN_SRCS       = main.c read_input.c check_argc.c error.c
 MAIN            = $(addprefix $(MAIN_PATH), $(MAIN_SRCS))
 
+SIGNAL_PATH     = ./signal/
+SIGNAL_SRCS     = signal.c
+SIGNAL          = $(addprefix $(SIGNAL_PATH), $(SIGNAL_SRCS))
+
 TOKEN_PATH    = ./token/
 TOKEN_SRCS    = token.c lexical_analysis.c special_tokens.c special_tokens2.c\
 				handle_quotes.c read_input_until_finding_the_quote.c process_input.c\
@@ -49,6 +53,7 @@ BUILT_IN         = $(addprefix $(BUILT_IN_PATH), $(BUILT_IN_SRCS))
 
 SOURCES         = $(addprefix $(SRCS_PATH), $(MAIN))\
 				  $(addprefix $(SRCS_PATH), $(TOKEN))\
+				  $(addprefix $(SRCS_PATH), $(SIGNAL))\
 				  $(addprefix $(SRCS_PATH), $(UTILS))\
 				  $(addprefix $(SRCS_PATH), $(EXECUTE))\
 				  $(addprefix $(SRCS_PATH), $(BUILT_IN))

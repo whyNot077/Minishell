@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:47:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/07 21:35:43 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/11 13:44:21 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@
 # include "../libft/libft.h"
 # include "binary_tree.h"
 # include "main.h"
+# include "signal.h"
 
 #endif

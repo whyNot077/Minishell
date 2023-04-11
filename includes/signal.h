@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_input.c                                       :+:      :+:    :+:   */
+/*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/07 14:05:31 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/11 13:42:12 by minkim3          ###   ########.fr       */
+/*   Created: 2023/04/11 13:42:58 by minkim3           #+#    #+#             */
+/*   Updated: 2023/04/11 13:57:00 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-char	*read_input(void)
-{
-	char	*input;
+void	handler(int signal);
+void	display_prompt(void);
+void	signal_handler(void);
 
-	input = readline(NULL);
-	if (input == NULL)
-		error_exit("exit");
-	if (input && *input)
-		add_history(input);
-	return (input);
-}
+#endif
