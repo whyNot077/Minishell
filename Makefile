@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/10 14:56:28 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/11 13:18:51 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ TOKEN_SRCS    = token.c lexical_analysis.c special_tokens.c special_tokens2.c\
 				space_token.c
 TOKEN         = $(addprefix $(TOKEN_PATH), $(TOKEN_SRCS))
 
-UTILS_PATH      = ./utils/
+UTILS_PATH      = ./data_structure/
 UTILS_SRCS      = binary_tree.c remove_recursive.c
 UTILS           = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
 
