@@ -23,16 +23,18 @@ typedef struct s_find
 	int					*find;
 }						t_find;
 
-typedef struct stack_node {
-	int			data;
+typedef struct stack_node
+{
+	int					data;
 	struct stack_node	*next;
 	struct stack_node	*prev;
-} stack_node;
+}						stack_node;
 
-typedef struct list {
-	stack_node	*top;
-	stack_node	*headnode;
-} stack;
+typedef struct list
+{
+	stack_node			*top;
+	stack_node			*headnode;
+}						stack;
 
 typedef struct tree_node
 {
