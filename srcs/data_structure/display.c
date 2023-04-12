@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:16:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/11 14:16:59 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/12 12:17:13 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,23 @@ void	display_stack(stack *list)
 		dummy = dummy->next;
 	}
 	printf("\n----------------\n");
+}
+
+void	display_list(t_array *list)
+{
+	size_t	i;
+
+	i = 0;
+	if (!list)
+	{
+		printf("no list\n");
+		return ;
+	}
+	printf("list : ");
+	while (i < list->current_count)
+	{
+		printf("%s ", get_token(list, i)->value);
+		i++;
+	}
+	printf("\n");
 }
