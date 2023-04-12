@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 18:25:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/10 21:23:44 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/12 13:56:13 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,12 @@ static void	get_args_to_envp(char **args, char **envp, char **export)
 	// 1-1 if there is only key, check if there is key in args
 	if (ft_strchr(args[1], '=') == NULL)
 	{
-		
+		// 1-2 if there is key in args, check if there is key in envp
+		if (get_envp_key(envp, args[1]) == NULL)
+		{
+			// 1-3 if there is no key in envp, add key to envp
+			al_add_rear(export, args[1]);
+		}
 	}
 	// 2. check if there is key and value in args
 	
