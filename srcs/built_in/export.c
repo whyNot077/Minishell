@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 18:25:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/09 22:17:22 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/10 21:23:44 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static int	validate_key_args(char **args)
 		}
 		args_idx++;
 	}
+	if (g_exit_code == 1)
+		return (ERROR);
 	return (SUCCESS);
 }
 
@@ -56,14 +58,19 @@ static void	print_env(char **envp, int outfile_fd)
 	free(sorted_envp);
 }
 
-void	get_args_to_envp(char **args, char **envp)
+static void	get_args_to_envp(char **args, char **envp, char **export)
 {
 	// 1. check if there is only key in args
-	
+	// 1-1 if there is only key, check if there is key in args
+	if (ft_strchr(args[1], '=') == NULL)
+	{
+		
+	}
 	// 2. check if there is key and value in args
+	
 }
 
-void	export(char **args, char **envp, int outfile_fd)
+void	export(char **args, char **envp, char **export, int outfile_fd)
 {
 	// 1. check if there is wrong key
 	if (validate_key_args(args) == ERROR)
@@ -75,6 +82,5 @@ void	export(char **args, char **envp, int outfile_fd)
 		return ;
 	}
 	// 3. input key and value to envp
-	get_args_to_envp(args, envp);
-	
+	get_args_to_envp(args, envp, export);
 }

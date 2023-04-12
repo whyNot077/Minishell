@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:47:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/11 14:13:57 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/11 14:31:32 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@
 # include "main.h"
 # include "signal.h"
 # include "doubly_linked_stack.h"
+# include "arraylist.h"
 
 #endif

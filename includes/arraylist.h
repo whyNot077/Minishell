@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   arraylist.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/11 14:25:41 by hyojocho         ###   ########.fr       */
+/*   Created: 2023/04/11 13:13:34 by hyojocho          #+#    #+#             */
+/*   Updated: 2023/04/12 10:54:40 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#ifndef ARRAYLIST_H
+# define ARRAYLIST_H
 
-// void execute(char **args, char **envp, int outfile_fd)
-// {
-// 	// no pipe, built_in
-// 	// if (built_in_flag == EXIST && pipe_flag == NOT_EXIST)
-// 	// 	built_in(args, envp, export, outfile_fd);
-	
-// }
+# define MAX_STRING_LENGTH 100
+# define INITIAL_CAPACITY 10
+
+typedef struct s_arraylist
+{
+	int		size;
+	int		capacity;
+	char	**data;
+}			t_arraylist;
+
+#endif
