@@ -39,6 +39,7 @@ typedef struct list
 typedef struct tree_node
 {
 	char				*data;
+	int					type;
 	struct tree_node	*left;
 	struct tree_node	*right;
 }						tree_node;

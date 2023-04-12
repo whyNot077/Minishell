@@ -6,22 +6,11 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:09:12 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 14:24:07 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/12 11:27:14 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-t_token	*create_token(const char *value)
-{
-	t_token	*token;
-
-	token = ft_calloc(1, sizeof(t_token));
-	if (token == NULL)
-		error_exit("malloc failed");
-	token->value = ft_strdup(value);
-	return (token);
-}
 
 int	is_operator(char c)
 {
