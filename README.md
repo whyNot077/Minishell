@@ -5,9 +5,9 @@
 [GNU Bash Manual][bash]  
 [Posix shell][posix]  
 [Shell Grammar Rules][shell]  
-[Base Definitions][base]
-[LL parser][ll]
-[Chomsky hierarchy][chom]
+[Base Definitions][base]  
+[LL parser][ll]  
+[Chomsky hierarchy][chom]  
 
 [bash]: https://www.gnu.org/software/bash/manual/bash.html
 [posix]: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/contents.html
