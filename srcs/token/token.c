@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:09:12 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 11:27:14 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/12 14:31:54 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,24 @@ int	is_space(char c)
 	return (c == ' ');
 }
 
-void	type_of_token(t_token *tokens, int token_index)
+int	type_of_token(char	*value)
 {
-	char	*value;
-
-	value = tokens[token_index].value;
 	if (ft_strncmp(value, "|", 1) == 0)
-		tokens[token_index].type = PIPE;
+		return (PIPE);
 	else if (ft_strncmp(value, ">", 1) == 0)
-		tokens[token_index].type = REDIRECT_OUT;
+		return (REDIRECT_OUT);
 	else if (ft_strncmp(value, "<", 1) == 0)
-		tokens[token_index].type = REDIRECT_IN;
+		return (REDIRECT_IN);
 	else if (ft_strncmp(value, ">>", 2) == 0)
-		tokens[token_index].type = REDIRECT_APPEND;
+		return (REDIRECT_APPEND);
 	else if (ft_strncmp(value, "<<", 2) == 0)
-		tokens[token_index].type = HEREDOC;
+		return (HEREDOC);
 	else if (ft_strncmp(value, "&&", 2) == 0)
-		tokens[token_index].type = AND;
+		return (AND);
 	else if (ft_strncmp(value, "||", 2) == 0)
-		tokens[token_index].type = OR;
+		return (OR);
 	else
-		tokens[token_index].type = WORD;
+		return (WORD);
 }
 
 void	free_tokens(t_token **tokens_ptr)

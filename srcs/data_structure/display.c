@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:16:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 12:17:13 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/12 18:11:37 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	display_list(t_array *list)
 		return ;
 	}
 	printf("list : ");
-	while (i < list->current_count)
+	while (i < list->token_count)
 	{
 		printf("%s ", get_token(list, i)->value);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:08:59 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 12:18:59 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/12 18:13:28 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,40 @@ t_array	*create_list(size_t max_num)
 
 	list = (t_array *)malloc(sizeof(t_array));
 	if (!list)
-		return (NULL);
+		error_exit("malloc error");
 	list->max_count = max_num;
-	list->current_count = 0;
+	list->token_count = 0;
 	list->token = ft_calloc(max_num, sizeof(t_token));
 	if (!list->token)
 	{
 		free(list);
 		list = NULL;
-		return (NULL);
+		error_exit("malloc error");
 	}
 	return (list);
 }
 
 t_token	*get_token(t_array *list, size_t index)
 {
-	if (!list || index < 0 || list->current_count < index)
+	if (!list || index < 0 || list->token_count < index)
 		return (NULL);
-	return (list->token + index);
+	return (&list->token[index]);
 }
 
-int is_full(t_array *list)
+int	is_full(t_array *list)
 {
-	return (list->current_count >= list->max_count);
+	return (list->token_count >= list->max_count);
 }
 
-int	insert_token(t_array *list, t_token new_token, size_t index)
+int	insert_token(t_array *list, char *value)
 {
 	size_t	current;
 	t_token	*dummy;
+	t_token	new_token;
 
-	current = list->current_count;
-	if (!list || index < 0 || current < index)
-		return (0);
+	if (!list || !value)
+		return (ERROR);
+	current = list->token_count;
 	if (is_full(list))
 	{
 		dummy = list->token;
@@ -61,30 +62,10 @@ int	insert_token(t_array *list, t_token new_token, size_t index)
 		list->max_count *= 1.5;
 		free(dummy);
 	}
-	while (index < current)
-	{
-		*get_token(list, current) = *get_token(list, current - 1);
-		current--;
-	}
-	*get_token(list, index) = new_token;
-	list->current_count++;
-	return (1);
-}
-
-int	remove_token(t_array *list, size_t index)
-{
-	size_t i;
-
-	i = (list->max_count) - 1;
-	if (index < 0 || ((list->current_count) <= index))
-		return (0);
-	while (index < i)
-	{
-		*get_token(list, index) = *get_token(list, index + 1);
-		index++;
-	}
-	(*get_token(list, index)).value = NULL;
-	list->current_count--;
+	new_token.value = value;
+	new_token.type = type_of_token(new_token.value);
+	list->token[current] = new_token;
+	list->token_count++;
 	return (1);
 }
 
@@ -94,7 +75,7 @@ void	destroy_list(t_array **list)
 		return ;
 	if ((*list)->token != NULL)
 	{
-		free((*list)->token);
+		free_tokens(&((*list)->token));
 		(*list)->token = NULL;
 	}
 	free(*list);

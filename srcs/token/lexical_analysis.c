@@ -6,37 +6,37 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:55:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/11 14:14:59 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/12 18:14:45 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	buffer_to_token_value(char *buffer, int *buffer_index,
-		t_token *tokens, int *token_index)
+void	buffer_to_token_value(char *buffer, int *buffer_index, t_array *list)
 {
+	char	*new_value;
+
 	if (*buffer_index > 0)
 	{
 		buffer[*buffer_index] = '\0';
-		tokens[(*token_index)++].value = ft_strdup(buffer);
-		type_of_token(tokens, *token_index - 1);
+		new_value = ft_strdup(buffer);
+		insert_token(list, new_value);
 		*buffer_index = 0;
 	}
 }
 
 t_token	*create_tokens_by_lexical_analysis(const char *input)
 {
-	t_token	*tokens;
-	int		token_index;
+	t_array	*list;
+	t_token	*token;
 
-	token_index = 0;
-	tokens = ft_calloc(MAX_TOKENS, sizeof(t_token));
-	if (tokens == NULL)
-		error_exit("malloc error");
-	process_input(input, tokens, &token_index);
-	tokens = special_tokens(tokens, token_index);
+	list = create_list(MAX_TOKENS);
+	process_input(list, input);
+	list = special_tokens(list);
 	printf("\nspecial_tokens finished\n");
-	for (int i = 0; tokens[i].value; i++)
-		printf("tokens[%d].value = %s\n", i, tokens[i].value);
-	return (tokens);
+	for (size_t i = 0; i < list->token_count; i++)
+		printf("tokens[%zu].value = %s\n", i, get_token(list, i)->value);
+	token = list->token;
+	free(list);
+	return (token);
 }

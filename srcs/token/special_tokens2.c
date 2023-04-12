@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 14:13:45 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 21:26:28 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/12 17:25:57 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int	is_unexpected_parameter(char c)
 }
 
 void	fill_data(t_process_input_data *data, const char *input, \
-		t_token *tokens, int *token_index)
+		t_array *list)
 {
 	data->input = input;
-	data->tokens = tokens;
-	data->token_index = token_index;
+	data->list = list;
+	data->tokens = list->token;
 	data->buffer_index = 0;
 }
 

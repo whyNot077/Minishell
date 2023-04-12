@@ -6,14 +6,13 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 22:11:04 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 14:35:48 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/12 18:15:03 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	handle_operator(const char *input, int i, t_token *tokens,
-		int *token_index)
+void	handle_operator(const char *input, int i, t_array *list)
 {
 	char	operator_str[2];
 
@@ -22,21 +21,18 @@ void	handle_operator(const char *input, int i, t_token *tokens,
 	{
 		operator_str[0] = input[i];
 		operator_str[1] = '\0';
-		tokens[(*token_index)++].value = ft_strdup(operator_str);
-		type_of_token(tokens, *token_index - 1);
+		insert_token(list, ft_strdup(operator_str));
 	}
 }
 
-static void	handle_remaining_buffer(char *buffer, int buffer_index,
-		t_token *tokens, int *token_index)
+static void	handle_remaining_buffer(char *buffer, int buffer_index, \
+		t_array *list)
 {
 	if (buffer_index > 0)
 	{
 		buffer[buffer_index] = '\0';
-		tokens[(*token_index)++].value = ft_strdup(buffer);
-		type_of_token(tokens, *token_index - 1);
+		insert_token(list, ft_strdup(buffer));
 	}
-	tokens[*token_index].value = NULL;
 }
 
 static void	handle_quote_char(t_process_input_data *data, int *i)
@@ -44,8 +40,8 @@ static void	handle_quote_char(t_process_input_data *data, int *i)
 	char	quote_char;
 
 	quote_char = data->input[*i];
-	if (find_quote_to_the_end(data->buffer, &data->buffer_index, \
-		data->input, i) == FALSE)
+	if (find_quote_to_the_end(data->buffer, &data->buffer_index, data->input, \
+			i) == FALSE)
 	{
 		read_input_until_finding_the_quote(quote_char, data->buffer, \
 				&data->buffer_index, data);
@@ -54,17 +50,16 @@ static void	handle_quote_char(t_process_input_data *data, int *i)
 
 static void	handle_operator_char(t_process_input_data *data, int *i)
 {
-	buffer_to_token_value(data->buffer, &data->buffer_index, data->tokens, \
-			data->token_index);
-	handle_operator(data->input, *i, data->tokens, data->token_index);
+	buffer_to_token_value(data->buffer, &data->buffer_index, data->list);
+	handle_operator(data->input, *i, data->list);
 }
 
-void	process_input(const char *input, t_token *tokens, int *token_index)
+void	process_input(t_array *list, const char *input)
 {
 	t_process_input_data	data;
 	int						i;
 
-	fill_data(&data, input, tokens, token_index);
+	fill_data(&data, input, list);
 	i = -1;
 	while (data.input[++i] != '\0')
 	{
@@ -84,6 +79,5 @@ void	process_input(const char *input, t_token *tokens, int *token_index)
 		else
 			data.buffer[data.buffer_index++] = data.input[i];
 	}
-	handle_remaining_buffer(data.buffer, data.buffer_index, data.tokens, \
-			data.token_index);
+	handle_remaining_buffer(data.buffer, data.buffer_index, data.list);
 }

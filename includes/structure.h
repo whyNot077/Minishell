@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 12:15:41 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/12 17:26:31 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_token
 typedef struct array_type
 {
 	size_t				max_count;
-	size_t				current_count;
+	size_t				token_count;
 	t_token				*token;
 }						t_array;
 
@@ -31,7 +31,7 @@ typedef struct s_process_input_data
 {
 	const char			*input;
 	t_token				*tokens;
-	int					*token_index;
+	t_array				*list;
 	char				buffer[MAX_INPUT_SIZE];
 	int					buffer_index;
 }						t_process_input_data;
