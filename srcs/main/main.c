@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 14:40:52 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/12 18:26:56 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void leaks(void)
 {
 	system("leaks --list minishell > tmp.txt");
 }
-
 
 int	main(int argc, char *argv[], char *envp[])
 {
@@ -33,8 +32,8 @@ int	main(int argc, char *argv[], char *envp[])
 		display_prompt();
 		input = read_input();
 		tokens = create_tokens_by_lexical_analysis(input);
-		free(input);
-		free_tokens(&tokens);
 	}
+	free(input);
+	free_tokens(&tokens);
 	return (0);
 }
