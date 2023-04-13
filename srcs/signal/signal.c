@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:33:16 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/13 11:59:32 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 20:38:56 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handler(int signal)
 
 void	display_prompt(void)
 {
-	printf("%sMinishell >%s", BLUE, DEFAULT);
+	printf("%sMinishell > %s", BLUE, DEFAULT);
 }
 
 void	signal_handler(void)
