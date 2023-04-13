@@ -15,6 +15,6 @@ tree_node	*create_new_node(t_token *token);
 void		destroy_tree(binarytree **tree);
 
 // display
-void	display_tree(binarytree *tree);
+void	display_tree(tree_node *node);
 
 #endif

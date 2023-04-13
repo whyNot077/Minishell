@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/13 14:36:40 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 19:14:52 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int	main(int argc, char *argv[], char *envp[])
 		input = read_input();
 		tokens = create_tokens_by_lexical_analysis(input);
 		tree = parse_tokens(tokens);
-		display_tree(tree);
+		display_tree(tree->root);
 		destroy_tree(&tree);
+		free_tokens(&tokens);
 		free(input);
 		free(tokens);
 	}

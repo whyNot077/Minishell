@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:13:17 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/13 14:11:32 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 19:15:15 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	free_tree_nodes(tree_node *node)
 		return ;
 	free_tree_nodes(node->left);
 	free_tree_nodes(node->right);
-	free(node->data);
+	// free(node->data);
 	free(node);
 }
 
