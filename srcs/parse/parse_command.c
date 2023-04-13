@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/13 20:05:02 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 20:09:09 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ tree_node	*parse_command(t_token *tokens, int *index)
 	if ((size_t)*index >= tokens->token_count)
 		return (NULL);
 	current_token = &tokens[*index];
-	if (current_token->type == WORD || current_token->type == ENV
+	if (current_token->type == WORD || current_token->type == ENV\
 		|| current_token->type == OPTION)
 	{
 		node = parse_word(tokens, index);
