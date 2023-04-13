@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/13 19:50:01 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 19:50:45 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ tree_node	*parse_command(t_token *tokens, int *index)
 	{
 		node = parse_word(tokens, index);
 		next_token = &tokens[*index];
+		printf("next_token = %s\n", next_token->value);
 		if (next_token_is_option(tokens, *index))
 		{
 			printf("option = %s\n", next_token->value);
