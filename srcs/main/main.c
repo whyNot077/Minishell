@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 18:26:56 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 14:36:40 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void leaks(void)
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	char	*input;
-	t_token	*tokens;
+	char		*input;
+	t_token		*tokens;
+	binarytree	*tree;
 
 	(void)envp;
 	atexit(leaks);
@@ -32,8 +33,11 @@ int	main(int argc, char *argv[], char *envp[])
 		display_prompt();
 		input = read_input();
 		tokens = create_tokens_by_lexical_analysis(input);
+		tree = parse_tokens(tokens);
+		display_tree(tree);
+		destroy_tree(&tree);
+		free(input);
+		free(tokens);
 	}
-	free(input);
-	free_tokens(&tokens);
 	return (0);
 }

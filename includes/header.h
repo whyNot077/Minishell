@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:47:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 19:38:16 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 13:54:22 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@
 # include "../libft/libft.h"
 # include "main.h"
 # include "signal.h"
-# include "doubly_linked_stack.h"
-# include "arraylist.h"
-# include "dynamic_array.h"
 # include "parse.h"
+# include "data_structure.h"
 
 #endif

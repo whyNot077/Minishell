@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 17:26:31 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 14:13:30 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_token
 {
 	char				*value;
 	int					type;
+	size_t				token_count;
 }						t_token;
 
 typedef struct array_type
@@ -41,19 +42,6 @@ typedef struct s_find
 	char				quote_char;
 	int					*find;
 }						t_find;
-
-typedef struct stack_node
-{
-	int					data;
-	struct stack_node	*next;
-	struct stack_node	*prev;
-}						stack_node;
-
-typedef struct list
-{
-	stack_node			*top;
-	stack_node			*headnode;
-}						stack;
 
 typedef struct tree_node
 {

@@ -2,5 +2,6 @@
 # define PARSE_H
 # include "structure.h"
 
+binarytree	*parse_tokens(t_token *tokens);
 
 #endif

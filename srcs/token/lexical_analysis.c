@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:55:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 18:14:45 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 14:16:42 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,8 @@ t_token	*create_tokens_by_lexical_analysis(const char *input)
 	list = create_list(MAX_TOKENS);
 	process_input(list, input);
 	list = special_tokens(list);
-	printf("\nspecial_tokens finished\n");
-	for (size_t i = 0; i < list->token_count; i++)
-		printf("tokens[%zu].value = %s\n", i, get_token(list, i)->value);
 	token = list->token;
+	token->token_count = list->token_count;
 	free(list);
 	return (token);
 }

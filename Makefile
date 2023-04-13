@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/12 19:37:26 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/13 14:10:50 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ PARSE_SRCS     = parse.c
 PARSE          = $(addprefix $(PARSE_PATH), $(PARSE_SRCS))
 
 UTILS_PATH      = ./data_structure/
-UTILS_SRCS      = remove_recursive.c doubly_linked_stack.c display.c dynamic_array.c
+UTILS_SRCS      = display.c dynamic_array.c binary_tree.c
 UTILS           = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
 
 EXECUTE_PATH    = ./execute/

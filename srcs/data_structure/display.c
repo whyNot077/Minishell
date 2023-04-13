@@ -6,47 +6,40 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:16:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 18:11:37 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 14:27:14 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	display_stack(stack *list)
+void	execution_order_traversal(tree_node *node)
 {
-	stack_node	*dummy;
-
-	if (list == NULL || list->top == NULL)
-	{
-		printf("empty list\n");
+	if (node == NULL)
 		return ;
-	}
-	dummy = list->headnode;
-	printf("\n----------------\n");
-	printf("\ndisplay_list\n");
-	while (dummy != NULL)
+	if (node->type == PIPE)
 	{
-		printf("%d ", dummy->data);
-		dummy = dummy->next;
+		execution_order_traversal(node->left);
+		execution_order_traversal(node->right);
 	}
-	printf("\n----------------\n");
+	else if (node->type == REDIRECT_OUT || node->type == REDIRECT_IN)
+	{
+		execution_order_traversal(node->left);
+		execution_order_traversal(node->right);
+	}
+	else
+	{
+		printf("Data: %s, Type: %d\n", node->data, node->type);
+		execution_order_traversal(node->left);
+		execution_order_traversal(node->right);
+	}
 }
 
-void	display_list(t_array *list)
+void	display_tree(binarytree *tree)
 {
-	size_t	i;
-
-	i = 0;
-	if (!list)
+	if (tree == NULL || tree->root == NULL)
 	{
-		printf("no list\n");
+		printf("Tree is empty\n");
 		return ;
 	}
-	printf("list : ");
-	while (i < list->token_count)
-	{
-		printf("%s ", get_token(list, i)->value);
-		i++;
-	}
-	printf("\n");
+	execution_order_traversal(tree->root);
 }
