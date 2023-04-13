@@ -6,24 +6,24 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/13 19:49:32 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 19:50:01 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	next_token_is_option(t_token *tokens, int index)
+int	next_token_is_option(t_token *tokens, int index)
 {
 	return ((size_t)index < tokens->token_count
 		&& tokens[index].type == OPTION);
 }
 
-bool	next_token_is_pipe(t_token *tokens, int index)
+int	next_token_is_pipe(t_token *tokens, int index)
 {
 	return ((size_t)index < tokens->token_count && tokens[index].type == PIPE);
 }
 
-bool	next_token_is_redirect(t_token *tokens, int index)
+int	next_token_is_redirect(t_token *tokens, int index)
 {
 	return ((size_t)index < tokens->token_count
 		&& (tokens[index].type == REDIRECT_OUT
