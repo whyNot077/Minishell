@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/03 13:37:57 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/06 19:55:15 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/13 19:32:37 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,6 @@ SRCS = allocate_new_memory/ft_calloc.c\
 		check_or_change_character/ft_tolower.c\
 		function_pointer/ft_striteri.c\
 		function_pointer/ft_strmapi.c\
-		get_next_line/get_next_line.c\
-		get_next_line/get_next_line_utils.c\
 		string/ft_strlen.c\
 		string/ft_split.c\
 		string/ft_strjoin.c\

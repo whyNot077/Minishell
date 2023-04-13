@@ -6,11 +6,29 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/13 19:23:44 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 19:49:32 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+bool	next_token_is_option(t_token *tokens, int index)
+{
+	return ((size_t)index < tokens->token_count
+		&& tokens[index].type == OPTION);
+}
+
+bool	next_token_is_pipe(t_token *tokens, int index)
+{
+	return ((size_t)index < tokens->token_count && tokens[index].type == PIPE);
+}
+
+bool	next_token_is_redirect(t_token *tokens, int index)
+{
+	return ((size_t)index < tokens->token_count
+		&& (tokens[index].type == REDIRECT_OUT
+			|| tokens[index].type == REDIRECT_IN));
+}
 
 tree_node	*parse_command(t_token *tokens, int *index)
 {
@@ -27,21 +45,25 @@ tree_node	*parse_command(t_token *tokens, int *index)
 	{
 		node = parse_word(tokens, index);
 		next_token = &tokens[*index];
-		if ((size_t)*index < tokens->token_count
-			&& (next_token->type == OPTION))
+		if (next_token_is_option(tokens, *index))
 		{
+			printf("option = %s\n", next_token->value);
 			node->left = parse_option(tokens, index);
 			next_token = &tokens[*index];
 		}
-		if ((size_t)*index < tokens->token_count && (next_token->type == PIPE
-				|| next_token->type == REDIRECT_OUT
-				|| next_token->type == REDIRECT_IN))
+		if (next_token_is_pipe(tokens, *index))
 		{
-			if (next_token->type == PIPE)
-				node->right = parse_pipe(tokens, index);
-			else
-				node->right = parse_redirect(tokens, index);
+			node->right = parse_pipe(tokens, index);
 		}
+		else if (next_token_is_redirect(tokens, *index))
+		{
+			node->right = parse_redirect(tokens, index);
+		}
+	}
+	else
+	{
+		printf("Error: unexpected token %s\n", current_token->value);
+		exit(1);
 	}
 	return (node);
 }
