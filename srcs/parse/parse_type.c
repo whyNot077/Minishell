@@ -6,13 +6,13 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:23:31 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/13 20:45:24 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 20:52:44 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-tree_node	*parse_word(t_token *tokens, int *index)
+tree_node	*parse_commands(t_token *tokens, int *index)
 {
 	t_token		*current_token;
 	tree_node	*node;
@@ -34,14 +34,14 @@ tree_node	*parse_pipe(t_token *tokens, int *index)
 	if (tokens[*index].value == NULL)
 	{
 		free(node);
-		printf("Error: syntax error near unexpected token %s\n", \
-			tokens[*index - 1].value);
+		printf("Error: syntax error near unexpected token %s\n",
+				tokens[*index - 1].value);
 		return (NULL);
 	}
 	if (tokens[*index].type != WORD)
 	{
 		free(node);
-		printf("Error: syntax error near unexpected token %s\n", \
+		printf("Error: syntax error near unexpected token %s\n",
 				tokens[*index].value);
 		return (NULL);
 	}
@@ -59,29 +59,17 @@ tree_node	*parse_redirect(t_token *tokens, int *index)
 	if (tokens[*index].value == NULL)
 	{
 		free(node);
-		printf("Error: syntax error near unexpected token %s\n", \
-			tokens[*index - 1].value);
+		printf("Error: syntax error near unexpected token %s\n",
+				tokens[*index - 1].value);
 		return (NULL);
 	}
 	else if (tokens[*index].type != WORD)
 	{
 		free(node);
-		printf("Error: syntax error near unexpected token %s\n", \
+		printf("Error: syntax error near unexpected token %s\n",
 				tokens[*index].value);
 		return (NULL);
 	}
 	node->right = parse_command(tokens, index);
-	return (node);
-}
-
-tree_node	*parse_option(t_token *tokens, int *index)
-{
-	t_token		*current_token;
-	tree_node	*node;
-
-	current_token = &tokens[*index];
-	node = create_new_node(current_token);
-	node->type = get_node_type(current_token->value);
-	(*index)++;
 	return (node);
 }
