@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/12 18:18:17 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/12 19:37:26 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,9 +39,12 @@ TOKEN_SRCS    = token.c lexical_analysis.c special_tokens.c special_tokens2.c\
 				space_token.c
 TOKEN         = $(addprefix $(TOKEN_PATH), $(TOKEN_SRCS))
 
+PARSE_PATH     = ./parse/
+PARSE_SRCS     = parse.c
+PARSE          = $(addprefix $(PARSE_PATH), $(PARSE_SRCS))
+
 UTILS_PATH      = ./data_structure/
-UTILS_SRCS      = binary_tree.c remove_recursive.c doubly_linked_stack.c display.c\
-				  dynamic_array.c
+UTILS_SRCS      = remove_recursive.c doubly_linked_stack.c display.c dynamic_array.c
 UTILS           = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
 
 EXECUTE_PATH    = ./execute/
@@ -55,6 +58,7 @@ BUILT_IN         = $(addprefix $(BUILT_IN_PATH), $(BUILT_IN_SRCS))
 SOURCES         = $(addprefix $(SRCS_PATH), $(MAIN))\
 				  $(addprefix $(SRCS_PATH), $(TOKEN))\
 				  $(addprefix $(SRCS_PATH), $(SIGNAL))\
+				  $(addprefix $(SRCS_PATH), $(PARSE))\
 				  $(addprefix $(SRCS_PATH), $(UTILS))\
 				  $(addprefix $(SRCS_PATH), $(EXECUTE))\
 				  $(addprefix $(SRCS_PATH), $(BUILT_IN))

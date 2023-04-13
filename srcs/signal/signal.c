@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:33:16 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/11 13:57:28 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 11:59:32 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	signal_handler(void)
 	if (sigaction(SIGINT, &sa, NULL) == -1)
 	{
 		perror("sigaction");
-		exit(1);
+		exit(SIGINT + 128);
 	}
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
@@ -44,6 +44,6 @@ void	signal_handler(void)
 	if (sigaction(SIGQUIT, &sa, NULL) == -1)
 	{
 		perror("sigaction");
-		exit(1);
+		exit(SIGQUIT + 128);
 	}
 }
