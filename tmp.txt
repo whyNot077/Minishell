@@ -1,23 +1,31 @@
-Process:         minishell [17949]
+Process:         minishell [20765]
 Path:            /Volumes/VOLUME/*/minishell
-Load Address:    0x1028ec000
+Load Address:    0x10563f000
 Identifier:      minishell
 Version:         ???
 Code Type:       X86-64
 Parent Process:  zsh [7352]
 
-Date/Time:       2023-04-13 19:52:55.598 +0900
-Launch Time:     2023-04-13 19:52:48.713 +0900
+Date/Time:       2023-04-13 20:06:29.014 +0900
+Launch Time:     2023-04-13 20:05:14.250 +0900
 OS Version:      Mac OS X 10.15.7 (19H2026)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
 Analysis Tool Version:  Xcode 12.3 (12C33)
 
-Physical footprint:         728K
-Physical footprint (peak):  728K
+Physical footprint:         812K
+Physical footprint (peak):  812K
 ----
 
 leaks Report Version: 3.0
-Process 17949: 376 nodes malloced for 359 KB
-Process 17949: 0 leaks for 0 total leaked bytes.
+Process 20765: 396 nodes malloced for 359 KB
+Process 20765: 8 leaks for 256 total leaked bytes.
 
+Leak: 0x7fd6ccd040d0  size=32  zone: DefaultMallocZone_0x105651000
+Leak: 0x7fd6ccd04110  size=32  zone: DefaultMallocZone_0x105651000
+Leak: 0x7fd6ccf040e0  size=32  zone: DefaultMallocZone_0x105651000
+Leak: 0x7fd6ccf04120  size=32  zone: DefaultMallocZone_0x105651000
+Leak: 0x7fd6ce8040d0  size=32  zone: DefaultMallocZone_0x105651000
+Leak: 0x7fd6ce804130  size=32  zone: DefaultMallocZone_0x105651000
+Leak: 0x7fd6ce9040d0  size=32  zone: DefaultMallocZone_0x105651000
+Leak: 0x7fd6ce904130  size=32  zone: DefaultMallocZone_0x105651000

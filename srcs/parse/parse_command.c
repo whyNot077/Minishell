@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/13 19:53:00 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/13 20:05:02 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,20 @@ tree_node	*parse_command(t_token *tokens, int *index)
 		if (next_token_is_pipe(tokens, *index))
 		{
 			node->right = parse_pipe(tokens, index);
+			if (node->right == NULL)
+				return (NULL);
 		}
 		else if (next_token_is_redirect(tokens, *index))
 		{
 			node->right = parse_redirect(tokens, index);
+			if (node->right == NULL)
+				return (NULL);
 		}
 	}
 	else
 	{
 		printf("Error: unexpected token %s\n", current_token->value);
-		exit(1);
+		return (NULL);
 	}
 	return (node);
 }
