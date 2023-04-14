@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 21:20:13 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/14 14:32:43 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/14 14:50:58 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ static t_arraylist	*make_env_list(char **envp)
 	return (env);
 }
 
-t_execute	*envp_init(char **envp)
-{
-	t_execute *execute;
-
-	execute = ft_calloc(1, sizeof(t_execute));
-	execute->env = make_env_list(envp);
-	execute->export = make_env_list(envp);
-	return (execute);
-}
-
 void	free_envp(t_execute	*execute)
 {
 	int	i;
@@ -55,4 +45,14 @@ void	free_envp(t_execute	*execute)
 		i++;
 	}
 	free(execute->export);
+}
+
+t_execute	*envp_init(char **envp)
+{
+	t_execute *execute;
+
+	execute = ft_calloc(1, sizeof(t_execute));
+	execute->env = make_env_list(envp);
+	execute->export = make_env_list(envp);
+	return (execute);
 }
