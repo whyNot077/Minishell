@@ -3,16 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 13:58:41 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:22:48 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
 # define MAX_INPUT_SIZE 1024
+
+typedef struct s_arraylist
+{
+	int					size;
+	int					capacity;
+	char				**data;
+}						t_arraylist;
+
+typedef struct s_execute
+{
+	int					built_in_flag;
+	int					pipe_flag;
+	t_arraylist			*env;
+	t_arraylist			*export;
+}						t_execute;
 
 typedef struct s_token
 {
