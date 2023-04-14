@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 13:59:54 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:08:23 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_tree_node	*parse_command(t_token *tokens, int *index)
 	t_token		*current_token;
 
 	node = NULL;
-	if ((size_t)*index >= tokens->token_count)
+	if ((size_t)(*index) >= tokens->token_count)
 	{
 		return (node);
 	}
@@ -38,11 +38,13 @@ t_tree_node	*parse_command(t_token *tokens, int *index)
 	if (current_token->type == WORD)
 	{
 		node = parse_commands(tokens, index);
-		if ((size_t)*index < tokens->token_count && tokens[*index].type != PIPE)
+		if ((size_t)(*index) < tokens->token_count \
+			&& tokens[*index].type != PIPE)
 		{
 			node->left = parse_cmd_prefix(tokens, index);
 		}
-		if ((size_t)*index < tokens->token_count && tokens[*index].type != PIPE)
+		if ((size_t)(*index) < tokens->token_count \
+			&& tokens[*index].type != PIPE)
 		{
 			node->right = parse_cmd_suffix(tokens, index);
 		}

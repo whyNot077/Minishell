@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:23:31 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 14:00:36 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:10:54 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static int	next_token_is_io_redirect(t_token *tokens, int index)
 {
-	return ((size_t)index < tokens->token_count &&
-			(tokens[index].type == REDIRECT_OUT
-					|| tokens[index].type == REDIRECT_IN
-					|| tokens[index].type == REDIRECT_APPEND
+	return ((size_t)index < tokens->token_count && \
+			(tokens[index].type == REDIRECT_OUT \
+					|| tokens[index].type == REDIRECT_IN \
+					|| tokens[index].type == REDIRECT_APPEND \
 					|| tokens[index].type == HEREDOC));
 }
 
@@ -103,21 +103,21 @@ t_tree_node	*parse_redirect(t_token *tokens, int *index)
 	}
 	else
 	{
-		printf("Error: syntax error near unexpected token %s\n",
+		printf("Error: syntax error near unexpected token %s\n", \
 				tokens[*index].value);
 		return (NULL);
 	}
 	if (tokens[*index].value == NULL)
 	{
 		free(node);
-		printf("Error: syntax error near unexpected token %s\n", tokens[*index
-				- 1].value);
+		printf("Error: syntax error near unexpected token %s\n", \
+			tokens[*index - 1].value);
 		return (NULL);
 	}
 	else if (tokens[*index].type != WORD)
 	{
 		free(node);
-		printf("Error: syntax error near unexpected token %s\n",
+		printf("Error: syntax error near unexpected token %s\n", \
 				tokens[*index].value);
 		return (NULL);
 	}
@@ -132,10 +132,10 @@ t_tree_node	*parse_io_redirect(t_token *tokens, int *index)
 {
 	t_tree_node	*node;
 
-	if (tokens[*index].type == REDIRECT_OUT
-		|| tokens[*index].type == REDIRECT_IN ||
-		tokens[*index].type == REDIRECT_APPEND
-			|| tokens[*index].type == HEREDOC)
+	if (tokens[*index].type == REDIRECT_OUT \
+		|| tokens[*index].type == REDIRECT_IN \
+			|| tokens[*index].type == REDIRECT_APPEND \
+				|| tokens[*index].type == HEREDOC)
 	{
 		node = create_new_node(&tokens[*index]);
 		node->type = tokens[*index].type;
@@ -143,14 +143,14 @@ t_tree_node	*parse_io_redirect(t_token *tokens, int *index)
 		if (tokens[*index].value == NULL)
 		{
 			free(node);
-			printf("Error: syntax error near unexpected token %s\n",
+			printf("Error: syntax error near unexpected token %s\n", \
 					tokens[*index - 1].value);
 			return (NULL);
 		}
 		else if (tokens[*index].type != WORD)
 		{
 			free(node);
-			printf("Error: syntax error near unexpected token %s\n",
+			printf("Error: syntax error near unexpected token %s\n", \
 					tokens[*index].value);
 			return (NULL);
 		}
@@ -158,7 +158,7 @@ t_tree_node	*parse_io_redirect(t_token *tokens, int *index)
 	}
 	else
 	{
-		printf("Error: syntax error near unexpected token %s\n",
+		printf("Error: syntax error near unexpected token %s\n", \
 				tokens[*index].value);
 		return (NULL);
 	}
