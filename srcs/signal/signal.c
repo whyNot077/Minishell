@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:33:16 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 15:58:53 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 16:02:50 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,6 @@ void handler(int signal)
         rl_replace_line("", 0);
         rl_redisplay();
     }
-}
-
-void	display_prompt(void)
-{
-	printf("Minishell > ");
 }
 
 void	signal_handler(void)
