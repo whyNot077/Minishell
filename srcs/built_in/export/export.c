@@ -6,11 +6,11 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 18:25:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/13 20:56:42 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/14 19:41:24 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 static int	validate_key_args(char **args)
 {
@@ -56,22 +56,6 @@ static void	print_env(char **envp, int outfile_fd)
 		sorted_envp++;
 	}
 	free(sorted_envp);
-}
-
-static void	get_args_to_envp(char **args, char **envp, char **export)
-{
-	// 1. check if there is only key in args
-	// 1-1 if there is only key, check if there is key in args
-	if (ft_strchr(args[1], '=') == NULL)
-	{
-		add_key_to_export(args[1], export);
-	}
-	// 2. check if there is key and value in args
-	else
-	{
-		add_key_to_export(args[1], export);
-		add_key_to_envp(args[1], envp);
-	}
 }
 
 void	export(char **args, char **envp, char **export, int outfile_fd)

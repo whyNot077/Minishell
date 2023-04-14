@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arraylist.h                                        :+:      :+:    :+:   */
+/*   export_get_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 13:13:34 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/14 19:51:38 by hyojocho         ###   ########.fr       */
+/*   Created: 2023/04/14 19:29:26 by hyojocho          #+#    #+#             */
+/*   Updated: 2023/04/14 19:46:07 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ARRAYLIST_H
-# define ARRAYLIST_H
+#include "../../../includes/minishell.h"
 
-# define MAX_STRING_LENGTH 100
-# define INITIAL_CAPACITY 10
-
-t_arraylist *al_init(void);
-char		*al_get(t_arraylist *list, int index);
-void		al_add_rear(t_arraylist *list, char *element);
-void		al_remove(t_arraylist *list, int index);
-
-#endif
+void	get_args_to_envp(char **args, char **envp, char **export)
+{
+	// 1. check if there is only key in args
+	// 1-1 if there is only key, check if there is key in args
+	if (ft_strchr(args[1], '=') == NULL)
+		al_add_rear(export, args[1]);
+	// 2. check if there is key and value in args
+	else
+	{
+		al_add_rear(export, args[1]);
+		al_add_rear(envp, args[1]);
+	}
+}

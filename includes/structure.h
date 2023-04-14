@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 14:22:48 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/14 20:05:31 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 typedef struct s_arraylist
 {
+	int					count;
 	int					size;
-	int					capacity;
 	char				**data;
 }						t_arraylist;
 
@@ -25,6 +25,8 @@ typedef struct s_execute
 {
 	int					built_in_flag;
 	int					pipe_flag;
+	int					pipe_count;
+	int					redirection_flag;
 	t_arraylist			*env;
 	t_arraylist			*export;
 }						t_execute;
