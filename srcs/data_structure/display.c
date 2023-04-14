@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:16:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 11:47:35 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:00:50 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ const char	*node_type_to_str(int node_type)
 	return ("UNKNOWN");
 }
 
-void	display_tree_helper(tree_node *node, int depth)
+void	display_tree_helper(t_tree_node *node, int depth)
 {
 	if (node == NULL)
 	{
@@ -57,7 +57,7 @@ void	display_tree_helper(tree_node *node, int depth)
 	display_tree_helper(node->right, depth + 1);
 }
 
-void	display_tree(tree_node *node)
+void	display_tree(t_tree_node *node)
 {
 	display_tree_helper(node, 0);
 }

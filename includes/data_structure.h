@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   data_structure.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/14 13:53:11 by minkim3           #+#    #+#             */
+/*   Updated: 2023/04/14 13:58:19 by minkim3          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DATA_STRUCTURE_H
 # define DATA_STRUCTURE_H
 
@@ -10,12 +22,12 @@ void		display_list(t_array *list);
 void		destroy_list(t_array **list);
 
 // binary tree
-binarytree	*create_tree(void);
-tree_node	*create_new_node(t_token *token);
-void		destroy_tree(binarytree **tree);
-void		free_tree_nodes(tree_node *node);
+t_binarytree	*create_tree(void);
+t_tree_node	*create_new_node(t_token *token);
+void		destroy_tree(t_binarytree **tree);
+void		free_tree_nodes(t_tree_node *node);
 
 // display
-void		display_tree(tree_node *node);
+void		display_tree(t_tree_node *node);
 
 #endif

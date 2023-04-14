@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/13 14:13:30 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 13:58:41 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ typedef struct tree_node
 	int					type;
 	struct tree_node	*left;
 	struct tree_node	*right;
-}						tree_node;
+}						t_tree_node;
 
 typedef struct binarytree
 {
-	tree_node			*root;
-}						binarytree;
+	t_tree_node			*root;
+}						t_binarytree;
 
 #endif

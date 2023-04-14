@@ -6,16 +6,16 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 11:55:18 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 13:59:54 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-tree_node	*parse_commands(t_token *tokens, int *index)
+t_tree_node	*parse_commands(t_token *tokens, int *index)
 {
 	t_token		*current_token;
-	tree_node	*node;
+	t_tree_node	*node;
 
 	current_token = &tokens[*index];
 	node = create_new_node(current_token);
@@ -24,9 +24,9 @@ tree_node	*parse_commands(t_token *tokens, int *index)
 	return (node);
 }
 
-tree_node	*parse_command(t_token *tokens, int *index)
+t_tree_node	*parse_command(t_token *tokens, int *index)
 {
-	tree_node	*node;
+	t_tree_node	*node;
 	t_token		*current_token;
 
 	node = NULL;

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:23:31 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 13:52:20 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:00:36 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static int	next_token_is_io_redirect(t_token *tokens, int index)
 					|| tokens[index].type == HEREDOC));
 }
 
-tree_node	*parse_cmd_prefix(t_token *tokens, int *index)
+t_tree_node	*parse_cmd_prefix(t_token *tokens, int *index)
 {
-	tree_node	*node;
-	tree_node	*temp_node;
+	t_tree_node	*node;
+	t_tree_node	*temp_node;
 
 	node = NULL;
 	while (next_token_is_io_redirect(tokens, *index))
@@ -48,10 +48,10 @@ tree_node	*parse_cmd_prefix(t_token *tokens, int *index)
 	return (node);
 }
 
-tree_node	*parse_cmd_suffix(t_token *tokens, int *index)
+t_tree_node	*parse_cmd_suffix(t_token *tokens, int *index)
 {
-	tree_node	*node;
-	tree_node	*temp_node;
+	t_tree_node	*node;
+	t_tree_node	*temp_node;
 
 	node = NULL;
 	while (next_token_is_io_redirect(tokens, *index)
@@ -83,9 +83,9 @@ tree_node	*parse_cmd_suffix(t_token *tokens, int *index)
 	return (node);
 }
 
-tree_node	*parse_redirect(t_token *tokens, int *index)
+t_tree_node	*parse_redirect(t_token *tokens, int *index)
 {
-	tree_node	*node;
+	t_tree_node	*node;
 
 	if (tokens[*index].type == REDIRECT_OUT
 		|| tokens[*index].type == REDIRECT_IN
@@ -128,9 +128,9 @@ tree_node	*parse_redirect(t_token *tokens, int *index)
 	return (node);
 }
 
-tree_node	*parse_io_redirect(t_token *tokens, int *index)
+t_tree_node	*parse_io_redirect(t_token *tokens, int *index)
 {
-	tree_node	*node;
+	t_tree_node	*node;
 
 	if (tokens[*index].type == REDIRECT_OUT
 		|| tokens[*index].type == REDIRECT_IN ||

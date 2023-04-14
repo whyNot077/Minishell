@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:47:16 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 11:36:26 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 13:56:08 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define MAX_INPUT_SIZE 1024
 # define MAX_TOKENS 64
 
-enum e_definition
+enum	e_definition
 {
 	ERROR = -1,
 	SUCCESS = 1,
@@ -34,15 +34,25 @@ enum e_definition
 	NOT_EXIST = -1
 };
 
-enum e_type
+/*
+** PIPE = |
+** REDIRECT_OUT = >
+** REDIRECT_IN = <
+** REDIRECT_APPEND = >>
+** HEREDOC = <<
+** AND = &&
+** OR = ||
+*/
+
+enum	e_type
 {
 	PIPE = 1,
-	REDIRECT_OUT = 2,  // >
-	REDIRECT_IN = 3,  // <
-	REDIRECT_APPEND = 4, // >>
-	HEREDOC = 5, // <<
-	AND = 6, // &&
-	OR = 7, // ||
+	REDIRECT_OUT = 2,
+	REDIRECT_IN = 3,
+	REDIRECT_APPEND = 4,
+	HEREDOC = 5,
+	AND = 6,
+	OR = 7,
 	WORD = 8,
 	ENV = 9,
 	OPTION = 10,

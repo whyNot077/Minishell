@@ -6,27 +6,27 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:13:17 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 13:51:56 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:01:22 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-binarytree	*create_tree(void)
+t_binarytree	*create_tree(void)
 {
-	binarytree	*tree;
+	t_binarytree	*tree;
 
-	tree = 	ft_calloc(1, sizeof(binarytree));
+	tree = 	ft_calloc(1, sizeof(t_binarytree));
 	if (!tree)
 		return (NULL);
 	return (tree);
 }
 
-tree_node	*create_new_node(t_token *token)
+t_tree_node	*create_new_node(t_token *token)
 {
-	tree_node	*new_node;
+	t_tree_node	*new_node;
 
-	new_node = 	ft_calloc(1, sizeof(tree_node));
+	new_node = 	ft_calloc(1, sizeof(t_tree_node));
 	if (!new_node)
 		return (NULL);
     new_node->data = token->value;
@@ -36,7 +36,7 @@ tree_node	*create_new_node(t_token *token)
 	return (new_node);
 }
 
-void	free_tree_nodes(tree_node *node)
+void	free_tree_nodes(t_tree_node *node)
 {
 	if (!node)
 		return ;
@@ -45,7 +45,7 @@ void	free_tree_nodes(tree_node *node)
 	free(node);
 }
 
-void	destroy_tree(binarytree **tree)
+void	destroy_tree(t_binarytree **tree)
 {
 	if (!tree || !*tree)
 		return ;

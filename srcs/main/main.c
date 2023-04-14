@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/13 19:14:52 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 13:59:17 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	char		*input;
 	t_token		*tokens;
-	binarytree	*tree;
+	t_binarytree	*tree;
 
 	(void)envp;
 	atexit(leaks);
