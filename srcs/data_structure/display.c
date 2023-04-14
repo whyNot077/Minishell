@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:16:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 14:00:50 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 18:36:44 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	display_tree_helper(t_tree_node *node, int depth)
 	{
 		printf("  ");
 	}
-	printf("%s", node_type_to_str(node->type));
+	printf("%s, ", node_type_to_str(node->type));
 	if (node->data)
 	{
-		printf(" (%s)", node->data);
+		printf("execute = (%s)", node->data);
 	}
 	printf("\n");
 	display_tree_helper(node->left, depth + 1);

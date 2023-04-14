@@ -1,22 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   element_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/14 18:33:44 by hyojocho         ###   ########.fr       */
+/*   Created: 2023/04/14 16:42:56 by hyojocho          #+#    #+#             */
+/*   Updated: 2023/04/14 16:44:47 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-// void	execute(t_tree_node *root, t_execute *exe_tool)
-// {
-// 	// check pipe, built_in
-// 	check_elements();
-// 	// no pipe, built_in exist
-// 	if (exe_tool->built_in_flag == EXIST && exe_tool->pipe_flag == NOT_EXIST)
-// 		built_in();
-// }
