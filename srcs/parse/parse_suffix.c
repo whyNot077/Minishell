@@ -6,13 +6,13 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:15:27 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 14:41:38 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:44:57 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_tree_node	*parse_next_cmd_suffix_element(t_token *tokens, int *index)
+static t_tree_node	*parse_next_cmd_suffix_element(t_token *tokens, int *index)
 {
 	t_tree_node	*temp_node;
 
