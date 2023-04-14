@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 19:42:00 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 21:20:17 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ t_tree_node	*parse_commands(t_token *tokens, int *index, char **env)
 
 	current_token = &tokens[*index];
 	node = create_new_node(current_token);
-	node->type = get_node_type(current_token->value, env);
+	node->type = get_node_type(&current_token->value, env);
+	node->data = current_token->value;
 	(*index)++;
 	return (node);
 }

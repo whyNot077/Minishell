@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 21:20:13 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/14 14:50:58 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/14 20:52:07 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,48 @@ static t_arraylist	*make_env_list(char **envp)
 	return (env);
 }
 
-void	free_envp(t_execute	*execute)
+static void	al_destroy(t_arraylist *list)
+{
+	if (list)
+	{
+		if (list->data)
+		{
+			free(list->data);
+			list->data = NULL;
+		}
+		free(list);
+	}
+}
+
+void	free_envp(t_execute *execute)
 {
 	int	i;
 
-	i = 0;
-	while (&(execute->env[i]))
+	if (execute->env)
 	{
-		free(&(execute->env[i]));
-		i++;
+		i = 0;
+		while (execute->env->data[i])
+		{
+			free(execute->env->data[i]);
+			i++;
+		}
+		al_destroy(execute->env);
 	}
-	free(execute->env);
-	i = 0;
-	while (&(execute->export[i]))
+	if (execute->export)
 	{
-		free(&(execute->export[i]));
-		i++;
+		i = 0;
+		while (execute->export->data[i])
+		{
+			free(execute->export->data[i]);
+			i++;
+		}
+		al_destroy(execute->export);
 	}
-	free(execute->export);
 }
 
 t_execute	*envp_init(char **envp)
 {
-	t_execute *execute;
+	t_execute	*execute;
 
 	execute = ft_calloc(1, sizeof(t_execute));
 	execute->env = make_env_list(envp);
