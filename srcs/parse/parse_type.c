@@ -6,13 +6,13 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:23:31 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 12:12:39 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 13:52:20 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	next_token_is_io_redirect(t_token *tokens, int index)
+static int	next_token_is_io_redirect(t_token *tokens, int index)
 {
 	return ((size_t)index < tokens->token_count &&
 			(tokens[index].type == REDIRECT_OUT
@@ -32,7 +32,7 @@ tree_node	*parse_cmd_prefix(t_token *tokens, int *index)
 		temp_node = parse_io_redirect(tokens, index);
 		if (!temp_node)
 		{
-			free_tree(node);
+			free_tree_nodes(node);
 			return (NULL);
 		}
 		if (!node)
@@ -62,7 +62,7 @@ tree_node	*parse_cmd_suffix(t_token *tokens, int *index)
 			temp_node = parse_io_redirect(tokens, index);
 			if (!temp_node)
 			{
-				free_tree(node);
+				free_tree_nodes(node);
 				return (NULL);
 			}
 		}
@@ -125,24 +125,6 @@ tree_node	*parse_redirect(t_token *tokens, int *index)
 	node->right->type = tokens[*index].type;
 	node->right->data = tokens[*index].value;
 	(*index)++;
-	return (node);
-}
-
-tree_node	*parse_pipe_sequence(t_token *tokens, int *index)
-{
-	tree_node	*node;
-	tree_node	*temp_node;
-
-	node = parse_command(tokens, index);
-	while ((size_t)*index < tokens->token_count && tokens[*index].type == PIPE)
-	{
-		temp_node = create_new_node(&tokens[*index]);
-		temp_node->type = tokens[*index].type;
-		(*index)++;
-		temp_node->left = node;
-		temp_node->right = parse_command(tokens, index);
-		node = temp_node;
-	}
 	return (node);
 }
 
