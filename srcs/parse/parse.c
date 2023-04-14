@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 20:17:48 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 20:18:20 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // 	// Your implementation for changing the environment variable to a word
 // }
 
-static int	is_built_in(char *value)
+static int	is_builtin(char *value)
 {
 	if (ft_strcmp(value, "echo") == 0)
 		return (TRUE);
@@ -51,7 +51,7 @@ int	get_node_type(char *value, char **env)
 		return (OPTION);
 	else
 	{
-		if (is_built_in(value))
+		if (is_builtin(value))
 			return (BUILTIN);
 		else
 		{
