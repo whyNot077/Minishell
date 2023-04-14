@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:09:54 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 13:57:28 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:15:58 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ t_tree_node		*parse_cmd_suffix(t_token *tokens, int *index);
 t_tree_node		*parse_io_redirect(t_token *tokens, int *index);
 t_tree_node		*parse_commands(t_token *tokens, int *index);
 t_tree_node		*parse_command(t_token *tokens, int *index);
+int				next_token_is_io_redirect(t_token *tokens, int index);
 
 #endif
