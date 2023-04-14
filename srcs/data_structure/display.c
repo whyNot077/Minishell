@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:16:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 19:43:26 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 20:16:17 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ const char	*node_type_to_str(int node_type)
 		return ("WORD");
 	else if (node_type == OPTION)
 		return ("OPTION");
+	else if (node_type == BUILTIN)
+		return ("BUILTIN");
 	return ("UNKNOWN");
 }
 
