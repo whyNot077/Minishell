@@ -6,24 +6,26 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:33:16 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 15:13:47 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 15:58:53 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	handler(int signal)
+void handler(int signal)
 {
-	if (signal == SIGINT)
-	{
-		printf("\n");
-		display_prompt();
-	}
+    if (signal == SIGINT)
+    {
+        printf("\n");
+        rl_on_new_line();
+        rl_replace_line("", 0);
+        rl_redisplay();
+    }
 }
 
 void	display_prompt(void)
 {
-	printf("%sMinishell > %s", BLUE, DEFAULT);
+	printf("Minishell > ");
 }
 
 void	signal_handler(void)
