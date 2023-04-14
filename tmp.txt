@@ -1,18 +1,30 @@
+<<<<<<< HEAD
 Process:         minishell [15416]
 Path:            /Volumes/VOLUME/*/minishell
 Load Address:    0x1093dd000
+=======
+Process:         minishell [92021]
+Path:            /Volumes/VOLUME/*/minishell
+Load Address:    0x1029c1000
+>>>>>>> 6c7badd169ce566f015259cedce45ffc96d87c7f
 Identifier:      minishell
 Version:         ???
 Code Type:       X86-64
-Parent Process:  zsh [4509]
+Parent Process:  zsh [89691]
 
+<<<<<<< HEAD
 Date/Time:       2023-04-14 14:42:03.032 +0900
 Launch Time:     2023-04-14 14:41:41.778 +0900
+=======
+Date/Time:       2023-04-14 14:33:10.713 +0900
+Launch Time:     2023-04-14 14:32:57.746 +0900
+>>>>>>> 6c7badd169ce566f015259cedce45ffc96d87c7f
 OS Version:      Mac OS X 10.15.7 (19H2026)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
 Analysis Tool Version:  Xcode 12.3 (12C33)
 
+<<<<<<< HEAD
 Physical footprint:         796K
 Physical footprint (peak):  796K
 ----
@@ -20,4 +32,13 @@ Physical footprint (peak):  796K
 leaks Report Version: 3.0
 Process 15416: 404 nodes malloced for 359 KB
 Process 15416: 0 leaks for 0 total leaked bytes.
+=======
+Physical footprint:         780K
+Physical footprint (peak):  780K
+----
+
+leaks Report Version: 3.0
+Process 92021: 441 nodes malloced for 362 KB
+Process 92021: 0 leaks for 0 total leaked bytes.
+>>>>>>> 6c7badd169ce566f015259cedce45ffc96d87c7f
 

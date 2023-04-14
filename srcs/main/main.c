@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 13:59:17 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:32:33 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ int	main(int argc, char *argv[], char *envp[])
 	char		*input;
 	t_token		*tokens;
 	t_binarytree	*tree;
+	t_execute	*execute;
 
 	(void)envp;
 	atexit(leaks);
 	if (check_argc(argc, argv))
 		return (0);
 	signal_handler();
+	execute = envp_init(envp);
 	while (1)
 	{
 		display_prompt();
@@ -40,5 +42,6 @@ int	main(int argc, char *argv[], char *envp[])
 		free(input);
 		free(tokens);
 	}
+	free_envp(execute);
 	return (0);
 }

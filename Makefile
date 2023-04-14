@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
+#    By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/14 14:16:18 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/14 14:26:28 by hyojocho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,11 +44,11 @@ PARSE_SRCS     = parse.c parse_command.c parse_prefix.c parse_redirect.c parse_s
 PARSE          = $(addprefix $(PARSE_PATH), $(PARSE_SRCS))
 
 UTILS_PATH      = ./data_structure/
-UTILS_SRCS      = display.c dynamic_array.c binary_tree.c
+UTILS_SRCS      = display.c dynamic_array.c binary_tree.c arraylist.c
 UTILS           = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
 
 EXECUTE_PATH    = ./execute/
-EXECUTE_SRCS    = execute.c
+EXECUTE_SRCS    = execute.c envp_init.c
 EXECUTE         = $(addprefix $(EXECUTE_PATH), $(EXECUTE_SRCS))
 
 BUILT_IN_PATH    = ./built_in/

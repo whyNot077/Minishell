@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:13:34 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/12 10:54:40 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/13 21:28:07 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@
 # define MAX_STRING_LENGTH 100
 # define INITIAL_CAPACITY 10
 
-typedef struct s_arraylist
-{
-	int		size;
-	int		capacity;
-	char	**data;
-}			t_arraylist;
+t_arraylist *al_init(void);
+char		*al_get(t_arraylist *list, int index);
+void		al_add_rear(t_arraylist *list, char *element);
+void		al_remove(t_arraylist *list, int index);
 
 #endif
