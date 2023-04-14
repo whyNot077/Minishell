@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 14:08:23 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 14:59:14 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ t_tree_node	*parse_commands(t_token *tokens, int *index)
 	return (node);
 }
 
+static t_tree_node	*parse_command_parts(t_token *tokens, int *index)
+{
+	t_tree_node	*node;
+
+	node = parse_commands(tokens, index);
+	if ((size_t)(*index) < tokens->token_count && tokens[*index].type != PIPE)
+	{
+		node->left = parse_cmd_prefix(tokens, index);
+	}
+	if ((size_t)(*index) < tokens->token_count && tokens[*index].type != PIPE)
+	{
+		node->right = parse_cmd_suffix(tokens, index);
+	}
+	return (node);
+}
+
 t_tree_node	*parse_command(t_token *tokens, int *index)
 {
 	t_tree_node	*node;
@@ -31,23 +47,11 @@ t_tree_node	*parse_command(t_token *tokens, int *index)
 
 	node = NULL;
 	if ((size_t)(*index) >= tokens->token_count)
-	{
 		return (node);
-	}
 	current_token = &tokens[*index];
 	if (current_token->type == WORD)
 	{
-		node = parse_commands(tokens, index);
-		if ((size_t)(*index) < tokens->token_count \
-			&& tokens[*index].type != PIPE)
-		{
-			node->left = parse_cmd_prefix(tokens, index);
-		}
-		if ((size_t)(*index) < tokens->token_count \
-			&& tokens[*index].type != PIPE)
-		{
-			node->right = parse_cmd_suffix(tokens, index);
-		}
+		node = parse_command_parts(tokens, index);
 	}
 	else
 	{
