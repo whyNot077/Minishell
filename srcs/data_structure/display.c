@@ -6,26 +6,58 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:16:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/13 21:23:05 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/14 11:47:35 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	display_tree(tree_node *node)
+const char	*node_type_to_str(int node_type)
+{
+	if (node_type == PIPE)
+		return ("PIPE");
+	if (node_type == REDIRECT_OUT)
+		return ("REDIRECT_OUT");
+	if (node_type == REDIRECT_IN)
+		return ("REDIRECT_IN");
+	if (node_type == REDIRECT_APPEND)
+		return ("REDIRECT_APPEND");
+	if (node_type == HEREDOC)
+		return ("HEREDOC");
+	if (node_type == AND)
+		return ("AND");
+	if (node_type == OR)
+		return ("OR");
+	if (node_type == WORD)
+		return ("WORD");
+	if (node_type == ENV)
+		return ("ENV");
+	if (node_type == OPTION)
+		return ("OPTION");
+	return ("UNKNOWN");
+}
+
+void	display_tree_helper(tree_node *node, int depth)
 {
 	if (node == NULL)
-		return ;
-	if (node->type == WORD || node->type == ENV || node->type == OPTION)
 	{
-		printf("Executing: %s\n", node->data);
+		return ;
 	}
-	else if (node->type == PIPE)
-		printf("PIPE = %s\n", node->data);
-	else if (node->type == REDIRECT_OUT)
-		printf("REDIRECT_OUT = %s\n", node->data);
-	else if (node->type == REDIRECT_IN)
-		printf("REDIRECT_IN = %s\n", node->data);
-	display_tree(node->left);
-	display_tree(node->right);
+	for (int i = 0; i < depth; ++i)
+	{
+		printf("  ");
+	}
+	printf("%s", node_type_to_str(node->type));
+	if (node->data)
+	{
+		printf(" (%s)", node->data);
+	}
+	printf("\n");
+	display_tree_helper(node->left, depth + 1);
+	display_tree_helper(node->right, depth + 1);
+}
+
+void	display_tree(tree_node *node)
+{
+	display_tree_helper(node, 0);
 }
