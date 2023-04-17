@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 21:20:17 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/17 14:08:47 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,6 @@ t_tree_node	*parse_command(t_token *tokens, int *index, char **env)
 	if ((size_t)(*index) >= tokens->token_count)
 		return (node);
 	current_token = &tokens[*index];
-	if (current_token->type == WORD)
-	{
-		node = parse_command_parts(tokens, index, env);
-	}
-	else
-	{
-		printf("Error: syntax error near unexpected token `newline'\n");
-		return (node);
-	}
+	node = parse_command_parts(tokens, index, env);
 	return (node);
 }
