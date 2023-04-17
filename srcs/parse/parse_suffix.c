@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 14:15:27 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 19:41:40 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/17 16:31:32 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_tree_node	*parse_next_cmd_suffix_element(t_token *tokens, int *index, c
 			return (NULL);
 	}
 	else
-		temp_node = parse_commands(tokens, index, env);
+		temp_node = command(tokens, index, env);
 	return (temp_node);
 }
 

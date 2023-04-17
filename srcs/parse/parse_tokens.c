@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 20:18:51 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/17 14:46:37 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_tree_node	*parse_pipe_sequence(t_token *tokens, int *index, char **env)
 	t_tree_node	*node;
 	t_tree_node	*temp_node;
 
-	node = parse_command(tokens, index, env);
+	node = simple_command(tokens, index, env);
 	while ((size_t)(*index) < tokens->token_count \
 		&& tokens[*index].type == PIPE)
 	{
@@ -25,9 +25,12 @@ static t_tree_node	*parse_pipe_sequence(t_token *tokens, int *index, char **env)
 		temp_node->type = tokens[*index].type;
 		(*index)++;
 		temp_node->left = node;
-		temp_node->right = parse_command(tokens, index, env);
+		temp_node->right = simple_command(tokens, index, env);
 		node = temp_node;
 	}
+	// printf("temp_node = %s\n", temp_node->data);
+	// printf("temp_node->right = %s\n", temp_node->right->data);
+	// printf("temp_node->left = %s\n", temp_node->left->data);
 	return (node);
 }
 
