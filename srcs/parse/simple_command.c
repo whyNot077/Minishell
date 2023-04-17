@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/17 16:30:55 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/17 18:43:28 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ t_tree_node	*command(t_token *tokens, int *index, char **env)
 	return (node);
 }
 
-static int	is_io_redirect(t_token *tokens)
-{
-	return (tokens->type == REDIRECT_IN || tokens->type == REDIRECT_OUT \
-		|| tokens->type == REDIRECT_APPEND || tokens->type == HEREDOC);
-}
 
 t_tree_node	*simple_command(t_token *tokens, int *index, char **env)
 {

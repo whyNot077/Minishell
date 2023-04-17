@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 20:05:31 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/17 19:24:33 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_find
 typedef struct tree_node
 {
 	char				*data;
+	char				*option;
 	int					type;
 	struct tree_node	*left;
 	struct tree_node	*right;
@@ -71,6 +72,7 @@ typedef struct tree_node
 typedef struct binarytree
 {
 	t_tree_node			*root;
+	t_tree_node			*current_node;
 }						t_binarytree;
 
 #endif
