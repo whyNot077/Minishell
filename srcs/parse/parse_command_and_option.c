@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/18 16:40:28 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/18 18:44:28 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	parse_command_and_option(t_binarytree *tree, t_token *tokens,
 	t_tree_node	*current_node;
 
 	current_node = tree->current_node;
-	if (tokens[*index].type == WORD)
+	if (tokens[*index].type == WORD || tokens[*index].type == BUILTIN)
 	{
 		parse_command(tree, tokens[*index].value, tokens[*index].type);
 		current_node = tree->current_node;
@@ -115,6 +115,6 @@ void	parse_command_and_option(t_binarytree *tree, t_token *tokens,
 		parse_option(tokens[*index].value, current_node);
 		(*index)++;
 	}
-	if (tokens[*index].type == WORD)
+	if (tokens[*index].type == WORD || tokens[*index].type == BUILTIN)
 		parse_command_and_option(tree, tokens, index);
 }

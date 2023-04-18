@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/18 16:06:12 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/18 18:45:20 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static void	parse_tree(t_binarytree *tree, t_token *tokens, int *index)
 	char	*value;
 	int		type;
 	int		token_count;
-
+//pwd <a cat cat cat | ls -al folder folder >b
 	token_count = tokens->token_count;
 	while (*index < token_count)
 	{
 		value = tokens[*index].value;
 		type = tokens[*index].type;
-		if (type == WORD || type == OPTION)
+		if (type == WORD || type == BUILTIN)
 			parse_command_and_option(tree, tokens, index);
 		else if (is_redirection(type))
 			parse_redirection(tree, tokens, index);
