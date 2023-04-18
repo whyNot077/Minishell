@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/18 18:44:28 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/18 19:17:00 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	parse_command(t_binarytree *tree, char *value, int type)
 {
 	t_tree_node	*new_node;
 	t_tree_node	*current_node;
+	t_tree_node *redirection_node;
 
 	current_node = tree->current_node;
 	new_node = create_new_node(value, type);
@@ -29,20 +30,29 @@ void	parse_command(t_binarytree *tree, char *value, int type)
 		tree->root = new_node;
 	else
 	{
+		new_node->parent = current_node;
 		if (current_node->type == PIPE)
-		{
-			new_node->parent = current_node;
 			current_node->right = new_node;
-		}
-		else if (current_node->left == NULL)
+		else if (is_redirection(current_node->type))
 		{
-			new_node->parent = current_node;
+			redirection_node = current_node;
+			while (current_node->left != NULL)
+			{
+				current_node = current_node->left;
+				new_node->parent = current_node;
+			}
 			current_node->left = new_node;
+			tree->current_node = redirection_node;
+			return ; 
 		}
 		else
 		{
-			new_node->parent = current_node->left;
-			current_node->left->left = new_node;
+			while (current_node->left != NULL)
+			{
+				current_node = current_node->left;
+				new_node->parent = current_node;
+			}
+			current_node->left = new_node;
 		}
 	}
 	tree->current_node = new_node;
