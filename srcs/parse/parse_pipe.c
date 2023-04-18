@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:39:42 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/18 16:55:59 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/18 19:22:44 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void	parse_pipe(t_binarytree *tree, t_token *tokens, int *index)
 	pipe_to_the_tree(tree, pipe_node, index);
 	if (tokens[*index].type == WORD || tokens[*index].type == BUILTIN)
 		parse_command_and_option(tree, tokens, index);
-	else
-		printf("Error: Missing command after '%s'\n", pipe);
+	else if (tokens[*index].type == PIPE)
+		printf("syntax error near unexpected token `|'\n");
 }
