@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/18 19:17:00 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/18 19:27:55 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	parse_command(t_binarytree *tree, char *value, int type)
 	t_tree_node	*current_node;
 	t_tree_node *redirection_node;
 
-	current_node = tree->current_node;
+	current_node = tree->key_node;
 	new_node = create_new_node(value, type);
 	if (tree->root == NULL)
 		tree->root = new_node;
@@ -42,7 +42,7 @@ void	parse_command(t_binarytree *tree, char *value, int type)
 				new_node->parent = current_node;
 			}
 			current_node->left = new_node;
-			tree->current_node = redirection_node;
+			tree->key_node = redirection_node;
 			return ; 
 		}
 		else
@@ -55,7 +55,7 @@ void	parse_command(t_binarytree *tree, char *value, int type)
 			current_node->left = new_node;
 		}
 	}
-	tree->current_node = new_node;
+	tree->key_node = new_node;
 }
 
 static int	option_exists(char *options, char option)
@@ -112,11 +112,11 @@ void	parse_command_and_option(t_binarytree *tree, t_token *tokens,
 {
 	t_tree_node	*current_node;
 
-	current_node = tree->current_node;
+	current_node = tree->key_node;
 	if (tokens[*index].type == WORD || tokens[*index].type == BUILTIN)
 	{
 		parse_command(tree, tokens[*index].value, tokens[*index].type);
-		current_node = tree->current_node;
+		current_node = tree->key_node;
 		(*index)++;
 	}
 	while ((size_t)*index < tokens->token_count

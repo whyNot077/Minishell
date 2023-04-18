@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:39:42 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/18 19:22:44 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/18 19:27:59 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void pipe_to_the_tree(t_binarytree *tree, t_tree_node *pipe_node, int *in
 		pipe_node->left = tree->root;
 		tree->root = pipe_node;
 	}
-	tree->current_node = pipe_node;
+	tree->key_node = pipe_node;
 	(*index)++;
 }
 

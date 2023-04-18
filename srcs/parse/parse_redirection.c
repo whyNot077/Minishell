@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:24:15 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/18 19:09:58 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/18 19:28:06 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void parse_filename(t_binarytree *tree, char *value, int type, int *index
 	t_tree_node *filename_node;
 
 	filename_node = create_new_node(value, type);
-	tree->current_node->right = filename_node;
+	tree->key_node->right = filename_node;
 	(*index)++;
 }
 
@@ -26,7 +26,7 @@ static void redirection_to_tree(t_binarytree *tree, t_tree_node	*new_node, int *
 	t_tree_node *current_node;
 	t_tree_node *parent_node;
 
-	current_node = tree->current_node;
+	current_node = tree->key_node;
 	if (current_node == NULL)
 		tree->root = new_node;
 	else if (current_node->type == PIPE)
@@ -50,7 +50,7 @@ static void redirection_to_tree(t_binarytree *tree, t_tree_node	*new_node, int *
 		current_node->parent = new_node;
 		new_node->left = current_node;
 	}
-	tree->current_node = new_node;
+	tree->key_node = new_node;
 	(*index)++;
 }
 

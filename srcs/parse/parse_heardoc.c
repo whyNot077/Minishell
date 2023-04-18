@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:34:48 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/18 15:49:15 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/18 19:28:35 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	heardoc_to_the_tree(t_binarytree *tree, t_tree_node *new_node,
 {
 	t_tree_node	*current_node;
 
-	current_node = tree->current_node;
+	current_node = tree->key_node;
 	if (current_node->right == NULL)
 		current_node->right = new_node;
 	else
@@ -25,7 +25,7 @@ static void	heardoc_to_the_tree(t_binarytree *tree, t_tree_node *new_node,
 		new_node->left = current_node->right;
 		current_node->right = new_node;
 	}
-	tree->current_node = new_node;
+	tree->key_node = new_node;
 	(*index)++;
 }
 
@@ -35,9 +35,9 @@ static void	parse_here_end(t_binarytree *tree, char *value, int type)
 	t_tree_node	*heredoc_node;
 
 	here_end = create_new_node(value, type);
-	heredoc_node = tree->current_node;
+	heredoc_node = tree->key_node;
 	heredoc_node->right = here_end;
-	tree->current_node = here_end;
+	tree->key_node = here_end;
 }
 
 void	parse_heredoc(t_binarytree *tree, t_token *tokens, int *index)
