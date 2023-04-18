@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:13:17 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/17 19:25:53 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/18 16:36:11 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ t_tree_node	*create_new_node(char *value, int type)
 		return (NULL);
     new_node->data = value;
     new_node->type = type;
-    new_node->left = NULL;
-    new_node->right = NULL;
 	return (new_node);
 }
 
@@ -42,6 +40,7 @@ void	free_tree_nodes(t_tree_node *node)
 		return ;
 	free_tree_nodes(node->left);
 	free_tree_nodes(node->right);
+	free(node->options);
 	free(node);
 }
 

@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 14:48:01 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/08 14:52:48 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/17 20:51:38 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/minishell.h"
+#include <iostream>  // input output library
 
-int	main(int argc, char *argv[], char *envp[])
+int main()
 {
-	(void)envp;
-	(void)argc;
-	echo(argv);
+	int favorite_number;
+	std::cout << "Tell me your favorite number: "; // standard out
+	std::cin >> favorite_number; // standard in
+	std::cout << "Your favorite number is " << favorite_number << std::endl;
+	return 0;
 }
