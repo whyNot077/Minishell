@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:24:15 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/20 19:05:22 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/20 20:01:38 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,15 @@ static void redirection_to_tree(t_binarytree *tree, t_tree_node	*new_node, int *
 	{
 		parent_node = current_node->parent;
 		if (parent_node->left == current_node)
+		{
+			new_node->parent = parent_node;
 			parent_node->left = new_node;
+		}
 		else
+		{
+			new_node->parent = parent_node;
 			parent_node->right = new_node;
+		}
 		current_node->parent = new_node;
 		new_node->left = current_node;
 	}
