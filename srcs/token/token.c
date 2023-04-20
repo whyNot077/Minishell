@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:09:12 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 14:31:54 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/20 17:07:20 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,7 @@ int	is_space(char c)
 
 int	type_of_token(char	*value)
 {
-	if (ft_strncmp(value, "|", 1) == 0)
-		return (PIPE);
-	else if (ft_strncmp(value, ">", 1) == 0)
-		return (REDIRECT_OUT);
-	else if (ft_strncmp(value, "<", 1) == 0)
-		return (REDIRECT_IN);
-	else if (ft_strncmp(value, ">>", 2) == 0)
+	if (ft_strncmp(value, ">>", 2) == 0)
 		return (REDIRECT_APPEND);
 	else if (ft_strncmp(value, "<<", 2) == 0)
 		return (HEREDOC);
@@ -38,6 +32,12 @@ int	type_of_token(char	*value)
 		return (AND);
 	else if (ft_strncmp(value, "||", 2) == 0)
 		return (OR);
+	else if (ft_strncmp(value, "|", 1) == 0)
+		return (PIPE);
+	else if (ft_strncmp(value, ">", 1) == 0)
+		return (REDIRECT_OUT);
+	else if (ft_strncmp(value, "<", 1) == 0)
+		return (REDIRECT_IN);
 	else
 		return (WORD);
 }

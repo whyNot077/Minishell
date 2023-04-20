@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:08:27 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/18 14:06:28 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/20 16:59:39 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ static int	is_builtin(char *value)
 		return (TRUE);
 	else
 		return (FALSE);
+}
+
+int	is_redirection(int type)
+{
+	return (type == REDIRECT_OUT || \
+			type == REDIRECT_IN || type == REDIRECT_APPEND);
 }
 
 static void	replace_env_to_the_word(char **value, char **env)

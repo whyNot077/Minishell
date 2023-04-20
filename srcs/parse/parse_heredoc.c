@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_heardoc.c                                    :+:      :+:    :+:   */
+/*   parse_heredoc.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:34:48 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/18 19:28:35 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/20 17:08:52 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,13 @@
 static void	heardoc_to_the_tree(t_binarytree *tree, t_tree_node *new_node,
 		int *index)
 {
-	t_tree_node	*current_node;
+	t_tree_node	*dummy;
 
-	current_node = tree->key_node;
-	if (current_node->right == NULL)
-		current_node->right = new_node;
-	else
-	{
-		new_node->left = current_node->right;
-		current_node->right = new_node;
-	}
-	tree->key_node = new_node;
+	dummy = tree->key_node;
+	while (dummy->left != NULL)
+		dummy = dummy->left;
+	dummy->left = new_node;
+	new_node->parent = dummy;
 	(*index)++;
 }
 
@@ -37,7 +33,6 @@ static void	parse_here_end(t_binarytree *tree, char *value, int type)
 	here_end = create_new_node(value, type);
 	heredoc_node = tree->key_node;
 	heredoc_node->right = here_end;
-	tree->key_node = here_end;
 }
 
 void	parse_heredoc(t_binarytree *tree, t_token *tokens, int *index)
