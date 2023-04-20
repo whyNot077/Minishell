@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:34:48 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/20 18:37:52 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/20 19:28:11 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,26 @@ static void	heardoc_to_the_tree(t_binarytree *tree, t_tree_node *new_node,
 {
 	t_tree_node	*dummy;
 
-	dummy = tree->key_node;
-	if (dummy == NULL)
+	if (tree->root == NULL)
 	{
 		tree->root = new_node;
 		tree->key_node = new_node;
 		(*index)++;
 		return ;
 	}
-	while (dummy->left != NULL)
-		dummy = dummy->left;
-	dummy->left = new_node;
+	if (tree->root->type == PIPE)
+	{
+		dummy = tree->root->right;
+		new_node->left = dummy->right;
+		dummy->right = new_node;
+	}
+	else
+	{
+		dummy = tree->key_node;
+		while (dummy->left != NULL)
+			dummy = dummy->left;	
+		dummy->left = new_node;
+	}
 	new_node->parent = dummy;
 	(*index)++;
 }

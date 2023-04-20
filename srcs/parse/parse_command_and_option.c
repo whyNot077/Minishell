@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/20 16:59:35 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/20 19:49:34 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	parse_command(t_binarytree *tree, char *value, int type)
 {
 	t_tree_node	*new_node;
 	t_tree_node	*current_node;
-	t_tree_node *redirection_node;
 
 	current_node = tree->key_node;
 	new_node = create_new_node(value, type);
@@ -29,24 +28,18 @@ void	parse_command(t_binarytree *tree, char *value, int type)
 			current_node->right = new_node;
 		else if (is_redirection(current_node->type))
 		{
-			redirection_node = current_node;
-			while (current_node->left != NULL)
-			{
-				current_node = current_node->left;
-				new_node->parent = current_node;
-			}
+			new_node->parent = current_node;
+			new_node->left = current_node->left;
 			current_node->left = new_node;
-			tree->key_node = redirection_node;
-			return ; 
+			return ;
 		}
 		else
 		{
-			while (current_node->left != NULL)
-			{
-				current_node = current_node->left;
-				new_node->parent = current_node;
-			}
-			current_node->left = new_node;
+			new_node->parent = current_node->parent;
+			if (tree->root == current_node)
+				tree->root = new_node;
+			new_node->left = current_node;
+			current_node->parent = new_node;
 		}
 	}
 	tree->key_node = new_node;
