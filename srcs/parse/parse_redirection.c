@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:24:15 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/18 19:28:06 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/20 18:41:15 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void redirection_to_tree(t_binarytree *tree, t_tree_node	*new_node, int *
 		tree->root = new_node;
 	else if (current_node->type == PIPE)
 	{
-		current_node->right->parent = new_node;
 		current_node->right = new_node;
+		new_node->parent = current_node;
 	}
 	else if (tree->root == current_node)
 	{
