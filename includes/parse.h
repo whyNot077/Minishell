@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:09:54 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/20 16:24:07 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/21 14:13:35 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void			parse_command_and_option(t_binarytree *tree, t_token *tokens,
 int				is_redirection(int type);
 void			parse_redirection(t_binarytree *tree, t_token *tokens,
 					int *index);
-void			parse_heredoc(t_binarytree *tree, t_token *tokens, int *index);
 void			parse_pipe(t_binarytree *tree, t_token *tokens, int *index);
 
 void			parse_command(t_binarytree *tree, char *value, int type);

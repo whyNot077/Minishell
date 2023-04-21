@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/20 19:57:44 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/21 14:13:51 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static void	parse_tree(t_binarytree *tree, t_token *tokens, int *index)
 			parse_command_and_option(tree, tokens, index);
 		else if (is_redirection(type))
 			parse_redirection(tree, tokens, index);
-		else if (type == HEREDOC)
-			parse_heredoc(tree, tokens, index);
 		else if (type == PIPE)
 			parse_pipe(tree, tokens, index);
 	}
@@ -51,8 +49,8 @@ t_binarytree	*parse_tokens(t_token *tokens, char **env)
 	}
 	index = 0;
 	parse_tree(tree, tokens, &index);
-	printf("tree->root->value: %s\n", tree->root->data);
-	printf("tree->key_node->value: %s\n", tree->key_node->data);
-	printf("tree->key->right->value: %s\n", tree->key_node->right->data);
+	// printf("tree->root->value: %s\n", tree->root->data);
+	// printf("tree->key_node->value: %s\n", tree->key_node->data);
+	// printf("tree->key->right->value: %s\n", tree->key_node->right->data);
 	return (tree);
 }

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:39:42 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/20 19:58:00 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/20 20:08:54 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ static void pipe_to_the_tree(t_binarytree *tree, t_tree_node *pipe_node, int *in
 	else if (tree->root->type == PIPE)
 	{
 		dummy = tree->root;
-		while (dummy->right->type == PIPE)
+		while (dummy->right != NULL && dummy->right->type == PIPE)
 			dummy = dummy->right;
 		pipe_node->parent = dummy;
 		pipe_node->left = dummy->right;
+		dummy->right->parent = pipe_node;
 		dummy->right = pipe_node;
 	}
 	else
