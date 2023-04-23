@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 21:48:40 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 21:55:08 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	parse_command_and_option(t_binarytree *tree, t_token *tokens,
 	add_command_to_the_tree(tree, command_node);
 	while (tokens[*index].type == WORD || tokens[*index].type == BUILTIN)
 	{
-		add_options_or_arguments_to_the_tree(tree, tokens[*index].value);
+		fill_command_structure(tree, tokens[*index].value);
 		(*index)++;
 	}
 }

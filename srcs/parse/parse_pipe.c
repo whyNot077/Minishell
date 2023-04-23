@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:39:42 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 20:19:10 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 22:11:10 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,14 @@ static void	pipe_to_the_tree(t_binarytree *tree, t_tree_node *pipe_node, \
 	else
 	{
 		current = find_rightmost_node(tree->root);
-		if (current->type == WORD || current->type == BUILTIN)
-		{
-			connect_pipe_node_to_tree(current, pipe_node, index);
-		}
-		else
+		if (current->type == PIPE)
 		{
 			free(pipe_node);
 			printf("Syntax error: unexpected pipe '|'\n");
 			(*index)++;
 			return ;
 		}
+		connect_pipe_node_to_tree(current, pipe_node, index);
 	}
 	(*index)++;
 }

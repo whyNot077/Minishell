@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 20:09:00 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 20:09:26 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 21:55:02 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	**get_new_command(t_tree_node *command_node, \
 	return (new_command);
 }
 
-void	add_options_or_arguments_to_the_tree(t_binarytree *tree, char *value)
+void	fill_command_structure(t_binarytree *tree, char *value)
 {
 	char		**new_command;
 	t_tree_node	*command_node;
