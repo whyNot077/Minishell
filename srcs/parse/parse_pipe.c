@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:39:42 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 22:11:10 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 22:16:18 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,17 @@
 ** else, print syntax error
 */
 static void	connect_pipe_node_to_tree(t_tree_node *current, \
-		t_tree_node *pipe_node, int *index)
+		t_tree_node *pipe_node)
 {
-	while (current->left && is_redirection(current->left->type))
-	{
-		current = current->left;
-	}
-	if (current->left && current->left->type == PIPE)
+	if (find_pipe(current) == TRUE)
 	{
 		free(pipe_node);
 		printf("Syntax error: unexpected pipe '|'\n");
-		(*index)++;
 		return ;
+	}
+	while (current->left && is_redirection(current->left->type))
+	{
+		current = current->left;
 	}
 	pipe_node->left = current->left;
 	current->left = pipe_node;
@@ -52,14 +51,15 @@ static void	pipe_to_the_tree(t_binarytree *tree, t_tree_node *pipe_node, \
 	else
 	{
 		current = find_rightmost_node(tree->root);
-		if (current->type == PIPE)
+		if (current->type == PIPE || current->type == AND || \
+				current->type == OR)
 		{
 			free(pipe_node);
 			printf("Syntax error: unexpected pipe '|'\n");
 			(*index)++;
 			return ;
 		}
-		connect_pipe_node_to_tree(current, pipe_node, index);
+		connect_pipe_node_to_tree(current, pipe_node);
 	}
 	(*index)++;
 }
