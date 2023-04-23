@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:24:15 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 20:33:58 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 20:35:03 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	parse_redirection(t_binarytree *tree, t_token *tokens, int *index)
 	if (is_redirection(type) == 0)
 		return ;
 	new_node = create_new_node(redirection, type);
+	if (new_node->type == HEREDOC)
+		tree->heredoc_count++;
 	redirection_to_tree(tree, new_node);
 	(*index)++;
 	if (tokens[*index].type == WORD)
