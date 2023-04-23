@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:16:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/20 19:26:00 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 19:29:16 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ const char	*node_type_to_str(int node_type)
 		return ("OR");
 	else if (node_type == WORD)
 		return ("WORD");
-	else if (node_type == OPTION)
-		return ("OPTION");
 	else if (node_type == BUILTIN)
 		return ("BUILTIN");
 	return ("UNKNOWN");
@@ -45,11 +43,29 @@ void display_tree_helper(t_tree_node *node, int depth, char *branch)
         printf("  ");
     printf("%s", branch);
     printf("%s, ", node_type_to_str(node->type));
-    if (node->data)
+    if (node->value)
     {
-        printf("execute = (%s)", node->data);
-        if (node->options != NULL)
-            printf(", options = (%s)", node->options);
+        printf("execute = ");
+        if (node->type == WORD)
+        {
+            if (node->command)
+            {
+                for (int i = 0; node->command[i]; ++i)
+                {
+                    printf("(%s)", node->command[i]);
+                }
+            }
+            else
+            {
+                printf("(%s)", node->value);
+            }
+        }
+        else
+		{
+            printf("(%s)", node->value);
+			if (node->filename)
+				printf("filename = (%s)", node->filename);
+		}
     }
     printf("\n");
     if (node->left)
@@ -65,13 +81,29 @@ void inorder_traverse(t_tree_node *node)
         return;
     }
 
-    inorder_traverse(node->left);
+	inorder_traverse(node->left);
 
-    printf("execute: %s", node->data);
-    if (node->options != NULL)
-    {
-        printf(", options: %s", node->options);
-    }
+	printf("execute = ");
+	if (node->type == WORD)
+	{
+            if (node->command)
+            {
+                for (int i = 0; node->command[i]; ++i)
+                {
+                    printf("(%s)", node->command[i]);
+                }
+            }
+            else
+            {
+                printf("(%s)", node->value);
+            }
+	}
+	else
+	{
+		printf("(%s)", node->value);
+		if (node->filename)
+			printf(", filename = (%s)", node->filename);
+	}
     printf("\n");
 
     inorder_traverse(node->right);
@@ -80,6 +112,8 @@ void inorder_traverse(t_tree_node *node)
 
 void	display_tree(t_tree_node *node)
 {
+	printf("\ndisplay tree\n");
 	display_tree_helper(node, 0, "");
+	printf("\ninorder traverse\n");
 	inorder_traverse(node);
 }

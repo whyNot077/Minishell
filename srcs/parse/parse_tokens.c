@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/21 14:13:51 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/22 16:54:54 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	parse_tree(t_binarytree *tree, t_token *tokens, int *index)
 			parse_redirection(tree, tokens, index);
 		else if (type == PIPE)
 			parse_pipe(tree, tokens, index);
+		else if (type == AND || type == OR)
+			parse_and_or(tree, tokens, index);
 	}
 }
 
@@ -49,8 +51,5 @@ t_binarytree	*parse_tokens(t_token *tokens, char **env)
 	}
 	index = 0;
 	parse_tree(tree, tokens, &index);
-	// printf("tree->root->value: %s\n", tree->root->data);
-	// printf("tree->key_node->value: %s\n", tree->key_node->data);
-	// printf("tree->key->right->value: %s\n", tree->key_node->right->data);
 	return (tree);
 }

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:08:27 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/21 14:13:01 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/22 16:44:40 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int get_node_type(char **value, char **env)
         return (WORD);
     }
     else if ((*value)[0] == '-')
-        return (OPTION);
+        return (WORD);
 	else
     {
         if (is_builtin(*value))

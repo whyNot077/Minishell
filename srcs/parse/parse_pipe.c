@@ -6,36 +6,52 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:39:42 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/20 20:08:54 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 19:39:45 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/*
+** If the tree is empty, print syntax error
+** else, find the rightmost node.
+** If the rightmost node is of type WORD, BUILTIN.
+** move to the left, while the type of the node is redirection.
+** else, print syntax error
+*/
 static void pipe_to_the_tree(t_binarytree *tree, t_tree_node *pipe_node, int *index)
 {
-	t_tree_node	*dummy;
+    t_tree_node *current;
 
-	if (tree->root == NULL)
-		tree->root = pipe_node;
-	else if (tree->root->type == PIPE)
-	{
-		dummy = tree->root;
-		while (dummy->right != NULL && dummy->right->type == PIPE)
-			dummy = dummy->right;
-		pipe_node->parent = dummy;
-		pipe_node->left = dummy->right;
-		dummy->right->parent = pipe_node;
-		dummy->right = pipe_node;
-	}
-	else
-	{
-		tree->root->parent = pipe_node;
-		pipe_node->left = tree->root;
-		tree->root = pipe_node;
-	}
-	tree->key_node = pipe_node;
-	(*index)++;
+    if (tree->root == NULL)
+    {
+		free(pipe_node);
+        printf("Syntax error: unexpected pipe '|'\n");
+        return;
+    }
+    else
+    {
+        current = find_rightmost_node(tree->root);
+
+        if (current->type == WORD || current->type == BUILTIN)
+        {
+            while (current->left && is_redirection(current->left->type))
+            {
+                current = current->left;
+            }
+			if (current->left && current->left->type == PIPE)
+				printf("Syntax error: unexpected pipe '|'\n");
+            pipe_node->left = current->left;
+            current->left = pipe_node;
+        }
+        else
+        {
+			free(pipe_node);
+            printf("Syntax error: unexpected pipe '|'\n");
+            return;
+        }
+    }
+    (*index)++;
 }
 
 void	parse_pipe(t_binarytree *tree, t_token *tokens, int *index)
@@ -50,8 +66,4 @@ void	parse_pipe(t_binarytree *tree, t_token *tokens, int *index)
 		return ;
 	pipe_node = create_new_node(pipe, type);
 	pipe_to_the_tree(tree, pipe_node, index);
-	if (tokens[*index].type == WORD || tokens[*index].type == BUILTIN)
-		parse_command_and_option(tree, tokens, index);
-	else if (tokens[*index].type == PIPE)
-		printf("syntax error near unexpected token `|'\n");
 }

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/18 19:27:29 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 19:22:02 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,18 @@ typedef struct s_find
 
 typedef struct tree_node
 {
-	char				*data;
-	char				*options;
+	char				*value;
+	char				**command;
+	char				*filename;
 	int					type;
 	struct tree_node	*left;
 	struct tree_node	*right;
-	struct tree_node	*parent;
 }						t_tree_node;
 
 typedef struct binarytree
 {
 	t_tree_node			*root;
-	t_tree_node			*key_node;
+	int					heredoc_count;
 }						t_binarytree;
 
 #endif

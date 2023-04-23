@@ -6,59 +6,67 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:24:15 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/21 13:39:36 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 19:36:11 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void parse_filename(t_binarytree *tree, char *value, int type, int *index)
+void parse_filename(t_tree_node	*new_node, char *value, int *index)
 {
-	t_tree_node *filename_node;
-
-	filename_node = create_new_node(value, type);
-	tree->key_node->right = filename_node;
-	(*index)++;
+	new_node->filename = value;
+    (*index)++;
 }
 
-static void redirection_to_tree(t_binarytree *tree, t_tree_node	*new_node, int *index)
-{
-	t_tree_node *current_node;
-	t_tree_node *parent_node;
 
-	current_node = tree->key_node;
-	if (current_node == NULL)
-		tree->root = new_node;
-	else if (current_node->type == PIPE)
-	{
-		current_node->right = new_node;
-		new_node->parent = current_node;
-	}
-	else if (tree->root == current_node)
-	{
-		tree->root->parent = new_node;
-		new_node->left = tree->root;
-		tree->root = new_node;
-	}
-	else
-	{
-		parent_node = current_node->parent;
-		if (parent_node->left == current_node)
-		{
-			new_node->parent = parent_node;
-			parent_node->left = new_node;
-		}
-		else
-		{
-			new_node->parent = parent_node;
-			parent_node->right = new_node;
-		}
-		current_node->parent = new_node;
-		new_node->left = current_node;
-	}
-	tree->key_node = new_node;
-	(*index)++;
+/*
+** if the tree is empty, add the command node to the root
+** else, find the rightmost node.
+** If the rightmost node is of type WORD, BUILTIN, add the command node to the left of the rightmost node.
+** else, store the previous rightmost node as the left child of the new command node,
+** and the command node should be the rightmost node.
+*/
+static void redirection_to_tree(t_binarytree *tree, t_tree_node *new_node)
+{
+    t_tree_node *current;
+    t_tree_node *previous;
+
+    if (tree->root == NULL)
+    {
+        tree->root = new_node;
+        return;
+    }
+    else
+    {
+        current = tree->root;
+        previous = NULL;
+        while (current->right)
+        {
+            previous = current;
+            current = current->right;
+        }
+
+        if (current->type == WORD || current->type == BUILTIN)
+        {
+			new_node->left = current->left;
+            current->left = new_node;
+        }
+        else
+        {
+            new_node->left = current;
+            if (previous)
+            {
+                previous->right = new_node;
+            }
+            else
+            {
+                tree->root = new_node;
+            }
+        }
+    }
 }
+
+
 
 void	parse_redirection(t_binarytree *tree, t_token *tokens, int *index)
 {
@@ -71,9 +79,10 @@ void	parse_redirection(t_binarytree *tree, t_token *tokens, int *index)
 	if (is_redirection(type) == 0)
 		return ;
 	new_node = create_new_node(redirection, type);
-	redirection_to_tree(tree, new_node, index);
+	redirection_to_tree(tree, new_node);
+	(*index)++;
 	if (tokens[*index].type == WORD)
-		parse_filename(tree, tokens[*index].value, tokens[*index].type, index);
+		parse_filename(new_node, tokens[*index].value, index);
 	else
 		printf("Error: Missing filename after '%s'\n", redirection);
 }
