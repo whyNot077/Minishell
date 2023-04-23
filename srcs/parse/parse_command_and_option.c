@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 20:04:32 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 20:06:55 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,16 @@ static size_t	get_command_size(t_tree_node *command_node)
 	return (i);
 }
 
-static char	**get_new_command(t_tree_node *command_node, char *value,
-		size_t size)
+static char **get_new_command(t_tree_node *command_node, char *value,
+        size_t size)
 {
-	char	**new_command;
-	size_t	i;
-	size_t	j;
+    char **new_command;
 
-	new_command = ft_calloc(size + 2, sizeof(char *));
-	i = 0;
-	j = 0;
-	while (i < size)
-	{
-		new_command[j] = command_node->command[i];
-		i++;
-		j++;
-	}
-	new_command[j] = value;
-	new_command[j + 1] = NULL;
-	return (new_command);
+    new_command = ft_calloc(size + 2, sizeof(char *));
+    ft_memmove(new_command, command_node->command, size * sizeof(char *));
+    new_command[size] = value;
+    new_command[size + 1] = NULL;
+    return (new_command);
 }
 
 void	add_options_or_arguments_to_the_tree(t_binarytree *tree, char *value)
