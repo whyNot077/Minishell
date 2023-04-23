@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 21:55:08 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 22:21:13 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,14 @@ int	find_pipe(t_tree_node *current)
 static void	connect_command_node_to_tree(t_binarytree *tree, \
 	t_tree_node *current, t_tree_node *previous, t_tree_node *command_node)
 {
-	int	pipe;
-
-	pipe = find_pipe(current);
-	if ((current->type == WORD || current->type == BUILTIN) && pipe == FALSE)
-	{
-		free(command_node);
-		return ;
-	}
-	if (pipe == TRUE)
+	if (find_pipe(current) == TRUE)
 	{
 		current->right = command_node;
+		return ;
+	}
+	if ((current->type == WORD || current->type == BUILTIN))
+	{
+		free(command_node);
 		return ;
 	}
 	command_node->left = current;
