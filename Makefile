@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/22 19:35:51 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/23 20:08:56 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ TOKEN         = $(addprefix $(TOKEN_PATH), $(TOKEN_SRCS))
 
 PARSE_PATH     = ./parse/
 PARSE_SRCS     = parse_tokens.c get_node_type.c parse_command_and_option.c\
-				 parse_pipe.c parse_redirection.c parse_and_or.c
+				 parse_pipe.c parse_redirection.c parse_and_or.c parse_options_or_arguments.c
 PARSE          = $(addprefix $(PARSE_PATH), $(PARSE_SRCS))
 
 UTILS_PATH      = ./data_structure/
