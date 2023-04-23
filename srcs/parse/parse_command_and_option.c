@@ -6,15 +6,12 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 20:28:27 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 21:48:40 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* 
-** find the rightmost node and return it.
-*/
 t_tree_node	*find_rightmost_node(t_tree_node *node)
 {
 	if (node == NULL)
@@ -24,8 +21,7 @@ t_tree_node	*find_rightmost_node(t_tree_node *node)
 	return (node);
 }
 
-/* find the pipe in the left of the command node */
-static int	find_pipe(t_tree_node *current)
+int	find_pipe(t_tree_node *current)
 {
 	while (current)
 	{

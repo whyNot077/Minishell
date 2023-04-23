@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:09:54 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 20:09:36 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 21:48:24 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void			parse_command(t_binarytree *tree, char *value, int type);
 void			parse_and_or(t_binarytree *tree, t_token *tokens, int *index);
 t_tree_node		*find_rightmost_node(t_tree_node *node);
 void			add_options_or_arguments_to_the_tree(t_binarytree *tree,
-					char *value);
+											char *value);
+int				find_pipe(t_tree_node *current);
 
 #endif

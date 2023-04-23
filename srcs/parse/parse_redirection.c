@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:24:15 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 20:35:03 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 21:49:46 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,18 @@ void	parse_filename(t_tree_node *new_node, char *value, int *index)
 static void	connect_redirection_node(t_binarytree *tree, t_tree_node *current, \
 		t_tree_node *previous, t_tree_node *new_node)
 {
-	if (current->type == WORD || current->type == BUILTIN)
+	int	pipe;
+
+	pipe = find_pipe(current);
+	if ((current->type == WORD || current->type == BUILTIN) && pipe == FALSE)
 	{
 		new_node->left = current->left;
 		current->left = new_node;
+	}
+	if (pipe == TRUE)
+	{
+		current->right = new_node;
+		return ;
 	}
 	else
 	{
