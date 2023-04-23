@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 20:13:29 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 20:28:27 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,34 @@ t_tree_node	*find_rightmost_node(t_tree_node *node)
 	return (node);
 }
 
-/*
-** if the tree is empty, add the command node to the root
-** else, find the rightmost node.
-** If the rightmost node is of type WORD, BUILTIN return ;
-** else,
-	store the previous rightmost node as the left child of the new command node,
-** and the command node should be rightmost node.
-*/
+/* find the pipe in the left of the command node */
+static int	find_pipe(t_tree_node *current)
+{
+	while (current)
+	{
+		if (current->type == PIPE)
+		{
+			return (TRUE);
+		}
+		current = current->left;
+	}
+	return (FALSE);
+}
+
 static void	connect_command_node_to_tree(t_binarytree *tree, \
 	t_tree_node *current, t_tree_node *previous, t_tree_node *command_node)
 {
-	if (current->type == WORD || current->type == BUILTIN)
+	int	pipe;
+
+	pipe = find_pipe(current);
+	if ((current->type == WORD || current->type == BUILTIN) && pipe == FALSE)
 	{
 		free(command_node);
+		return ;
+	}
+	if (pipe == TRUE)
+	{
+		current->right = command_node;
 		return ;
 	}
 	command_node->left = current;
@@ -50,6 +64,15 @@ static void	connect_command_node_to_tree(t_binarytree *tree, \
 		tree->root = command_node;
 	}
 }
+
+/*
+** if the tree is empty, add the command node to the root
+** else, find the rightmost node.
+** If the rightmost node is of type WORD, BUILTIN return ;
+** else,
+**	store the previous rightmost node as the left child of the new command node,
+** and the command node should be rightmost node.
+*/
 
 void	add_command_to_the_tree(t_binarytree *tree, t_tree_node *command_node)
 {
@@ -74,8 +97,8 @@ void	add_command_to_the_tree(t_binarytree *tree, t_tree_node *command_node)
 	}
 }
 
-void	parse_command_and_option(t_binarytree *tree, t_token *tokens, \
-	int *index)
+void	parse_command_and_option(t_binarytree *tree, t_token *tokens,
+		int *index)
 {
 	t_tree_node	*command_node;
 
