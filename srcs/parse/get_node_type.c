@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:08:27 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 18:13:59 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 19:13:45 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,13 @@ int	get_node_type(t_token *tokens, int index, char **env)
 	value = tokens[index].value;
 	if (value == NULL)
 		return (ERROR);
-	if (value[0] == '-')
-		return (WORD);
+	if (is_builtin(value))
+		return (BUILTIN);
 	else
 	{
-		if (is_builtin(value))
-			return (BUILTIN);
-		else
-		{
-			replace_env_key_to_value(&value, env);
-			remove_quotes(value);
-			tokens[index].value = value;
-			return (WORD);
-		}
+		replace_env_key_to_value(&value, env);
+		remove_quotes(value);
+		tokens[index].value = value;
+		return (WORD);
 	}
 }
