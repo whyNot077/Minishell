@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:47:12 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 15:24:14 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:00:16 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ void	replace_env_key_to_value(char **value, char **env)
 		{
 			key = get_the_key(value, i);
 			env_value = get_env_value(key, env, 0);
-			printf("key: %s\n", key);
-			printf("env_value: %s\n", env_value);
 			replace_key_in_the_string(value, key, env_value, &i);
 			free(key);
 		}

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:08:27 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 14:28:24 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:00:57 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static int	is_builtin(char *value)
 
 int	is_redirection(int type)
 {
-	return (type == REDIRECT_OUT || type == HEREDOC || type == REDIRECT_IN
-		|| type == REDIRECT_APPEND);
+	return (type == REDIRECT_OUT || type == HEREDOC \
+		|| type == REDIRECT_IN || type == REDIRECT_APPEND);
 }
 
 int	get_node_type(t_token *tokens, int index, char **env)
@@ -44,7 +44,6 @@ int	get_node_type(t_token *tokens, int index, char **env)
 
 	if (tokens == NULL || index < 0)
 		return (ERROR);
-
 	value = tokens[index].value;
 	if (value == NULL)
 		return (ERROR);
