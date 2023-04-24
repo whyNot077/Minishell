@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:24:15 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 13:26:51 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:56:21 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,8 @@ void	parse_redirection(t_binarytree *tree, t_token *tokens, int *index)
 	if (tokens[*index].type == WORD)
 		parse_filename(new_node, tokens[*index].value, index);
 	else
+	{
 		printf("Error: Missing filename after '%s'\n", redirection);
+		tree->syntex_error = TRUE;
+	}
 }

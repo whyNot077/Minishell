@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 18:29:59 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:57:39 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	main(int argc, char *argv[], char *envp[])
 			tokens = create_tokens_by_lexical_analysis(input);
 			tree = parse_tokens(tokens, exe_tool->env->data);
 			// execute(tree->root, exe_tool);
-			display_tree(tree->root);
+			if (tree->syntex_error == FALSE)
+				display_tree(tree->root);
 			destroy_tree(&tree);
 			free_tokens(&tokens);
 			free(input);

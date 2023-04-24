@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 18:14:07 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:56:45 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	parse_tree(t_binarytree *tree, t_token *tokens, int *index)
 			parse_pipe(tree, tokens, index);
 		else if (type == AND || type == OR)
 			parse_and_or(tree, tokens, index);
+		if (tree->syntex_error == TRUE)
+			return ;
 	}
 }
 

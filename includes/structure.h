@@ -6,13 +6,14 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 19:22:02 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:55:07 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
 # define MAX_INPUT_SIZE 1024
+# include "minishell.h"
 
 typedef struct s_arraylist
 {
@@ -74,6 +75,7 @@ typedef struct binarytree
 {
 	t_tree_node			*root;
 	int					heredoc_count;
+	int					syntex_error;
 }						t_binarytree;
 
 #endif

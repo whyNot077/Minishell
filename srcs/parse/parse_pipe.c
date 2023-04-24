@@ -6,19 +6,20 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:39:42 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 13:26:46 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:58:51 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	connect_pipe_node_to_tree(t_tree_node *current, \
-		t_tree_node *pipe_node)
+static void	connect_pipe_node_to_tree(t_binarytree *tree, \
+	t_tree_node *current, t_tree_node *pipe_node)
 {
 	if (find_pipe(current) == TRUE)
 	{
 		free(pipe_node);
 		printf("Syntax error: unexpected pipe '|'\n");
+		tree->syntex_error = TRUE;
 		return ;
 	}
 	while (current->left && is_redirection(current->left->type))
@@ -38,6 +39,7 @@ static void	pipe_to_the_tree(t_binarytree *tree, t_tree_node *pipe_node, \
 	{
 		free(pipe_node);
 		printf("Syntax error: unexpected pipe '|'\n");
+		tree->syntex_error = TRUE;
 		(*index)++;
 		return ;
 	}
@@ -49,10 +51,11 @@ static void	pipe_to_the_tree(t_binarytree *tree, t_tree_node *pipe_node, \
 		{
 			free(pipe_node);
 			printf("Syntax error: unexpected pipe '|'\n");
+			tree->syntex_error = TRUE;
 			(*index)++;
 			return ;
 		}
-		connect_pipe_node_to_tree(current, pipe_node);
+		connect_pipe_node_to_tree(tree, current, pipe_node);
 	}
 	(*index)++;
 }
