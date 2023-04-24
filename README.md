@@ -1,4 +1,4 @@
-# Create a simple shell, as beautiful as bash
+# Create a shell. It's small but still powerful 
 
 ### reference
 
@@ -899,7 +899,7 @@ brew install bash
 </details>
 
  
-Minishell is created in the following steps.  
+Making a simple shell consists of the following steps.  
 
 (1) Receive commands from the terminal using readline().  
 (2) Lexical analysis: The received commands are split into token units and semanticised.  
