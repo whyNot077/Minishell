@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 21:37:25 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 14:28:43 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_binarytree	*parse_tokens(t_token *tokens, char **env)
 	while ((size_t)index < tokens->token_count)
 	{
 		if (tokens[index].type == WORD)
-			tokens[index].type = get_node_type(&tokens[index].value, env);
+			tokens[index].type = get_node_type(tokens, index, env);
 		index++;
 	}
 	index = 0;

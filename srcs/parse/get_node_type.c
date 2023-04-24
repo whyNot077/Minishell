@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:08:27 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 19:46:14 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 14:28:24 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,61 +38,27 @@ int	is_redirection(int type)
 		|| type == REDIRECT_APPEND);
 }
 
-static char	*get_env_value(char *env_key, char **env)
+int	get_node_type(t_token *tokens, int index, char **env)
 {
-	char	*env_value;
-	size_t	key_length;
-	int		i;
+	char	*value;
 
-	key_length = ft_strlen(env_key);
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env_key, env[i], key_length) == 0 \
-			&& env[i][key_length] == '=')
-		{
-			env_value = env[i] + key_length + 1;
-			return (ft_strdup(env_value));
-		}
-		i++;
-	}
-	return (ft_strdup(""));
-}
-
-static void	replace_env_to_the_word(char **value, char **env)
-{
-	char	*env_key;
-	char	*env_value;
-
-	if (!value || !*value || !env)
-		return ;
-	if ((*value)[0] == '$')
-	{
-		env_key = *value + 1;
-		env_value = get_env_value(env_key, env);
-		free(*value);
-		*value = env_value;
-	}
-}
-
-int	get_node_type(char **value, char **env)
-{
-	if (value == NULL || *value == NULL)
+	if (tokens == NULL || index < 0)
 		return (ERROR);
-	if ((*value)[0] == '$')
-	{
-		replace_env_to_the_word(value, env);
-		return (WORD);
-	}
-	else if ((*value)[0] == '-')
+
+	value = tokens[index].value;
+	if (value == NULL)
+		return (ERROR);
+
+	if (value[0] == '-')
 		return (WORD);
 	else
 	{
-		if (is_builtin(*value))
+		if (is_builtin(value))
 			return (BUILTIN);
 		else
 		{
-			// replace_the_env_in_string(value, env);
+			replace_env_key_to_value(&value, env);
+			tokens[index].value = value;
 			return (WORD);
 		}
 	}
