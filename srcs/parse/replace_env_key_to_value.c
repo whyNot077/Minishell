@@ -6,32 +6,13 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:47:12 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 14:53:39 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 15:24:14 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*find_the_key_in_double_quote(char **value, size_t i)
-{
-	size_t	start;
-	size_t	end;
-	char	*key;
-
-	start = i + 1;
-	end = start;
-	while ((*value)[end] && !is_space((*value)[end]) && \
-		(*value)[end] != '\"')
-		end++;
-	key = (char *)malloc(end - start + 1);
-	if (!key)
-		return (NULL);
-	ft_memcpy(key, *value + start, end - start);
-	key[end - start] = '\0';
-	return (key);
-}
-
-static char	*get_the_key(char **value, size_t i, int in_double_quote)
+static char	*get_the_key(char **value, size_t i)
 {
 	size_t	start;
 	size_t	end;
@@ -39,8 +20,6 @@ static char	*get_the_key(char **value, size_t i, int in_double_quote)
 
 	if (!value || !*value)
 		return (NULL);
-	if (in_double_quote == 1)
-		return (find_the_key_in_double_quote(value, i));
 	start = i + 1;
 	end = start;
 	while ((*value)[end] && !is_space((*value)[end]) && (*value)[end] != '$' \
@@ -110,13 +89,13 @@ void	replace_env_key_to_value(char **value, char **env)
 	in_double_quote = -1;
 	while ((*value)[++i])
 	{
-		if ((*value)[i] == '\'')
+		if ((*value)[i] == '\'' && in_double_quote == -1)
 			in_single_quote *= -1;
 		else if ((*value)[i] == '\"')
 			in_double_quote *= -1;
 		if ((*value)[i] == '$' && in_single_quote == -1)
 		{
-			key = get_the_key(value, i, in_double_quote);
+			key = get_the_key(value, i);
 			env_value = get_env_value(key, env, 0);
 			printf("key: %s\n", key);
 			printf("env_value: %s\n", env_value);
