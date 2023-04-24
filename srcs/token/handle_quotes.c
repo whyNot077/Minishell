@@ -6,14 +6,14 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 15:54:20 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 21:44:26 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:15:44 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	find_quote_to_the_end(char *buffer, int *buffer_index, const char *input,
-		int *i)
+int	find_quote_to_the_end(char *buffer, int *buffer_index, \
+	const char *input, int *i)
 {
 	char	quote_char;
 
