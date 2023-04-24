@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:52:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 14:54:02 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:20:54 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	add_buffer_until_the_quote_is_found(const char *line, int *i,
 	}
 }
 
-static int	the_quote_is_found(int find, char **line, char *buffer,
+static int	the_quote_is_found(int find, char **line, char *buffer, \
 		int *buffer_index)
 {
 	if (find)
@@ -46,7 +46,7 @@ static int	the_quote_is_found(int find, char **line, char *buffer,
 	return (FALSE);
 }
 
-static void	read_remaining_line_dealing_operators(const char *line, int *i,
+static void	read_remaining_line_dealing_operators(const char *line, int *i, \
 		t_process_input_data *data)
 {
 	char	*buffer;
@@ -71,8 +71,8 @@ static void	read_remaining_line_dealing_operators(const char *line, int *i,
 	buffer_to_token_value(buffer, buffer_index, data->list);
 }
 
-int	another_quote_is_found(const char *line, int *i, t_process_input_data *data,
-		char *quote_char)
+int	another_quote_is_found(const char *line, int *i, \
+	t_process_input_data *data, char *quote_char)
 {
 	char	*buffer;
 	int		*buffer_index;
@@ -91,10 +91,8 @@ int	another_quote_is_found(const char *line, int *i, t_process_input_data *data,
 	return (TRUE);
 }
 
-void	read_input_until_finding_the_quote(char quote_char,
-										char *buffer,
-										int *buffer_index,
-										t_process_input_data *data)
+void	read_input_until_finding_the_quote(char quote_char, \
+	char *buffer, int *buffer_index, t_process_input_data *data)
 {
 	char	*line;
 	int		i;
