@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 22:21:13 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 13:26:32 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,6 @@ static void	connect_command_node_to_tree(t_binarytree *tree, \
 		tree->root = command_node;
 	}
 }
-
-/*
-** if the tree is empty, add the command node to the root
-** else, find the rightmost node.
-** If the rightmost node is of type WORD, BUILTIN return ;
-** else,
-**	store the previous rightmost node as the left child of the new command node,
-** and the command node should be rightmost node.
-*/
 
 void	add_command_to_the_tree(t_binarytree *tree, t_tree_node *command_node)
 {

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:24:15 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 22:20:30 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 13:26:51 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,6 @@ void	parse_filename(t_tree_node *new_node, char *value, int *index)
 	(*index)++;
 }
 
-/*
-** if the tree is empty, add the command node to the root
-** else, find the rightmost node.
-** If the rightmost node is of type WORD, BUILTIN,
-**	add the command node to the left of the rightmost node.
-** else,
-**	store the previous rightmost node as the left child of the new command node,
-** and the command node should be the rightmost node.
-*/
 static void	connect_redirection_node(t_binarytree *tree, t_tree_node *current, \
 		t_tree_node *previous, t_tree_node *new_node)
 {
