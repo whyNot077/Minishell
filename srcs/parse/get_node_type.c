@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:08:27 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 18:12:48 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:13:59 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int	get_node_type(t_token *tokens, int index, char **env)
 	value = tokens[index].value;
 	if (value == NULL)
 		return (ERROR);
-
 	if (value[0] == '-')
 		return (WORD);
 	else

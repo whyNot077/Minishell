@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:47:12 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 18:00:16 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:14:16 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	replace_key_in_the_string(char **value, char *key, char *env_value, \
 	free(suffix);
 	free(tmp);
 }
-
 
 void	replace_env_key_to_value(char **value, char **env)
 {
