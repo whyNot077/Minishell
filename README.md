@@ -1,24 +1,24 @@
 # Create a simple shell, as beautiful as bash
 
-### reference
+### reference  
 
 [GNU Bash Manual][bash]  
 [Posix shell][posix]  
 [Shell Grammar Rules][shell]  
 [Base Definitions][base]  
 [LL parser][ll]  
-[Chomsky hierarchy][chom]  
+[Chomsky hierarchy][chom]
 
 [bash]: https://www.gnu.org/software/bash/manual/bash.html
 [posix]: https://pubs.opengroup.org/onlinepubs/9699919799/utilities/contents.html
 [shell]: https://pubs.opengroup.org/onlinepubs/009604499/utilities/xcu_chap02.html#tag_02_10_02
 [base]: https://pubs.opengroup.org/onlinepubs/9699919799.2018edition/
 [ll]: https://en.wikipedia.org/wiki/LL_parser
-[chom]: https://en.wikipedia.org/wiki/Chomsky_hierarchy  
+[chom]: https://en.wikipedia.org/wiki/Chomsky_hierarchy
 
 
-### External Functions
-<details>
+### External Functions  
+<details>  
 <summary>readline, printf, write, malloc, free </summary>
 <div markdown="1">
 
@@ -50,7 +50,7 @@ void clear_history_and_exit() {
 ```
 
 ### rl_on_new_line
-Indicates that the cursor is on a new line, allowing readline to maintain proper screen output.  
+Indicates that the cursor is on a new line, allowing readline to maintain proper screen output.
 ```c
 #include <readline/readline.h>
 
@@ -895,5 +895,299 @@ brew update && brew upgrade
 brew install bash
 ```
 
+</div>
+</details>  
+
+
+## built_in
+<details>
+<summary>what is built_in?</summary>
+<div markdown="1">
+Ecole42's Minishell program includes several built-in commands that are implemented within the shell itself, rather than being separate external programs.
+
+**Here is a list of the built-in commands in Ecole42's Minishell:**
+
+- **echo: Displays a message on the terminal.**
+- **cd: Changes the current working directory.**
+- **pwd: Prints the current working directory.**
+- **export: Sets the value of an environment variable.**
+- **unset: Removes an environment variable.**
+- **env: Prints a list of environment variables.**
+- **exit: Exits the shell.**
+
+These built-in commands are executed directly by the shell, which makes them faster and more efficient than external commands. 
+
+Additionally, the shell can provide more functionality and customization for built-in commands since they are a part of the shell itself.
+</div>
+</details>
+
+<details>
+<summary>echo</summary>
+<div markdown="1">
+Features : Outputs a string or variable.  
+
+options : -n (Do not print newlines)
+```c
+$ echo -n "Hello"
+Hello$
+```
+Edge cases  
+1. -n options
+```c
+$ echo -nnnnnnnn Hello
+Hello$
+$ echo -n -n -n -n -nnn -nnnn -nnnnm Hello
+Hello$
+$ echo -n -n -n -n -nnn -nnnn -nnnnm -nHello
+-nHello$
+```
+2. When using echo with $Key echo printed "Value”
+```c
+bash-5.2$ export a=1000
+bash-5.2$ export
+declare -x a="1000"
+bash-5.2$ echo a
+a
+bash-5.2$ echo $a
+1000
+```
+</div>
+</details>
+
+<details>
+<summary>cd</summary>
+<div markdown="1">
+Features : Move directory  
+
+examples :  
+
+```c
+move to specified directory (relative path)
+$ cd directory_path
+$ cd ./A/B/C
+$ cd /A/B/C
+
+move to parent diretory
+$ cd ..
+
+move to before directory
+$ cd -
+```
+
+edge case :
+
+1. If you find "PWD" when you try to use the "env" or "export" command, then "PWD" must be updated.  
+
+```c
+export | grep "PWD"
+
+declare -x OLDPWD="/Users/hyojocho/Desktop/MINISHELL"
+declare -x PWD="/Users/hyojocho"
+```
+2. After trying the "unset HOME" command, when you try cd, your shell must output "bash: cd: HOME not set".
+
+```c
+bash-5.2$ unset HOME
+bash-5.2$ cd
+bash: cd: HOME not set
+```
+
+3. If you delete the parent directory and try to access the parent directory, you get the following error: "cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory".
+
+```c
+If you delete the parent directory and try to access the parent directory, you get the following error: "cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory".
+```
+</div>
+</details>
+
+<details>
+<summary>pwd</summary>
+<div markdown="1">
+In shell scripting, **`pwd`** stands for "print working directory". The **`pwd`** command is used to display the current working directory, which is the directory in which the user is currently located.
+
+Here is the basic syntax of the **`pwd`** command:
+```c
+pwd
+```
+When you type this command in the shell, it will display the current working directory in the terminal. For example, if you are currently located in the /home/user/Documents
+directory, then the pwd command will display the following output:
+```c
+/home/user/Documents
+```
+The pwd command is useful for navigating the file system and understanding your current location in the directory structure. You can use the output of the pwd
+command to create file paths, change directories, and perform other file-related operations.
+
+</div>
+</details>
+
+<details>
+<summary>export</summary>
+<div markdown="1">
+the **`export`**command is used to set an environment variable that can be accessed by any child process of the shell.
+
+Here is the basic syntax of the **`export`** command:
+```c
+export VARNAME=value
+```
+edge cases
+1. "Export" can be used to add multiple values.
+```c
+bash-5.2$ export a b c d
+bash-5.2$ export
+declare -x a
+declare -x b
+declare -x c
+declare -x d
+bash-5.2$ export a=1 b=2 c=3 d=4
+bash-5.2$ export
+declare -x a="1"
+declare -x b="2"
+declare -x c="3"
+declare -x d="4"
+```
+2. "Export" can’t get first character as Number or Special characters (Exclude '_’)
+```c
+bash-5.2$ export 1a
+bash: export: `1a': not a valid identifier
+
+bash-5.2$ export _a
+bash-5.2$ export
+declare -x _a
+
+bash-5.2$ export a1
+bash-5.2$ export
+declare -x a1
+
+bash-5.2$ export (1
+bash: syntax error near unexpected token 1
+```
+3. If the key and value have already been exported, you can't use "Export" with the key only.
+```c
+bash-5.2$ export a=b
+bash-5.2$ export
+declare -x a="b"
+
+bash-5.2$ export a
+bash-5.2$ export
+declare -x a="b"
+```
+4. Even if there are no valid identifiers, another validation key must be added.
+```c
+bash-5.2$ export a b c 1d
+bash: export: '1d': not a valid identifier
+bash-5.2$ export
+declare -x a
+declare -x b
+declare -x c
+
+bash-5.2$ export 1 a b c 
+bash: export: '1': not a valid identifier
+bash-5.2$ export
+declare -x a
+declare -x b
+declare -x c
+```
+</div>
+</details>
+
+<details>
+<summary>unset</summary>
+<div markdown="1">
+The **`unset`** command is a shell command in Unix and Unix-like operating systems that is used to unset or remove environment variables or shell functions.
+
+When an environment variable is unset, it means that its value is removed from the current shell's environment, and any child processes will not inherit the variable.
+
+Here's the syntax for the **`unset`**command:
+```c
+unset MY_VAR
+```
+This will remove the value of the MY_VAR variable from the current shell's environment.
+
+edge cases
+1. "Unset" can be used to remove multiple values.
+```c
+bash-5.2$ export a b c d e
+bash-5.2$ export
+declare -x a
+declare -x b
+declare -x c
+declare -x d
+declare -x e
+
+bash-5.2$ unset a c e
+bash-5.2$ export
+declare -x b
+declare -x d
+```
+2. "Unset" can erase when only “key” value received
+```c
+bash-5.2$ export a=1 b=2 c=3
+
+case 1)
+bash-5.2$ unset a=1 b=2 c=3
+bash-5.2$ env
+c=3
+HOME=/Users/hyojocho
+b=2
+a=1
+
+case 2)
+bash-5.2$ unset a b c
+bash-5.2$ env
+-disappeared-
+```
+</div>
+</details>
+
+<details>
+<summary>env</summary>
+<div markdown="1">
+The **`env`** command is a shell command in Unix and Unix-like operating systems that is used to display or modify the environment variables for the current shell and its child processes.
+
+When used without any arguments, the **`env`** command displays a list of environment variables and their values. 
+
+For example, you can type **`env`** in the terminal to see a list of all the environment variables that are currently set in your shell.
+
+Here's the basic syntax for the **`env`** command:
+```c
+env
+```
+result is 
+```c
+PATH=/Users/hyojocho/.brew/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki
+LC_TERMINAL=iTerm2
+COLORTERM=truecolor
+COMMAND_MODE=unix2003
+TERM=xterm-256color
+HOME=/Users/hyojocho
+TMPDIR=/var/folders/zz/zyxvpxvq6csfxvn_n000cv000036r0/T/
+USER=hyojocho
+XPC_SERVICE_NAME=0
+LOGNAME=hyojocho
+LaunchInstanceID=CB4EAA94-A6EC-48B1-B223-767DDF0F904E
+__CF_USER_TEXT_ENCODING=0x0:0:0
+ITERM_SESSION_ID=w0t0p0:8AE6874A-34C5-4D71-9709-9DEA32BE7D3F
+SHLVL=1
+OLDPWD=/Users/hyojocho
+ZSH=/Users/hyojocho/.oh-my-zsh
+PAGER=less
+LESS=-R
+LSCOLORS=Gxfxcxdxbxegedabagacad
+LS_COLORS=di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
+```
+</div>
+</details>
+
+<details>
+<summary>env</summary>
+<div markdown="1">
+The **`exit`** command is a shell command in Unix and Unix-like operating systems that is used to exit the current shell or shell script.
+
+When you run the **`exit`** command, it terminates the current shell session and returns control to the parent process (usually the terminal emulator). Any commands or scripts that were running in the shell are terminated immediately.
+
+Here's the basic syntax for the **`exit`** command:
+```c
+exit [n]
+```
 </div>
 </details>
