@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 13:53:11 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 14:02:06 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/17 19:26:04 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void			destroy_list(t_array **list);
 
 // binary tree
 t_binarytree	*create_tree(void);
-t_tree_node		*create_new_node(t_token *token);
+t_tree_node		*create_new_node(char *value, int type);
 void			destroy_tree(t_binarytree **tree);
 void			free_tree_nodes(t_tree_node *node);
 

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 20:05:31 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/24 18:55:07 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
 # define MAX_INPUT_SIZE 1024
+# include "minishell.h"
 
 typedef struct s_arraylist
 {
@@ -62,7 +63,9 @@ typedef struct s_find
 
 typedef struct tree_node
 {
-	char				*data;
+	char				*value;
+	char				**command;
+	char				*filename;
 	int					type;
 	struct tree_node	*left;
 	struct tree_node	*right;
@@ -71,6 +74,8 @@ typedef struct tree_node
 typedef struct binarytree
 {
 	t_tree_node			*root;
+	int					heredoc_count;
+	int					syntex_error;
 }						t_binarytree;
 
 #endif

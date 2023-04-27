@@ -1,45 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 20:18:51 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 18:56:45 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_tree_node	*parse_pipe_sequence(t_token *tokens, int *index, char **env)
+static void	parse_tree(t_binarytree *tree, t_token *tokens, int *index)
 {
-	t_tree_node	*node;
-	t_tree_node	*temp_node;
+	char	*value;
+	int		type;
+	int		token_count;
 
-	node = parse_command(tokens, index, env);
-	while ((size_t)(*index) < tokens->token_count \
-		&& tokens[*index].type == PIPE)
+	token_count = tokens->token_count;
+	while (*index < token_count)
 	{
-		temp_node = create_new_node(&tokens[*index]);
-		temp_node->type = tokens[*index].type;
-		(*index)++;
-		temp_node->left = node;
-		temp_node->right = parse_command(tokens, index, env);
-		node = temp_node;
+		value = tokens[*index].value;
+		type = tokens[*index].type;
+		if (type == WORD || type == BUILTIN)
+			parse_command_and_option(tree, tokens, index);
+		else if (is_redirection(type))
+			parse_redirection(tree, tokens, index);
+		else if (type == PIPE)
+			parse_pipe(tree, tokens, index);
+		else if (type == AND || type == OR)
+			parse_and_or(tree, tokens, index);
+		if (tree->syntex_error == TRUE)
+			return ;
 	}
-	return (node);
 }
 
 t_binarytree	*parse_tokens(t_token *tokens, char **env)
 {
-	t_binarytree *tree;
-	int index;
+	t_binarytree	*tree;
+	int				index;
 
+	index = 0;
 	if (!tokens)
 		return (NULL);
 	tree = create_tree();
+	while ((size_t)index < tokens->token_count)
+	{
+		if (tokens[index].type == WORD)
+			tokens[index].type = get_node_type(tokens, index, env);
+		index++;
+	}
 	index = 0;
-	tree->root = parse_pipe_sequence(tokens, &index, env);
+	parse_tree(tree, tokens, &index);
 	return (tree);
 }

@@ -1,4 +1,4 @@
-# Create a simple shell, as beautiful as bash
+# Create a shell. It's small but still powerful 
 
 ### reference  
 
@@ -896,6 +896,7 @@ brew install bash
 ```
 
 </div>
+<<<<<<< HEAD
 </details>  
 
 
@@ -1179,7 +1180,7 @@ LS_COLORS=di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw
 </details>
 
 <details>
-<summary>env</summary>
+<summary>exit</summary>
 <div markdown="1">
 The **`exit`** command is a shell command in Unix and Unix-like operating systems that is used to exit the current shell or shell script.
 
@@ -1191,3 +1192,285 @@ exit [n]
 ```
 </div>
 </details>
+=======
+</details>
+
+ 
+Making a simple shell consists of the following steps.  
+
+(1) Receive commands from the terminal using readline().  
+(2) Lexical analysis: The received commands are split into token units and semanticised.  
+(3) Syntax analysis: Receives tokens, checks them for grammatical correctness and parses them into a syntax tree.  
+(4) Execution: Executes the command by traversing the syntax tree.  
+
+Let's have a look at the syntax analysis, which is the core of minishell parsing.   
+First of all, the structure of the tree is as follows.  
+<img src = "./image/tree.jpg">
+
+On the diagonal in the upper right-hand corner, from left to right, are an AND or OR, a pipe, a redirect, and a command.  
+AND or OR, pipe, and command can only appear once on a line, but redirects can appear multiple times.  
+Redirection which is parsed later is stacked closer to the command.  
+
+The structure was created to store value, command, filename, type, left, right and heredoc count.  
+
+```c
+typedef struct tree_node
+{
+	char				*value;
+	char				**command;
+	char				*filename;
+	int					type;
+	struct tree_node	*left;
+	struct tree_node	*right;
+}						t_tree_node;
+
+typedef struct binarytree
+{
+	t_tree_node			*root;
+	int					heredoc_count;
+	int					syntex_error;
+}						t_binarytree;
+```
+
+All non-filename words are stored in a two-dimensional array, command. The very first value of command (command[0]) is identified as the command, the immediately following -word is identified as options, and the remaining values are identified as arguments. The advantage of storing this in a two-dimensional array is that it clarifies the tree. Also, when we use the execve function in the execution part, we can drop it in as an argument without much thought.  
+
+```c
+ int execve(const char *path, char *const argv[], char *const envp[]);
+```
+
+The redirections (<, >, <<, >>) always have a filename, and we've made it possible to store this value in a structure. My first thought was that we could store the filename to the right of the redirection. But then we'd have to think twice about whether the value was a command or a filename when parsing other tokens and looking for the rightmost node in the tree. For example, let's parse the command '<', 'a' ,'pwd'. Immediately before parsing pwd, the tree has '<' at the root and an 'a' at the root's right child. So if we were looking for the rightmost node with pwd, we would have to go through an extra step to distinguish the type. Because both filename or command have the same type - WORD. After parsing, we could have replaced type with FILENAME or COMMAND, but storing in a structure would be more convenient.  
+
+### parse command
+```c
+void	parse_command_and_option(t_binarytree *tree, t_token *tokens,
+		int *index)
+{
+	t_tree_node	*command_node;
+
+	command_node = create_new_node(tokens[*index].value, tokens[*index].type);
+	add_command_to_the_tree(tree, command_node);
+	while (tokens[*index].type == WORD || tokens[*index].type == BUILTIN)
+	{
+		fill_command_structure(tree, tokens[*index].value);
+		(*index)++;
+	}
+}
+```
+add_command_to_the_tree is a function that adds the node itself, and fil_command_structure is a function that puts the token value into the command of the structure.  
+
+```c
+void	add_command_to_the_tree(t_binarytree *tree, t_tree_node *command_node)
+{
+	t_tree_node	*current;
+	t_tree_node	*previous;
+
+	if (tree->root == NULL)
+	{
+		tree->root = command_node;
+		return ;
+	}
+	else
+	{
+		current = tree->root;
+		previous = NULL;
+		while (current->right)
+		{
+			previous = current;
+			current = current->right;
+		}
+		connect_command_node_to_tree(tree, current, previous, command_node);
+	}
+}
+```
+If the root of the tree is empty, it immediately inserts the command node. Otherwise it looks for the rightmost node (current) and the second from the right (previous). connect_command_node_to_tree parses 'current', 'previous' and 'command_node' into the tree.  
+
+```c
+static void	connect_command_node_to_tree(t_binarytree *tree, \
+	t_tree_node *current, t_tree_node *previous, t_tree_node *command_node)
+{
+	if (find_pipe(current) == TRUE)
+	{
+		current->right = command_node;
+		return ;
+	}
+	if ((current->type == WORD || current->type == BUILTIN))
+	{
+		free(command_node);
+		return ;
+	}
+	command_node->left = current;
+	if (previous)
+	{
+		previous->right = command_node;
+	}
+	else
+	{
+		tree->root = command_node;
+	}
+}
+
+```
+1. If there is a pipe, place a new command node on the right-hand side of the tree.  
+2. if there is already a command node on the rightmost line of the tree, release the command node you just created and exit the function.  
+3. If the situation is not (1) and (2), the command node will replace current, and current will be the left child of the command node because current means redirection or AND, OR.  
+
+```c
+static char	**get_new_command(t_tree_node *command_node, \
+	char *value, size_t size)
+{
+	char	**new_command;
+
+	new_command = ft_calloc(size + 2, sizeof(char *));
+	ft_memmove(new_command, command_node->command, size * sizeof(char *));
+	new_command[size] = value;
+	new_command[size + 1] = NULL;
+	return (new_command);
+}
+
+void	fill_command_structure(t_binarytree *tree, char *value)
+{
+	char		**new_command;
+	t_tree_node	*command_node;
+	size_t		size;
+
+	command_node = find_rightmost_node(tree->root);
+	if (command_node->command == NULL)
+	{
+		command_node->command = (char **)ft_calloc(2, sizeof(char *));
+		command_node->command[0] = value;
+		command_node->command[1] = NULL;
+	}
+	else
+	{
+		size = get_command_size(command_node);
+		new_command = get_new_command(command_node, value, size);
+		free(command_node->command);
+		command_node->command = new_command;
+	}
+}
+```
+The structure is allocated an array that can hold a char * for the command variable, and we put value into it in the form of a flat copy. We've made it possible to reference value because it won't change afterward, rather than using strdup and allocating new memory.  
+
+### parse redirection
+```c
+void	parse_redirection(t_binarytree *tree, t_token *tokens, int *index)
+{
+	int			type;
+	char		*redirection;
+	t_tree_node	*new_node;
+
+	type = tokens[*index].type;
+	redirection = tokens[*index].value;
+	if (is_redirection(type) == 0)
+		return ;
+	new_node = create_new_node(redirection, type);
+	if (new_node->type == HEREDOC)
+		tree->heredoc_count++;
+	redirection_to_tree(tree, new_node);
+	(*index)++;
+	if (tokens[*index].type == WORD)
+		parse_filename(new_node, tokens[*index].value, index);
+	else
+	{
+		printf("Error: Missing filename after '%s'\n", redirection);
+		tree->syntex_error = TRUE;
+	}
+}
+```
+
+1. if heredoc, let heredoc count.  
+2. redirection_to_tree: Parse the redirection node to the tree.  
+3. parse_filename: Store the filename in the structure. If the filename does not exist, print an error message.  
+
+```c
+static void	connect_redirection_node(t_binarytree *tree, t_tree_node *current, \
+		t_tree_node *previous, t_tree_node *new_node)
+{
+	if (find_pipe(current) == TRUE)
+	{
+		current->right = new_node;
+		return ;
+	}
+	if ((current->type == WORD || current->type == BUILTIN))
+	{
+		new_node->left = current->left;
+		current->left = new_node;
+	}
+	else
+	{
+		new_node->left = current;
+		if (previous)
+		{
+			previous->right = new_node;
+		}
+		else
+		{
+			tree->root = new_node;
+		}
+	}
+}
+```
+1. Find the rightmost node (current) and the second from the right (previous), as you did when parsing the command, and place new_node in the tree.  
+2. If a command node exists, new_node goes to the left of the current.  
+3. The new node becomes the rightmost node if a pipe is on that line.   
+4. Otherwise, the new node takes the place of the current, and the current goes into the left of the newnode.  
+
+### parse pipe
+
+```c
+static void	pipe_to_the_tree(t_binarytree *tree, t_tree_node *pipe_node, \
+		int *index)
+{
+	t_tree_node	*current;
+
+	if (tree->root == NULL)
+	{
+		free(pipe_node);
+		printf("Syntax error: unexpected pipe '|'\n");
+		tree->syntex_error = TRUE;
+		(*index)++;
+		return ;
+	}
+	else
+	{
+		current = find_rightmost_node(tree->root);
+		if (current->type == PIPE || current->type == AND || \
+				current->type == OR)
+		{
+			free(pipe_node);
+			printf("Syntax error: unexpected pipe '|'\n");
+			tree->syntex_error = TRUE;
+			(*index)++;
+			return ;
+		}
+		connect_pipe_node_to_tree(tree, current, pipe_node);
+	}
+	(*index)++;
+}
+```
+1. It returns a syntax error if the tree is empty or if the rightmost node (the current node) is of type pipe, and, or.   
+2. Otherwise, the pipe node will be parsed as a tree.   
+
+```c
+static void	connect_pipe_node_to_tree(t_binarytree *tree, \
+	t_tree_node *current, t_tree_node *pipe_node)
+{
+	if (find_pipe(current) == TRUE)
+	{
+		free(pipe_node);
+		printf("Syntax error: unexpected pipe '|'\n");
+		tree->syntex_error = TRUE;
+		return ;
+	}
+	while (current->left && is_redirection(current->left->type))
+	{
+		current = current->left;
+	}
+	pipe_node->left = current->left;
+	current->left = pipe_node;
+}
+```
+1. If the rightmost node has a pipe, print an error message.  
+2. If not, move left and find the end of the redirection.   
+3. Place the pipe to the left of that node.  
+>>>>>>> aef024004f2575b51c0174fbdbc07281a87e5fd4

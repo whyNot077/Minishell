@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:13:17 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 14:01:22 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/23 17:37:15 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,15 @@ t_binarytree	*create_tree(void)
 	return (tree);
 }
 
-t_tree_node	*create_new_node(t_token *token)
+t_tree_node	*create_new_node(char *value, int type)
 {
 	t_tree_node	*new_node;
 
 	new_node = 	ft_calloc(1, sizeof(t_tree_node));
 	if (!new_node)
 		return (NULL);
-    new_node->data = token->value;
-    new_node->type = token->type;
-    new_node->left = NULL;
-    new_node->right = NULL;
+    new_node->value = value;
+    new_node->type = type;
 	return (new_node);
 }
 
@@ -42,6 +40,7 @@ void	free_tree_nodes(t_tree_node *node)
 		return ;
 	free_tree_nodes(node->left);
 	free_tree_nodes(node->right);
+	free(node->command);
 	free(node);
 }
 

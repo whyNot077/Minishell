@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:02:22 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 17:23:30 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/24 19:03:36 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	num_of_special_tokens_and_space(t_token *tokens, \
 void	free_tokens(t_token **tokens_ptr);
 void	handle_operator(const char *input, int i, t_array *list);
 void	process_input(t_array *list, const char *input);
-int		is_unexpected_parameter(char c);
 void	fill_data(t_process_input_data *data, const char *input, \
 		t_array *list);
 
