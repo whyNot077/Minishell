@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:29:20 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/14 20:09:45 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/26 17:07:15 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	al_add_rear(t_arraylist *list, char *element)
 	{
 		list->size *= 2;
 		temp = list->data;
-		list->data = malloc(sizeof(char *) * list->size + 1);
+		list->data = malloc(sizeof(char *) * (list->size + 1));
 		if (list->data == NULL)
 			return ;
 		ft_memcpy(list->data, temp, sizeof(char *) * list->count);
@@ -56,6 +56,7 @@ void	al_remove(t_arraylist *list, int index)
 
 	if (index >= list->count || index < 0)
 		return ;
+	free(list->data[index]);
 	i = index;
 	while (i < list->count - 1)
 	{

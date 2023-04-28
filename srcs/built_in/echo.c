@@ -6,25 +6,24 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:17:23 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/08 19:52:48 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/21 13:42:00 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void validate_n_option(char **args, int *args_idx, int *n_option_flag)
+static void validate_n_option(char **args, int *args_idx, int *n_option_flag, \
+								int *current_n_flag)
 {
 	int		string_idx;
-	int		current_n_flag;
 	
-	current_n_flag = 0;
 	string_idx = 1;
 	while (args[*args_idx][string_idx])
 	{
 		*n_option_flag = 1;
 		if (args[*args_idx][string_idx] != 'n')
 		{
-			current_n_flag = 1;
+			*current_n_flag = 1;
 			break ;
 		}
 		string_idx++;
@@ -33,7 +32,6 @@ static void validate_n_option(char **args, int *args_idx, int *n_option_flag)
 
 static void	find_print_idx(char **args, int *args_idx, int *n_option_flag)
 {
-	int		string_idx;
 	int		current_n_flag;
 	
 	current_n_flag = 0;
@@ -41,17 +39,7 @@ static void	find_print_idx(char **args, int *args_idx, int *n_option_flag)
 	{
 		if (args[*args_idx][0] == '-')
 		{
-			string_idx = 1;
-			while (args[*args_idx][string_idx])
-			{
-				*n_option_flag = 1;
-				if (args[*args_idx][string_idx] != 'n')
-				{
-					current_n_flag = 1;
-					break ;
-				}
-				string_idx++;
-			}
+			validate_n_option(args, args_idx, n_option_flag, &current_n_flag);
 		}
 		else
 			break ;
@@ -61,12 +49,13 @@ static void	find_print_idx(char **args, int *args_idx, int *n_option_flag)
 	}
 }
 
-void	echo(char **args)
+void	echo(char **args, t_execute *execute)
 {
 	int		args_idx;
 	int		n_option_flag;
 
-	args_idx = 1;
+	(void)execute;
+	args_idx = 2;
 	n_option_flag = 0;
 	find_print_idx(args, &args_idx, &n_option_flag);
 	while (args[args_idx])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_key_to_value.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:47:12 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 18:14:16 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/28 14:21:45 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*get_the_key(char **value, size_t i)
 	return (key);
 }
 
-static char	*get_env_value(char *key, char **env, size_t i)
+static char	*get_key_value(char *key, char **env, size_t i)
 {
 	char	*env_value;
 	size_t	key_length;
@@ -95,7 +95,7 @@ void	replace_env_key_to_value(char **value, char **env)
 		if ((*value)[i] == '$' && in_single_quote == -1)
 		{
 			key = get_the_key(value, i);
-			env_value = get_env_value(key, env, 0);
+			env_value = get_key_value(key, env, 0);
 			replace_key_in_the_string(value, key, env_value, &i);
 			free(key);
 		}

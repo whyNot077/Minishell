@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
+#    By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/24 18:02:53 by minkim3          ###   ########.fr        #
+#    Updated: 2023/04/28 14:24:56 by hyojocho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,12 +51,15 @@ UTILS_SRCS      = display.c dynamic_array.c binary_tree.c arraylist.c
 UTILS           = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
 
 EXECUTE_PATH    = ./execute/
-EXECUTE_SRCS    = execute.c envp_init.c
+EXECUTE_SRCS    = execute.c envp_init.c element_check.c
 EXECUTE         = $(addprefix $(EXECUTE_PATH), $(EXECUTE_SRCS))
 
 BUILT_IN_PATH    = ./built_in/
-BUILT_IN_SRCS    = built_in.c
-BUILT_IN         = $(addprefix $(BUILT_IN_PATH), $(BUILT_IN_SRCS))
+BUILT_IN_SRCS    = built_in.c echo.c ./export/export.c ./export/export_get_env.c\
+					./export/export_print.c ./export/export_arg_validate.c\
+					./unset/unset.c ./unset/unset_apply.c\
+					env.c pwd.c command_exit.c\
+					./cd/cd.c ./cd/chdir_check.c ./cd/get_value.c
 
 SOURCES         = $(addprefix $(SRCS_PATH), $(MAIN))\
 				  $(addprefix $(SRCS_PATH), $(TOKEN))\

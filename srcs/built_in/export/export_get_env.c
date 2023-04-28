@@ -6,22 +6,44 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 19:29:26 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/14 19:46:07 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/26 19:19:37 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	get_args_to_envp(char **args, char **envp, char **export)
+static void	apply_envp(char **args, t_arraylist *envp, t_arraylist *export, \
+						int idx)
 {
-	// 1. check if there is only key in args
-	// 1-1 if there is only key, check if there is key in args
-	if (ft_strchr(args[1], '=') == NULL)
-		al_add_rear(export, args[1]);
-	// 2. check if there is key and value in args
+	char	*export_str;
+	char	*envp_str;
+	
+	if (ft_strchr(args[idx], '=') == NULL)
+	{
+		export_str = ft_strdup(args[idx]);
+		al_add_rear(export, export_str);
+	}
 	else
 	{
-		al_add_rear(export, args[1]);
-		al_add_rear(envp, args[1]);
+		export_str = ft_strdup(args[idx]);
+		al_add_rear(export, export_str);
+		envp_str = ft_strdup(args[idx]);
+		al_add_rear(envp, envp_str);
+	}
+}
+
+void	get_args_to_envp(char **args, t_arraylist *envp, t_arraylist *export)
+{
+	int		idx;
+
+	idx = 1;
+	while (args[++idx])
+	{
+		if (validate_key_args(args, idx) == ERROR)
+			continue ;
+		if (ft_strchr(args[idx], '=') == NULL && \
+			check_same_key(args[idx], envp) == TRUE)
+			continue ;
+		apply_envp(args, envp, export, idx);
 	}
 }
