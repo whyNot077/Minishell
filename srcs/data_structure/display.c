@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:16:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/28 14:28:49 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/28 14:29:42 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void inorder_traverse(t_tree_node *node)
 	inorder_traverse(node->left);
 	printf("%s, ", node_type_to_str(node->type));
 	printf("execute = ");
-	if (node->type == WORD)
+	if (node->type == WORD || node->type == BUILTIN)
 	{
             if (node->command)
             {
