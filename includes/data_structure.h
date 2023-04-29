@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data_structure.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 13:53:11 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/17 19:26:04 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/28 19:02:44 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void			destroy_tree(t_binarytree **tree);
 void			free_tree_nodes(t_tree_node *node);
 
 // display
-void			display_tree(t_tree_node *node);
+void	display_tree(t_tree_node *node, char **env, t_execute *execute);
 
 #endif

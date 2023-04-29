@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:17:23 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/21 13:42:00 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/29 14:23:14 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	echo(char **args, t_execute *execute)
 	int		n_option_flag;
 
 	(void)execute;
-	args_idx = 2;
+	args_idx = 1;
 	n_option_flag = 0;
 	find_print_idx(args, &args_idx, &n_option_flag);
 	while (args[args_idx])

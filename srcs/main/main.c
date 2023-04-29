@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 18:57:39 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/29 13:54:27 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ int	main(int argc, char *argv[], char *envp[])
 			handle_readline(input);
 			tokens = create_tokens_by_lexical_analysis(input);
 			tree = parse_tokens(tokens, exe_tool->env->data);
-			// execute(tree->root, exe_tool);
 			if (tree->syntex_error == FALSE)
-				display_tree(tree->root);
+				execute(tree, exe_tool);
+			// if (tree->syntex_error == FALSE)
+			// 	display_tree(tree->root, exe_tool->env->data, exe_tool);
 			destroy_tree(&tree);
 			free_tokens(&tokens);
 			free(input);

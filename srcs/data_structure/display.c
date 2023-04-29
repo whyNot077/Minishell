@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:16:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/28 14:29:42 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/28 19:56:27 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,29 @@ const char	*node_type_to_str(int node_type)
 	return ("UNKNOWN");
 }
 
-void inorder_traverse(t_tree_node *node)
+void inorder_traverse(t_tree_node *node, char **env, t_execute *execute)
 {
     if (node == NULL)
     {
         return;
     }
-
-	inorder_traverse(node->left);
+	inorder_traverse(node->left, env, execute);
 	printf("%s, ", node_type_to_str(node->type));
 	printf("execute = ");
 	if (node->type == WORD || node->type == BUILTIN)
 	{
-            if (node->command)
-            {
-                for (int i = 0; node->command[i]; ++i)
-                {
-                    printf("(%s)", node->command[i]);
-                }
-            }
-            else
-            {
-                printf("(%s)", node->value);
-            }
+		if (node->command)
+		{
+			built_in(node->command, execute);
+			for (int i = 0; node->command[i]; ++i)
+			{
+				printf("(%s)", node->command[i]);
+			}
+		}
+		else
+		{
+			printf("(%s)", node->value);
+		}
 	}
 	else
 	{
@@ -67,12 +67,12 @@ void inorder_traverse(t_tree_node *node)
 	}
     printf("\n");
 
-    inorder_traverse(node->right);
+    inorder_traverse(node->right, env, execute);
 }
 
 
-void	display_tree(t_tree_node *node)
+void	display_tree(t_tree_node *node, char **env, t_execute *execute)
 {
 	printf("\ninorder traverse\n");
-	inorder_traverse(node);
+	inorder_traverse(node, env, execute);
 }
