@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:25:37 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/26 16:00:05 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/29 14:41:07 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int validate_chdir(char **args, char *pwd_value)
 {
-	if (chdir(args[2]) != 0)
+	if (chdir(args[1]) != 0)
 	{
 		ft_putstr_fd("bash: cd: ", 2);
 		ft_putstr_fd(args[1], 2);

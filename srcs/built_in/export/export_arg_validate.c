@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:51:35 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/23 16:04:23 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/29 22:05:28 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,30 @@ int	validate_key_args(char **args, int args_idx)
 	return (SUCCESS);
 }
 
-int	check_same_key(char *str, t_arraylist *envp)
+int	check_has_same_str(char *str, t_arraylist *envp)
 {
 	int		envp_idx;
-	int		str_idx;
 
 	envp_idx = 0;
 	while (envp->data[envp_idx])
 	{
-		str_idx = 0;
-		while (str[str_idx] == envp->data[envp_idx][str_idx])
-			str_idx++;
-		if (envp->data[envp_idx][str_idx] == '=' && str[str_idx] == '\0')
+		if (ft_strcmp(str, envp->data[envp_idx]) == 0)
 			return (TRUE);
 		envp_idx++;
 	}
 	return (FALSE);
+}
+
+char	*get_key(char *str)
+{
+	int		idx;
+	char	*key;
+
+	if (ft_strchr(str, '=') == NULL)
+		return (str);
+	idx = 0;
+	while (str[idx] != '=')
+		idx++;
+	key = ft_substr(str, 0, idx);
+	return (key);
 }

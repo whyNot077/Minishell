@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:05:25 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/26 16:58:43 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/29 14:31:17 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	cd(char **args, t_execute *execute)
 	char	*home_value;
 
 	args_count = count_args(args);
-	if (args_count > 3)
+	if (args_count > 2)
 	{
 		ft_putstr_fd("bash: cd: too many arguments\n", 2);
 		g_exit_code = 1;
@@ -81,7 +81,7 @@ void	cd(char **args, t_execute *execute)
 	}
 	if (check_home_dir(execute) == ERROR)
 		return ;
-	if (args[2] == NULL)
+	if (args[1] == NULL)
 	{
 		home_value = get_target_value("HOME", execute->env);
 		chdir(home_value);
