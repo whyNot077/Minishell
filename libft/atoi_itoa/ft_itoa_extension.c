@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa_extension.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 15:40:52 by minkim3           #+#    #+#             */
-/*   Updated: 2023/02/22 17:33:56 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/30 20:52:07 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static int	ft_numlen(unsigned long long n)
+static int	ft_numlen(long long n)
 {
 	int	len;
 
@@ -30,7 +30,7 @@ static int	ft_numlen(unsigned long long n)
 	return (len);
 }
 
-static char	*ft_putnum(char *arr, unsigned long long n, int len)
+static char	*ft_putnum(char *arr, long long n, int len)
 {
 	int	i;
 
@@ -50,7 +50,7 @@ static char	*ft_putnum(char *arr, unsigned long long n, int len)
 	return (arr);
 }
 
-char	*ft_itoa_extension(unsigned long long n)
+char	*ft_itoa_extension(long long n)
 {
 	char	*arr;
 	int		len;

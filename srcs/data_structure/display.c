@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 14:16:53 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/28 19:56:27 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/30 15:50:35 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void inorder_traverse(t_tree_node *node, char **env, t_execute *execute)
 	{
 		if (node->command)
 		{
-			built_in(node->command, execute);
 			for (int i = 0; node->command[i]; ++i)
 			{
 				printf("(%s)", node->command[i]);

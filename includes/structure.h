@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/28 20:58:22 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/30 18:13:01 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_execute
 	int					input_fd;
 	int					prev_fd;
 	int					outfile_fd;
+	int					pipe_fd[2];
+	pid_t				pid;
 	t_arraylist			*env;
 	t_arraylist			*export;
 }						t_execute;

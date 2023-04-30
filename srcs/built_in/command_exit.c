@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:58:53 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/23 20:29:30 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/04/30 21:07:21 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,17 @@ static void	validate_arg_is_num(char **args)
 	int str_idx;
 
 	str_idx = 0;
-	while (args[2][str_idx])
+	while (args[1][str_idx])
 	{
-		if (ft_isdigit(args[2][str_idx]) == FALSE)
+		if (ft_isdigit(args[1][str_idx]) == FALSE)
 		{
+			if (args[1][0] == '-')
+			{
+				str_idx++;
+				continue ;
+			}
 			ft_putstr_fd("bash: exit: ", 2);
-			ft_putstr_fd(args[2], 2);
+			ft_putstr_fd(args[1], 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
 			g_exit_code = 2;
 			exit(2);
@@ -49,11 +54,18 @@ static void	validate_arg_count(char **args)
 
 static void validate_arg_range(char **args)
 {
-	if (-9223372036854775807 > ft_atoi_extension(args[2]) || \
-			ft_atoi_extension(args[2]) > 9223372036854775807)
+	long long int num;
+	char *res;
+	
+	num = ft_atoi_extension(args[1]);
+	printf("num : %lld\n", num);
+	res = ft_itoa_extension(num);
+	printf("res : %s\n", res);
+	if (ft_strlen(res) != ft_strlen(args[1]) && \
+		ft_strcmp(res, args[1]) != 0)
 	{
 		ft_putstr_fd("bash: exit: ", 2);
-		ft_putstr_fd(args[2], 2);
+		ft_putstr_fd(args[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		g_exit_code = 2;
 		ft_printf("g_exit_code(range) : %d\n", g_exit_code);
@@ -63,15 +75,22 @@ static void validate_arg_range(char **args)
 
 static void numbering_exit(char **args)
 {
+	long long int num;
+	long long int key;
+
+	num = ft_atoi_extension(args[1]);
 	ft_putstr_fd("exit\n", 1);
-	g_exit_code = (ft_atoi_extension(args[2]) % 256);
+	key = num;
+	while (key < 0)
+		key += 256;
+	g_exit_code = (key % 256);
 	ft_printf("g_exit_code(numbering) : %d\n", g_exit_code);
 	exit(g_exit_code);
 }
 
 void	command_exit(char **args)
 {
-	if (args[2] == NULL)
+	if (args[1] == NULL)
 	{
 		ft_putstr_fd("exit\n", 1);
 		g_exit_code = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/04 15:45:26 by minkim3           #+#    #+#             */
-/*   Updated: 2023/03/20 15:27:10 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/04/30 20:52:40 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void		ft_lstclear(t_list **lst, void (*del)(void *));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *));
 char		*ft_new_string(size_t strlen);
-char		*ft_itoa_extension(unsigned long long n);
+char		*ft_itoa_extension(long long n);
 char		*get_next_line(int fd);
 ssize_t		find_char(const char *s, int c);
 size_t		ft_strlen(const char *s);
