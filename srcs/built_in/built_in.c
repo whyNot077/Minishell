@@ -6,31 +6,28 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:06 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/05 18:24:13 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/05 20:59:46 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	built_in(char **args, t_execute *execute)
+void	built_in(char **args, t_execute *exe_tool)
 {
+	apply_redirect_out(exe_tool);
 	if (ft_strcmp(args[0], "echo") == 0)
-		echo(args, execute);
+		echo(args, exe_tool);
 	else if (ft_strcmp(args[0], "cd") == 0)
-		cd(args, execute);
+		cd(args, exe_tool);
 	else if (ft_strcmp(args[0], "pwd") == 0)
 		pwd();
 	else if (ft_strcmp(args[0], "export") == 0)
-		export(args, execute->env, execute->export, execute->outfile_fd);
+		export(args, exe_tool->env, exe_tool->export, exe_tool->outfile_fd);
 	else if (ft_strcmp(args[0], "unset") == 0)
-		unset(args, execute->env, execute->export);
+		unset(args, exe_tool->env, exe_tool->export);
 	else if (ft_strcmp(args[0], "env") == 0)
-		env(execute->env);
+		env(exe_tool->env);
 	else if (ft_strcmp(args[0], "exit") == 0)
 		command_exit(args);
-	if (execute->outfile_fd > 0)
-	{
-		dup2(execute->dup_tmp, STDOUT_FILENO);
-		close(execute->outfile_fd);
-	}
+	restore_redirect_out(exe_tool);
 }
