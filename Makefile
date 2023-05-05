@@ -6,7 +6,7 @@
 #    By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/04/28 21:00:45 by hyojocho         ###   ########.fr        #
+#    Updated: 2023/05/04 20:10:01 by hyojocho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ UTILS_SRCS      = display.c dynamic_array.c binary_tree.c arraylist.c
 UTILS           = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
 
 EXECUTE_PATH    = ./execute/
-EXECUTE_SRCS    = execute.c envp_init.c
+EXECUTE_SRCS    = execute.c envp_init.c pipe_apply.c redirection.c command_apply.c
 EXECUTE         = $(addprefix $(EXECUTE_PATH), $(EXECUTE_SRCS))
 
 BUILT_IN_PATH    = ./built_in/

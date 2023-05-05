@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:06 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/30 21:18:10 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/05 18:24:13 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ void	built_in(char **args, t_execute *execute)
 	else if (ft_strcmp(args[0], "unset") == 0)
 		unset(args, execute->env, execute->export);
 	else if (ft_strcmp(args[0], "env") == 0)
-		env(execute->env, execute->outfile_fd);
+		env(execute->env);
 	else if (ft_strcmp(args[0], "exit") == 0)
 		command_exit(args);
+	if (execute->outfile_fd > 0)
+	{
+		dup2(execute->dup_tmp, STDOUT_FILENO);
+		close(execute->outfile_fd);
+	}
 }

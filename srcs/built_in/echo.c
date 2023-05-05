@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:17:23 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/29 14:23:14 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:17:21 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void	echo(char **args, t_execute *execute)
 	find_print_idx(args, &args_idx, &n_option_flag);
 	while (args[args_idx])
 	{
-		ft_putstr_fd(args[args_idx], 1);
+		ft_putstr_fd(args[args_idx], STDOUT_FILENO);
 		if (args[args_idx + 1])
-			ft_putchar_fd(' ', 1);
+			ft_putchar_fd(' ', STDOUT_FILENO);
 		args_idx++;
 	}
 	if (n_option_flag == 0)
-		ft_putchar_fd('\n', 1);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 }

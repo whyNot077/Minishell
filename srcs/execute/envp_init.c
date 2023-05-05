@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envp_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 21:20:13 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/14 20:52:07 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/04 21:22:11 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,18 @@ void	free_envp(t_execute *execute)
 	}
 }
 
+static char	**get_paths(char **envp)
+{
+	while (*envp != NULL && ft_strncmp("PATH=", *envp, 5))
+		envp++;
+	if (*envp == NULL)
+	{
+		ft_putstr_fd("ERROR: Failed to get PATH\n", STDERR_FILENO);
+		return (NULL);
+	}
+	return (ft_split(*envp + 5, ':'));
+}
+
 t_execute	*envp_init(char **envp)
 {
 	t_execute	*execute;
@@ -73,5 +85,6 @@ t_execute	*envp_init(char **envp)
 	execute = ft_calloc(1, sizeof(t_execute));
 	execute->env = make_env_list(envp);
 	execute->export = make_env_list(envp);
+	execute->paths = get_paths(envp);
 	return (execute);
 }

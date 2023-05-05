@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:12:33 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/29 22:05:33 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:11:18 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*get_key(char *str);
 void	unset(char **args, t_arraylist *env, t_arraylist *export);
 void	apply_unset(char *str, t_arraylist *env, t_arraylist *export);
 // env
-void	env(t_arraylist *envp, int outfile_fd);
+void	env(t_arraylist *envp);
 // pwd
 void	pwd(void);
 // exit

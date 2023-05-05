@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:05:25 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/29 14:31:17 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/02 20:19:06 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ void	cd(char **args, t_execute *execute)
 	if (args[1] == NULL)
 	{
 		home_value = get_target_value("HOME", execute->env);
+		pwd_value = getcwd(NULL, 0);
 		chdir(home_value);
-		return ;
+		return (apply_cd(execute, pwd_value));
 	}
 	pwd_value = getcwd(NULL, 0);
 	if (validate_chdir(args, pwd_value) == ERROR)

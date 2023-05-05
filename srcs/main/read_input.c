@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:05:31 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/14 15:55:09 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/05 18:43:16 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*read_input(int display_prompt)
 
 	if (display_prompt)
 	{
-		prompt = "Minishell > ";
+		prompt = "Minishell$ ";
 		input = readline(prompt);
 	}
 	else
