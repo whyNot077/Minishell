@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:41:14 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/09 19:04:44 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/09 19:17:52 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,37 @@ char	*get_new_filename(const char *base, int index)
 	return (filename);
 }
 
+char	*get_dir_route(const char *base)
+{
+	char	*dir;
+	char	*dir_base;
+	char	cwd[PATH_MAX];
+
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	{
+		printf("getcwd() error");
+		exit(1);
+	}
+	dir = ft_strjoin(cwd, "/tmp/");
+	dir_base = ft_strjoin(dir, base);
+	free(dir);
+	return (dir_base);
+}
 char	*make_unique_filename(const char *base)
 {
-	int			index;
-	char		*filename;
-	const char	*dir;
-	char		*dir_base;
+	int		index;
+	char	*filename;
+	char	*dir_base;
 
-	dir = "/Users/minkim3/Desktop/Mini-shell/tmp/";
-	dir_base = ft_strjoin(dir, base);
 	index = 0;
 	filename = NULL;
+	dir_base = get_dir_route(base);
 	while (1)
 	{
 		filename = get_new_filename(dir_base, index);
-		free(dir_base);
 		if (!file_exists(filename))
 		{
+			free(dir_base);
 			return (filename);
 		}
 		index++;
