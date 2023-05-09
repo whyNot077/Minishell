@@ -1,3 +1,0 @@
-hahahaha
-I'm
-hyojocho

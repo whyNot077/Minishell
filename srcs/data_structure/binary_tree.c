@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:13:17 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/23 17:37:15 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/09 16:47:32 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	free_tree_nodes(t_tree_node *node)
 	if (!node)
 		return ;
 	free_tree_nodes(node->left);
+	if (node->type == HEREDOC)
+		free(node->filename);
 	free_tree_nodes(node->right);
 	free(node->command);
 	free(node);

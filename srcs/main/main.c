@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/09 13:46:40 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:11:05 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 void	leaks(void)
 {
 	system("leaks --list minishell > tmp.txt");
+}
+
+static void free_everything(t_binarytree *tree, t_token *tokens, char *input)
+{
+	destroy_tree(&tree);
+	free_tokens(&tokens);
+	free(input);
+	free(tokens);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -42,10 +50,7 @@ int	main(int argc, char *argv[], char *envp[])
 				execute(tree->root, exe_tool);
 			// if (tree->syntex_error == FALSE)
 			// 	display_tree(tree->root, exe_tool->env->data, exe_tool);
-			destroy_tree(&tree);
-			free_tokens(&tokens);
-			free(input);
-			free(tokens);
+			free_everything(tree, tokens, input);
 		}
 	}
 	free_envp(exe_tool);

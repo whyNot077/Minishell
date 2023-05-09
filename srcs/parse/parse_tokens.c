@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 18:56:45 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/09 16:01:04 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ t_binarytree	*parse_tokens(t_token *tokens, char **env)
 	}
 	index = 0;
 	parse_tree(tree, tokens, &index);
+	open_heredoc(tree->root);
 	return (tree);
 }
