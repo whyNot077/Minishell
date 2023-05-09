@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 21:20:13 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/04 21:22:11 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:31:13 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	free_envp(t_execute *execute)
 	}
 }
 
-static char	**get_paths(char **envp)
+char	**get_paths(char **envp)
 {
 	while (*envp != NULL && ft_strncmp("PATH=", *envp, 5))
 		envp++;
@@ -85,6 +85,6 @@ t_execute	*envp_init(char **envp)
 	execute = ft_calloc(1, sizeof(t_execute));
 	execute->env = make_env_list(envp);
 	execute->export = make_env_list(envp);
-	execute->paths = get_paths(envp);
+	execute->paths = get_paths(execute->env->data);
 	return (execute);
 }

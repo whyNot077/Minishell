@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:26:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/07 19:45:50 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:31:21 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void		apply_command(char **args, t_execute *exe_tool);
 // process
 void		child_process(char *full_path, char **args, t_execute *exe_tool);
 void		parent_process(t_execute *exe_tool);
+// get path
+char		**get_paths(char **envp);
 // free
 void		free_envp(t_execute *execute);
 

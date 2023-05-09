@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:58:53 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/30 21:07:21 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:35:20 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	validate_arg_count(char **args)
 	{
 		ft_putstr_fd("bash: exit: too many arguments\n", 2);
 		g_exit_code = 1;
-		ft_printf("g_exit_code : %d\n", g_exit_code);
 		exit(1);
 	}
 }
@@ -58,9 +57,7 @@ static void validate_arg_range(char **args)
 	char *res;
 	
 	num = ft_atoi_extension(args[1]);
-	printf("num : %lld\n", num);
 	res = ft_itoa_extension(num);
-	printf("res : %s\n", res);
 	if (ft_strlen(res) != ft_strlen(args[1]) && \
 		ft_strcmp(res, args[1]) != 0)
 	{
@@ -68,7 +65,6 @@ static void validate_arg_range(char **args)
 		ft_putstr_fd(args[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		g_exit_code = 2;
-		ft_printf("g_exit_code(range) : %d\n", g_exit_code);
 		exit(2);
 	}
 }
@@ -84,7 +80,6 @@ static void numbering_exit(char **args)
 	while (key < 0)
 		key += 256;
 	g_exit_code = (key % 256);
-	ft_printf("g_exit_code(numbering) : %d\n", g_exit_code);
 	exit(g_exit_code);
 }
 
@@ -94,7 +89,6 @@ void	command_exit(char **args)
 	{
 		ft_putstr_fd("exit\n", 1);
 		g_exit_code = 0;
-		ft_printf("g_exit_code : %d\n", g_exit_code);
 		exit(0);
 	}
 	validate_arg_is_num(args);

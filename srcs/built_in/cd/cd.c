@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:05:25 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/09 15:29:17 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:17:07 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,26 @@ void	cd(char **args, t_execute *execute)
 		g_exit_code = 1;
 		return ;
 	}
-	if (check_home_dir(execute) == ERROR)
+	if (args[1] == NULL && check_home_dir(execute) == ERROR)
 		return ;
 	if (args[1] == NULL)
 	{
 		home_value = get_target_value("HOME", execute->env);
 		pwd_value = getcwd(NULL, 0);
+		if (pwd_value == NULL)
+		{
+			ft_putstr_fd("bash: cd: No such file or directory\n", 2);
+			return ;
+		}
 		chdir(home_value);
 		return (apply_cd(execute, pwd_value));
 	}
 	pwd_value = getcwd(NULL, 0);
+	if (pwd_value == NULL)
+	{
+		ft_putstr_fd("bash: cd: No such file or directory\n", 2);
+		return ;
+	}
 	if (validate_chdir(args, pwd_value) == ERROR)
 		return ;
 	apply_cd(execute, pwd_value);
