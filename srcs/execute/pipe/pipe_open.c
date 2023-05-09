@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chdir_check.c                                      :+:      :+:    :+:   */
+/*   pipe_open.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/26 13:25:37 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/09 15:25:19 by hyojocho         ###   ########.fr       */
+/*   Created: 2023/04/30 17:59:54 by hyojocho          #+#    #+#             */
+/*   Updated: 2023/05/06 22:05:24 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int validate_chdir(char **args, char *pwd_value)
+static void	create_pipe(int *fd)
 {
-	if (chdir(args[1]) != 0)
+	if (pipe(fd) < 0)
 	{
-		ft_putstr_fd("bash: cd: ", 2);
-		ft_putstr_fd(args[1], 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		free(pwd_value);
-		g_exit_code = 1;
-		return (ERROR);
+		ft_putstr_fd("ERROR: Failed to create a pipe\n", STDERR_FILENO);
+		exit(EXIT_FAILURE);
 	}
-	return (SUCCESS);
+	if (fd[0] < 0 || fd[1] < 0)
+	{
+		ft_putstr_fd("ERROR: Failed to create a pipe\n", STDERR_FILENO);
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	open_pipe(t_execute *exe_tool)
+{
+	create_pipe(exe_tool->pipe_fd);
+	exe_tool->pipe_flag = TRUE;
 }

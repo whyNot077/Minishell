@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 20:47:00 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/05 20:52:56 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/08 20:58:27 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,3 @@ void	restore_redirect_out(t_execute *exe_tool)
 		exe_tool->outfile_fd = 0;
 	}
 }
-

@@ -5,30 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/30 17:59:54 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/04 21:18:28 by hyojocho         ###   ########.fr       */
+/*   Created: 2023/05/06 21:09:55 by hyojocho          #+#    #+#             */
+/*   Updated: 2023/05/07 16:11:56 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
-static void	create_pipe(int *fd)
+void	apply_pipe_output(t_execute *exe_tool)
 {
-	if (pipe(fd) < 0)
+	if (exe_tool->pipe_flag == TRUE)
 	{
-		ft_putstr_fd("ERROR: Failed to create a pipe\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
+		dup2(exe_tool->pipe_fd[1], STDOUT_FILENO);
+		close(exe_tool->pipe_fd[1]);
 	}
-	if (fd[0] < 0 || fd[1] < 0)
-	{
-		ft_putstr_fd("ERROR: Failed to create a pipe\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	apply_pipe(t_execute *exe_tool)
-{
-	create_pipe(exe_tool->pipe_fd);
-	exe_tool->pipe_flag = TRUE;
-	exe_tool->pid = fork();
 }

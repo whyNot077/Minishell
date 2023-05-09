@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chdir_check.c                                      :+:      :+:    :+:   */
+/*   parent_process.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/26 13:25:37 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/09 15:25:19 by hyojocho         ###   ########.fr       */
+/*   Created: 2023/05/07 19:41:19 by hyojocho          #+#    #+#             */
+/*   Updated: 2023/05/09 14:47:30 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-int validate_chdir(char **args, char *pwd_value)
+void	parent_process(t_execute *exe_tool)
 {
-	if (chdir(args[1]) != 0)
+	if (exe_tool->pipe_flag == TRUE)
 	{
-		ft_putstr_fd("bash: cd: ", 2);
-		ft_putstr_fd(args[1], 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		free(pwd_value);
-		g_exit_code = 1;
-		return (ERROR);
+		dup2(exe_tool->dup_tmp, STDOUT_FILENO);
+		close(exe_tool->pipe_fd[1]);
+		close(exe_tool->dup_tmp);
+		exe_tool->prev_fd = exe_tool->pipe_fd[0];
 	}
-	return (SUCCESS);
 }

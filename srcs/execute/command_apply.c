@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/05 20:58:35 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:16:06 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,15 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 	pid_t	pid;
 	int		status;
 
+	exe_tool->dup_tmp = dup(STDOUT_FILENO);
 	pid = fork();
 	if (pid == 0)
-		execve(full_path, args, NULL);
+		child_process(full_path, args, exe_tool);
 	else
 	{
+		parent_process(exe_tool);
 		waitpid(pid, &status, 0);
+		exe_tool->pipe_flag = FALSE;
 		free(full_path);
 		if (exe_tool->outfile_fd > 0)
 		{
@@ -58,6 +61,8 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 			close(exe_tool->outfile_fd);
 		}
 	}
+	restore_redirect_in(exe_tool);
+	restore_redirect_out(exe_tool);
 }
 
 void	apply_command(char **args, t_execute *exe_tool)
@@ -65,8 +70,6 @@ void	apply_command(char **args, t_execute *exe_tool)
 	char	*full_path;
 
 	full_path = NULL;
-	apply_redirect_in(exe_tool);
-	apply_redirect_out(exe_tool);
 	if (validate_commands(args, &full_path, exe_tool) == ERROR)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
@@ -75,6 +78,4 @@ void	apply_command(char **args, t_execute *exe_tool)
 		return ;
 	}
 	execute_command(full_path, args, exe_tool);
-	restore_redirect_in(exe_tool);
-	restore_redirect_out(exe_tool);
 }
