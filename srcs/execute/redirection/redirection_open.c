@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_open.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:17:29 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/05 20:46:47 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:46:10 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	open_redirect_in(t_tree_node *root, t_execute *exe_tool)
 {
 	if (open_input_file(root->filename, exe_tool) == ERROR)
 	{
+		if (root->type == HEREDOC)
+			return ;
 		ft_putstr_fd("minishell: ", STDOUT_FILENO);
 		ft_putstr_fd(root->filename, STDOUT_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDOUT_FILENO);
