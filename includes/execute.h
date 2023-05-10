@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:26:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/09 16:31:21 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:08:11 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void		execute(t_tree_node *root, t_execute *exe_tool);
 t_execute	*envp_init(char **envp);
 // pipe
 void		open_pipe(t_execute *exe_tool);
-void		apply_pipe_input(t_execute *exe_tool);
-void		apply_pipe_output(t_execute *exe_tool);
+void		apply_built_in_pipe(char **args, t_execute *exe_tool);
 // redirection
 void		open_redirect_out(t_tree_node *root, t_execute *exe_tool);
 void		open_redirect_in(t_tree_node *root, t_execute *exe_tool);

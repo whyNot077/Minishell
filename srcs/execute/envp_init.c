@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 21:20:13 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/09 16:31:13 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:37:47 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,7 @@ char	**get_paths(char **envp)
 	while (*envp != NULL && ft_strncmp("PATH=", *envp, 5))
 		envp++;
 	if (*envp == NULL)
-	{
-		ft_putstr_fd("ERROR: Failed to get PATH\n", STDERR_FILENO);
 		return (NULL);
-	}
 	return (ft_split(*envp + 5, ':'));
 }
 

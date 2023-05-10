@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/09 18:43:57 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/09 19:52:05 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	validate_commands(char **args, char **full_path, \
 		*full_path = ft_strdup(args[0]);
 		return (SUCCESS);
 	}
+	if (exe_tool->paths == NULL)
+		return (ERROR);
 	paths_idx = 0;
 	while (exe_tool->paths[paths_idx])
 	{
@@ -70,14 +72,7 @@ void	apply_command(char **args, t_execute *exe_tool)
 	char	*full_path;
 
 	full_path = NULL;
-	// exe_tool->paths = get_paths(exe_tool->env->data);
-	if (exe_tool->paths == NULL)
-	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		ft_putstr_fd(args[0], STDERR_FILENO);
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-		return ;
-	}
+	exe_tool->paths = get_paths(exe_tool->env->data);
 	if (validate_commands(args, &full_path, exe_tool) == ERROR)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
