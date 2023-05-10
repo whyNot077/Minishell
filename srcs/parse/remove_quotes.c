@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 18:02:04 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 18:11:40 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/10 21:11:45 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,12 @@ void	remove_quotes(char *value)
 		return ;
 	start = 0;
 	end = ft_strlen(value);
-	quote = find_quote_from_front(value, &start);
-	if (quote == 0)
-		return ;
-	find_the_quote_from_back(value, &end, quote);
-	remove_quote_from_string(value, start, end);
+	while (start < end)
+	{
+		quote = find_quote_from_front(value, &start);
+		if (quote == 0)
+			return ;
+		find_the_quote_from_back(value, &end, quote);
+		remove_quote_from_string(value, start, end);
+	}
 }
