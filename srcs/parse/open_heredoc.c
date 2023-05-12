@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:41:14 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/09 19:48:26 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/11 20:39:50 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	get_heredoc(t_tree_node *node, char *eof)
 	while (1)
 	{
 		line = readline("> ");
-		if (ft_strcmp(line, eof) == 0)
+		if (line == NULL || ft_strcmp(line, eof) == 0)
 		{
 			free(line);
 			break ;

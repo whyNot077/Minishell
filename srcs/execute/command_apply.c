@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/09 19:52:05 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/11 21:00:39 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	validate_commands(char **args, char **full_path, \
 		}
 		free(*full_path);
 		free(temp_path);
-		paths_idx++;
+		paths_idx++; 
 	}
 	return (ERROR);
 }
@@ -45,7 +45,6 @@ static int	validate_commands(char **args, char **full_path, \
 void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 {
 	pid_t	pid;
-	int		status;
 
 	exe_tool->dup_tmp = dup(STDOUT_FILENO);
 	pid = fork();
@@ -54,7 +53,6 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 	else
 	{
 		parent_process(exe_tool);
-		waitpid(pid, &status, 0);
 		exe_tool->pipe_flag = FALSE;
 		free(full_path);
 		if (exe_tool->outfile_fd > 0)
@@ -69,6 +67,7 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 
 void	apply_command(char **args, t_execute *exe_tool)
 {
+	int		i;
 	char	*full_path;
 
 	full_path = NULL;
@@ -78,7 +77,16 @@ void	apply_command(char **args, t_execute *exe_tool)
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(args[0], STDERR_FILENO);
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		i = 0;
+		while (exe_tool->paths[i])
+			free(exe_tool->paths[i++]);
+		free(exe_tool->paths);
 		return ;
 	}
 	execute_command(full_path, args, exe_tool);
+	i = 0;
+	while (exe_tool->paths[i])
+		free(exe_tool->paths[i++]);
+	free(exe_tool->paths);
+	exe_tool->paths = NULL;
 }

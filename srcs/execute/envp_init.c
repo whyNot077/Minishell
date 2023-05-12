@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 21:20:13 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/09 19:37:47 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/11 20:34:11 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ t_execute	*envp_init(char **envp)
 	execute = ft_calloc(1, sizeof(t_execute));
 	execute->env = make_env_list(envp);
 	execute->export = make_env_list(envp);
-	execute->paths = get_paths(execute->env->data);
+	// execute->paths = get_paths(execute->env->data);
 	return (execute);
 }

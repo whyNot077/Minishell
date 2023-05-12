@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 17:59:54 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/06 22:05:24 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/11 19:27:00 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	create_pipe(int *fd)
 
 void	open_pipe(t_execute *exe_tool)
 {
+	printf("open_pipe\n");
 	create_pipe(exe_tool->pipe_fd);
 	exe_tool->pipe_flag = TRUE;
 }
