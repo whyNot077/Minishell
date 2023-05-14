@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/11 19:17:40 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:09:38 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_execute
 	char				*outfile_str;
 	char				**paths;
 	int					pipe_flag;
+	int					built_in_flag;
 	int					prev_fd;
 	int					infile_fd;
 	int					outfile_fd;

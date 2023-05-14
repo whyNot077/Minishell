@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 21:09:55 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/11 19:37:30 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:12:12 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	apply_built_in_pipe(char **args, t_execute *exe_tool)
 	int		status;
 
 	printf("built_in_with_pipe\n");
+	exe_tool->built_in_flag = TRUE;
 	exe_tool->dup_tmp = dup(STDOUT_FILENO);
 	pid = fork();
 	if (pid == 0)

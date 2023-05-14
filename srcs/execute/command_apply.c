@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/11 21:00:39 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:05:46 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 {
 	pid_t	pid;
 
+	
 	exe_tool->dup_tmp = dup(STDOUT_FILENO);
 	pid = fork();
 	if (pid == 0)

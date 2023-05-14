@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:12:33 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/09 15:55:31 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:38:16 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ void	built_in(char **args, t_execute *execute);
 // echo
 void	echo(char **args, t_execute *execute);
 // export
-void	export(char **args, t_arraylist *envp, t_arraylist *export, \
-				int outfile_fd);
+void	export(char **args, t_arraylist *envp, t_arraylist *export);
 void	get_args_to_envp(char **args, t_arraylist *envp, t_arraylist *export);
-void	print_export(t_arraylist *envp, int outfile_fd);
+void	print_export(t_arraylist *envp);
 int		validate_key_args(char **args, int args_idx);
 int		check_has_same_str(char *str, t_arraylist *envp);
 char	*get_key(char *str);

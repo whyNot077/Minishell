@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:07:17 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/23 13:48:00 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:39:20 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,17 @@ static void	sort_env(t_arraylist *envp)
 	}
 }
 
-static void print_value(t_arraylist *envp, int outfile_fd, \
-						int *envp_idx, int *str_idx)
+static void print_value(t_arraylist *envp, int *envp_idx, int *str_idx)
 {
-	ft_putchar_fd('=', outfile_fd);
-	ft_putchar_fd('"', outfile_fd);
+	ft_putchar_fd('=', STDOUT_FILENO);
+	ft_putchar_fd('"', STDOUT_FILENO);
 	while (envp->data[*envp_idx][++(*str_idx)])
-		ft_putchar_fd(envp->data[*envp_idx][*str_idx], outfile_fd);
-	ft_putchar_fd('"', outfile_fd);
-	ft_putchar_fd('\n', outfile_fd);
+		ft_putchar_fd(envp->data[*envp_idx][*str_idx], STDOUT_FILENO);
+	ft_putchar_fd('"', STDOUT_FILENO);
+	ft_putchar_fd('\n', STDOUT_FILENO);
 }
 
-void	print_export(t_arraylist *envp, int outfile_fd)
+void	print_export(t_arraylist *envp)
 {
 	int		envp_idx;
 	int		str_idx;
@@ -56,21 +55,21 @@ void	print_export(t_arraylist *envp, int outfile_fd)
 	envp_idx = 0;
 	while (envp->data[envp_idx])
 	{
-		ft_putstr_fd("declare -x ", outfile_fd);
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		str_idx = -1;
 		while (envp->data[envp_idx][++str_idx])
 		{
 			if (envp->data[envp_idx][str_idx] == '=')
 				break ;
-			ft_putchar_fd(envp->data[envp_idx][str_idx], outfile_fd);
+			ft_putchar_fd(envp->data[envp_idx][str_idx], STDOUT_FILENO);
 		}
 		if (envp->data[envp_idx][str_idx] != '=')
 		{
-			ft_putchar_fd('\n', outfile_fd);
+			ft_putchar_fd('\n', STDOUT_FILENO);
 			envp_idx++;
 			continue;
 		}
-		print_value(envp, outfile_fd, &envp_idx, &str_idx);
+		print_value(envp, &envp_idx, &str_idx);
 		envp_idx++;
 	}
 }
