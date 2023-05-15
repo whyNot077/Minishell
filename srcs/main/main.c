@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/11 20:07:54 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/15 20:49:03 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ int	main(int argc, char *argv[], char *envp[])
 				execute(tree->root, exe_tool);
 				while (waitpid(-1, NULL, 0) != -1)
 					;
-			}// if (tree->syntex_error == FALSE)
-			// 	display_tree(tree->root, exe_tool->env->data, exe_tool);
+				memset(exe_tool->pipe_fd, 0, sizeof(int) * 2);
+				exe_tool->prev_fd = 0;
+			}
 			free_everything(tree, tokens, input);
 		}
 	}
