@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:58:53 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/09 15:35:20 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:37:50 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,19 @@ static void	validate_arg_is_num(char **args)
 	}
 }
 
-static void	validate_arg_count(char **args)
+static int	validate_arg_count(char **args)
 {
 	int arg_idx;
 
 	arg_idx = 0;
 	while (args[arg_idx])
 		arg_idx++;
-	if (arg_idx > 3)
+	if (arg_idx >= 2)
 	{
 		ft_putstr_fd("bash: exit: too many arguments\n", 2);
-		g_exit_code = 1;
-		exit(1);
+		return (FALSE);
 	}
+	return (TRUE);
 }
 
 static void validate_arg_range(char **args)
@@ -92,7 +92,11 @@ void	command_exit(char **args)
 		exit(0);
 	}
 	validate_arg_is_num(args);
-	validate_arg_count(args);
+	if (validate_arg_count(args) == FALSE)
+	{
+		g_exit_code = 1;
+		return ;
+	}
 	validate_arg_range(args);
 	numbering_exit(args);
 }
