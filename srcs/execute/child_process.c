@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:06:14 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/15 21:05:55 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:26:09 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	child_process(char *full_path, char **args, t_execute *exe_tool)
 		dup2(exe_tool->prev_fd, STDIN_FILENO);
 		close(exe_tool->prev_fd);
 	}
-	if (exe_tool->pipe_flag == TRUE && exe_tool->outfile_fd == 0)
+	if (exe_tool->curr_pipe_flag == TRUE && exe_tool->outfile_fd == 0)
 	{
 		dup2(exe_tool->pipe_fd[1], STDOUT_FILENO);
 		close(exe_tool->pipe_fd[1]);

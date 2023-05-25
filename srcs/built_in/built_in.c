@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:06 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/25 16:48:57 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:37:21 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	built_in(char **args, t_execute *exe_tool)
 	else if (ft_strcmp(args[0], "env") == 0)
 		env(exe_tool->env);
 	else if (ft_strcmp(args[0], "exit") == 0)
-		command_exit(args);
+		command_exit(args, exe_tool);
 	restore_redirect_out(exe_tool);
 }

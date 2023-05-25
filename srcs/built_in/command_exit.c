@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:58:53 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/25 18:37:50 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:39:13 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,12 @@ static void numbering_exit(char **args)
 	exit(g_exit_code);
 }
 
-void	command_exit(char **args)
-{
+void	command_exit(char **args, t_execute *exe_tool)
+{	if (args[1] == NULL && exe_tool->pipe_flag == TRUE)
+	{
+		g_exit_code = 0;
+		exit(0);
+	}
 	if (args[1] == NULL)
 	{
 		ft_putstr_fd("exit\n", 1);

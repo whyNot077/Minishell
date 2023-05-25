@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 21:09:55 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/15 20:52:53 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:26:09 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void	apply_built_in_pipe(char **args, t_execute *exe_tool)
 		close(exe_tool->dup_tmp);
 		exe_tool->prev_fd = exe_tool->pipe_fd[0];
 		waitpid(pid, &status, 0);
-		exe_tool->pipe_flag = FALSE;
+		exe_tool->curr_pipe_flag = FALSE;
 	}
 }

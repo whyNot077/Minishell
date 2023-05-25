@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/15 19:02:25 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:26:09 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 	else
 	{
 		parent_process(exe_tool);
-		exe_tool->pipe_flag = FALSE;
+		exe_tool->curr_pipe_flag = FALSE;
 		free(full_path);
 		if (exe_tool->outfile_fd > 0)
 		{
