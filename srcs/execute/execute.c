@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/26 16:26:43 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:55:09 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	execute(t_tree_node *root, t_execute *exe_tool)
 	else if (root->type == BUILTIN && exe_tool->pipe_flag == FALSE)
 		built_in(root->command, exe_tool);
 	else if (root->type == BUILTIN && exe_tool->pipe_flag == TRUE)
+	{
 		apply_built_in_pipe(root->command, exe_tool);
+		exe_tool->pipe_flag = FALSE;
+	}
 	else if (root->type == WORD)
 		apply_command(root->command, exe_tool);
 	execute(root->right, exe_tool);
