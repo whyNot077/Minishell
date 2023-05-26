@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:58:53 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/25 19:39:13 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:05:32 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	validate_arg_is_num(char **args)
 {
-	int str_idx;
+	int	str_idx;
 
 	str_idx = 0;
 	while (args[1][str_idx])
@@ -38,7 +38,7 @@ static void	validate_arg_is_num(char **args)
 
 static int	validate_arg_count(char **args)
 {
-	int arg_idx;
+	int	arg_idx;
 
 	arg_idx = 0;
 	while (args[arg_idx])
@@ -51,11 +51,11 @@ static int	validate_arg_count(char **args)
 	return (TRUE);
 }
 
-static void validate_arg_range(char **args)
+static	void	validate_arg_range(char **args)
 {
-	long long int num;
-	char *res;
-	
+	long long int	num;
+	char			*res;
+
 	num = ft_atoi_extension(args[1]);
 	res = ft_itoa_extension(num);
 	if (ft_strlen(res) != ft_strlen(args[1]) && \
@@ -69,10 +69,10 @@ static void validate_arg_range(char **args)
 	}
 }
 
-static void numbering_exit(char **args)
+static void	numbering_exit(char **args)
 {
-	long long int num;
-	long long int key;
+	long long int	num;
+	long long int	key;
 
 	num = ft_atoi_extension(args[1]);
 	ft_putstr_fd("exit\n", 1);
@@ -84,7 +84,8 @@ static void numbering_exit(char **args)
 }
 
 void	command_exit(char **args, t_execute *exe_tool)
-{	if (args[1] == NULL && exe_tool->pipe_flag == TRUE)
+{	
+	if (args[1] == NULL && exe_tool->pipe_flag == TRUE)
 	{
 		g_exit_code = 0;
 		exit(0);

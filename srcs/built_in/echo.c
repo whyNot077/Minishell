@@ -6,17 +6,17 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:17:23 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/03 18:17:21 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:07:33 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void validate_n_option(char **args, int *args_idx, int *n_option_flag, \
+static void	validate_n_option(char **args, int *args_idx, int *n_option_flag, \
 								int *current_n_flag)
 {
 	int		string_idx;
-	
+
 	string_idx = 1;
 	while (args[*args_idx][string_idx])
 	{
@@ -33,7 +33,7 @@ static void validate_n_option(char **args, int *args_idx, int *n_option_flag, \
 static void	find_print_idx(char **args, int *args_idx, int *n_option_flag)
 {
 	int		current_n_flag;
-	
+
 	current_n_flag = 0;
 	while (args[*args_idx])
 	{

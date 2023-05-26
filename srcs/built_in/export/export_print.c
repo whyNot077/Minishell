@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/21 20:07:17 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/14 16:39:20 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:49:26 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	sort_env(t_arraylist *envp)
 	}
 }
 
-static void print_value(t_arraylist *envp, int *envp_idx, int *str_idx)
+static void	print_value(t_arraylist *envp, int *envp_idx, int *str_idx)
 {
 	ft_putchar_fd('=', STDOUT_FILENO);
 	ft_putchar_fd('"', STDOUT_FILENO);
@@ -67,7 +67,7 @@ void	print_export(t_arraylist *envp)
 		{
 			ft_putchar_fd('\n', STDOUT_FILENO);
 			envp_idx++;
-			continue;
+			continue ;
 		}
 		print_value(envp, &envp_idx, &str_idx);
 		envp_idx++;

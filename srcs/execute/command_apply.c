@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/25 19:26:09 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:23:21 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	validate_commands(char **args, char **full_path, \
 		}
 		free(*full_path);
 		free(temp_path);
-		paths_idx++; 
+		paths_idx++;
 	}
 	return (ERROR);
 }

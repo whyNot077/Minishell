@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/25 19:29:31 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:26:43 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	execute(t_tree_node *root, t_execute *exe_tool)
 {
 	if (root == NULL)
-        return;
+		return ;
 	execute(root->left, exe_tool);
 	// if (root->type == AND)
 	// 	apply_and(root, exe_tool);

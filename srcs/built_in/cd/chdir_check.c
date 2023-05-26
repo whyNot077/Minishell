@@ -6,13 +6,13 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 13:25:37 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/09 16:00:35 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:48:47 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int validate_chdir(char **args, char *pwd_value)
+int	validate_chdir(char **args, char *pwd_value)
 {
 	if (chdir(args[1]) != 0)
 	{

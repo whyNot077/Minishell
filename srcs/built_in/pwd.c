@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:40:08 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/09 16:17:57 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:13:36 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	pwd(void)
 {
 	char	*pwd;
-	
+
 	pwd = getcwd(NULL, 0);
 	if (pwd == NULL)
 	{

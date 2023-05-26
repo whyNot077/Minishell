@@ -6,15 +6,15 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:17:29 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/15 20:53:04 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/26 16:28:05 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-static int open_output_file(char *arg, t_execute *exe_tool)
+static int	open_output_file(char *arg, t_execute *exe_tool)
 {
-	int fd;
+	int	fd;
 
 	fd = open(arg, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
@@ -23,9 +23,9 @@ static int open_output_file(char *arg, t_execute *exe_tool)
 	return (SUCCESS);
 }
 
-static int open_input_file(char *arg, t_execute *exe_tool)
+static int	open_input_file(char *arg, t_execute *exe_tool)
 {
-	int fd;
+	int	fd;
 
 	fd = open(arg, O_RDONLY);
 	if (fd < 0)
