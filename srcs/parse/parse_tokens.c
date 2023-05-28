@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tokens.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/09 16:01:04 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/26 23:36:18 by choihyojong      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	parse_tree(t_binarytree *tree, t_token *tokens, int *index)
 {
-	char	*value;
+	// char	*value;
 	int		type;
 	int		token_count;
 
 	token_count = tokens->token_count;
 	while (*index < token_count)
 	{
-		value = tokens[*index].value;
+		// value = tokens[*index].value;
 		type = tokens[*index].type;
 		if (type == WORD || type == BUILTIN)
 			parse_command_and_option(tree, tokens, index);

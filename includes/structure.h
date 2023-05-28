@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/25 19:26:42 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/28 02:05:51 by choihyojong      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_execute
 	char				**paths;
 	int					curr_pipe_flag;
 	int					pipe_flag;
+	int					exit_flag;
 	int					built_in_flag;
 	int					prev_fd;
 	int					infile_fd;
