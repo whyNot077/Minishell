@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:17:29 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/26 16:28:05 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/28 17:54:17 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ void	open_redirect_in(t_tree_node *root, t_execute *exe_tool)
 {
 	if (open_input_file(root->filename, exe_tool) == ERROR)
 	{
-		if (root->type == HEREDOC)
-			return ;
 		ft_putstr_fd("minishell: ", STDOUT_FILENO);
 		ft_putstr_fd(root->filename, STDOUT_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDOUT_FILENO);

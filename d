@@ -1,0 +1,11 @@
+Makefile
+README.md
+a
+b
+d
+image
+includes
+libft
+minishell
+srcs
+valgrind.rb

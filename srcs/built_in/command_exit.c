@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:58:53 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/28 02:08:06 by choihyojong      ###   ########.fr       */
+/*   Updated: 2023/05/28 18:47:05 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	numbering_exit(char **args)
 }
 
 void	command_exit(char **args, t_execute *exe_tool)
-{	
+{
 	if ((args[1] == NULL && exe_tool->pipe_flag == TRUE) || \
 		(args[1] == NULL && exe_tool->exit_flag == TRUE))
 	{

@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/28 17:45:40 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/28 18:20:18 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	execute(t_tree_node *root, t_execute *exe_tool)
 	// 	apply_or(root, exe_tool);
 	if (root->type == PIPE)
 		open_pipe(exe_tool);
-	else if (root->type == REDIRECT_IN || root->type == HEREDOC)
+	// else if (root->type == HEREDOC)
+	// 	open_heredoc(root, exe_tool);
+	else if (root->type == REDIRECT_IN)
 		open_redirect_in(root, exe_tool);
 	else if (root->type == REDIRECT_OUT || \
 			root->type == REDIRECT_APPEND)
