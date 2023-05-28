@@ -8,4 +8,5 @@ includes
 libft
 minishell
 srcs
+tmp.txt
 valgrind.rb
