@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/28 02:05:51 by choihyojong      ###   ########.fr       */
+/*   Updated: 2023/05/29 16:59:30 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_execute
 	int					dup_tmp;
 	int					pipe_fd[2];
 	pid_t				pid;
+	pid_t				last_pid;
 	t_arraylist			*env;
 	t_arraylist			*export;
 }						t_execute;

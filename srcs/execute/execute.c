@@ -6,13 +6,13 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/28 18:20:18 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:26:57 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	execute(t_tree_node *root, t_execute *exe_tool)
+void	 execute(t_tree_node *root, t_execute *exe_tool)
 {
 	if (root == NULL)
 		return ;
@@ -31,9 +31,7 @@ void	execute(t_tree_node *root, t_execute *exe_tool)
 			root->type == REDIRECT_APPEND)
 		open_redirect_out(root, exe_tool);
 	else if (root->type == BUILTIN && exe_tool->pipe_flag == FALSE)
-	{
 		built_in(root->command, exe_tool);
-	}
 	else if (root->type == BUILTIN && exe_tool->pipe_flag == TRUE)
 	{
 		if (exe_tool->curr_pipe_flag == FALSE)

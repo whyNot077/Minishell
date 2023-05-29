@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_apply.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: choihyojong <choihyojong@student.42.fr>    +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 21:09:55 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/27 12:58:37 by choihyojong      ###   ########.fr       */
+/*   Updated: 2023/05/29 16:59:47 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	apply_built_in_pipe(char **args, t_execute *exe_tool)
 	exe_tool->built_in_flag = TRUE;
 	exe_tool->dup_tmp = dup(STDOUT_FILENO);
 	pid = fork();
+	exe_tool->last_pid = pid;
 	if (pid == 0)
 	{
 		close(exe_tool->pipe_fd[0]);

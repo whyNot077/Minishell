@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/26 16:23:21 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:26:28 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 	pid_t	pid;
 
 	pid = fork();
+	exe_tool->last_pid = pid;
 	if (pid == 0)
 		child_process(full_path, args, exe_tool);
 	else

@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:58:53 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/28 18:47:05 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:21:15 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	validate_arg_count(char **args)
 	arg_idx = 0;
 	while (args[arg_idx])
 		arg_idx++;
-	if (arg_idx >= 2)
+	if (arg_idx >= 3)
 	{
 		ft_putstr_fd("bash: exit: too many arguments\n", 2);
 		return (FALSE);
@@ -87,15 +87,11 @@ void	command_exit(char **args, t_execute *exe_tool)
 {
 	if ((args[1] == NULL && exe_tool->pipe_flag == TRUE) || \
 		(args[1] == NULL && exe_tool->exit_flag == TRUE))
-	{
-		g_exit_code = 0;
-		exit(0);
-	}
+		exit(g_exit_code);
 	if (args[1] == NULL)
 	{
 		ft_putstr_fd("exit\n", 1);
-		g_exit_code = 0;
-		exit(0);
+		exit(g_exit_code);
 	}
 	validate_arg_is_num(args);
 	if (validate_arg_count(args) == FALSE)

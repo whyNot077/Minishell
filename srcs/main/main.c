@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/29 15:07:30 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/29 18:36:43 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// void	leaks(void)
-// {
-// 	system("leaks --list minishell > tmp.txt");
-// }
 
 static void free_everything(t_binarytree *tree, t_token *tokens, char *input)
 {
@@ -41,19 +36,19 @@ static void	init_exe_tool(t_execute *exe_tool)
 
 int	main(int argc, char *argv[], char *envp[])
 {
+	int				status;
+	int				pid;
 	char			*input;
 	t_token			*tokens;
 	t_binarytree	*tree;
 	t_execute		*exe_tool;
 
 	(void)envp;
-	// atexit(leaks);
 	if (check_argc(argc, argv))
 		return (0);
 	signal_handler();
 	exe_tool = envp_init(envp);
-	g_exit_code = 0;
-	while (1)
+	while (1)    
 	{
 		input = read_input(1);
 		if (input)
@@ -63,8 +58,14 @@ int	main(int argc, char *argv[], char *envp[])
 			if (tree && tree->root && tree->syntex_error == FALSE)
 			{
 				execute(tree->root, exe_tool);
-				while (waitpid(-1, NULL, 0) != -1)
-					;
+				while (1)
+				{
+					pid = waitpid(-1, &status, 0);
+					if (exe_tool->last_pid == pid)
+						g_exit_code = WEXITSTATUS(status);
+					else if (pid == -1)
+						break ;
+				}
 				init_exe_tool(exe_tool);
 			}
 			free_everything(tree, tokens, input);
@@ -73,3 +74,4 @@ int	main(int argc, char *argv[], char *envp[])
 	free_envp(exe_tool);
 	return (0);
 }
+

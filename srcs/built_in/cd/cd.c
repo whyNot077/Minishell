@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:05:25 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/26 14:48:24 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/29 16:12:06 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static int	count_args(char **args)
 static void	apply_cd(t_execute *execute, char *pwd_value)
 {
 	update_pwd(execute->env, execute->export, pwd_value);
-	g_exit_code = 0;
 }
 
 void	cd(char **args, t_execute *execute)
