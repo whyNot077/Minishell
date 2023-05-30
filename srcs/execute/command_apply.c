@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/30 17:33:54 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/30 19:33:14 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 		child_process(full_path, args, exe_tool);
 	else
 	{
-		exec_signal(PARENT);
+		exec_signal(PARENT_SIG);
 		parent_process(exe_tool);
 		exe_tool->curr_pipe_flag = FALSE;
 		free(full_path);

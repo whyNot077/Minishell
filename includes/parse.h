@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:09:54 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/29 19:42:49 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/30 18:50:26 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void			fill_command_structure(t_binarytree *tree, char *value);
 int				find_pipe(t_tree_node *current);
 void			replace_env_key_to_value(char **value, char **env);
 void			remove_quotes(char *value);
-void			open_heredoc(t_tree_node *node);
+int				open_heredoc(t_tree_node *node);
 
 #endif

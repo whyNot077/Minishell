@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/30 17:35:12 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/30 19:34:28 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char *argv[], char *envp[])
 	exe_tool = envp_init(envp);
 	while (1)    
 	{
-		exec_signal(READLINE);
+		exec_signal(READLINE_SIG);
 		input = read_input(1);
 		if (input)
 		{

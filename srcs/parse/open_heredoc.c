@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:41:14 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/30 17:27:14 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/30 20:18:29 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*make_unique_filename(const char *base)
 	}
 }
 
-static void	get_heredoc(t_tree_node *node, char *eof, int save_stdin)
+static void	get_heredoc(t_tree_node *node, char *eof, int *stdin_dup)
 {
 	char	*filename;
 	int		fd;
@@ -62,10 +62,10 @@ static void	get_heredoc(t_tree_node *node, char *eof, int save_stdin)
 	if (fd == -1)
 	{
 		perror("open");
-		node->filename = ft_strdup("heredoc_error");
+		exit(1);
 	}
-	save_stdin = dup(STDIN_FILENO);
-	exec_signal(HEREDOC);
+	*stdin_dup = dup(STDIN_FILENO);
+	exec_signal(HEREDOE_SIG);
 	while (1)
 	{
 		line = readline("> ");
@@ -82,23 +82,34 @@ static void	get_heredoc(t_tree_node *node, char *eof, int save_stdin)
 	close(fd);
 }
 
-void	open_heredoc(t_tree_node *node)
+int	open_heredoc(t_tree_node *node)
 {
-	int		save_stdin;
+	int stdin_dup;
 
-	save_stdin = 0;
 	if (node == NULL)
 	{
-		return ;
+		return (0);
 	}
-	open_heredoc(node->left);
+	if (open_heredoc(node->left) != 0)
+	{
+		return (1);
+	}
 	if (node->type == HEREDOC)
 	{
-		get_heredoc(node, node->filename, save_stdin);
-		dup2(save_stdin, STDIN_FILENO);
-		close(save_stdin);
-		if (close(0) == -1)
-			return ;
+		get_heredoc(node, node->filename, &stdin_dup);
+		dup2(stdin_dup, STDIN_FILENO);
+		if (close(stdin_dup) == -1)
+		{
+			printf("close error\n");
+			unlink(node->filename);
+			free(node->filename);
+			free(node);
+			return (1);
+		}
 	}
-	open_heredoc(node->right);
+	if (open_heredoc(node->right) != 0)
+	{
+		return (1);
+	}
+	return (0);
 }

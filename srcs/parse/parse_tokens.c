@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/29 19:44:05 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/30 19:20:19 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	parse_tree(t_binarytree *tree, t_token *tokens, int *index)
 {
-	int		type;
-	int		token_count;
+	int	type;
+	int	token_count;
 
 	token_count = tokens->token_count;
 	while (*index < token_count)
@@ -36,12 +36,10 @@ static void	parse_tree(t_binarytree *tree, t_token *tokens, int *index)
 
 t_binarytree	*parse_tokens(t_token *tokens, char **env)
 {
-	t_binarytree	*tree;
-	int				index;
-	int				here_doc_flag;
+	t_binarytree *tree;
+	int index;
 
 	index = 0;
-	here_doc_flag = 0;
 	if (!tokens)
 		return (NULL);
 	tree = create_tree();
@@ -55,6 +53,9 @@ t_binarytree	*parse_tokens(t_token *tokens, char **env)
 	}
 	index = 0;
 	parse_tree(tree, tokens, &index);
-	open_heredoc(tree->root);
+	if (open_heredoc(tree->root) != 0)
+	{
+		return (NULL);
+	}
 	return (tree);
 }

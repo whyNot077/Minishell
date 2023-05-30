@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:33:16 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/30 15:41:16 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/30 19:34:04 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	exec_signal(int flag)
 
 	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
-	if (flag == PARENT)
+	if (flag == PARENT_SIG)
 	{
 		exec_parent_signal(sa);
 	}
-	else if (flag == CHILD)
+	else if (flag == CHILD_SIG)
 	{
 		exec_child_signal(sa);
 	}
-	else if (flag == HEREDOC)
+	else if (flag == HEREDOE_SIG)
 	{
 		exec_heredoc_signal(sa);
 	}
