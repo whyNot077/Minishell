@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:41:14 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/30 20:18:29 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/30 20:39:06 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*make_unique_filename(const char *base)
 	}
 }
 
-static void	get_heredoc(t_tree_node *node, char *eof, int *stdin_dup)
+static int	get_heredoc(t_tree_node *node, char *eof, int *stdin_dup)
 {
 	char	*filename;
 	int		fd;
@@ -59,7 +59,7 @@ static void	get_heredoc(t_tree_node *node, char *eof, int *stdin_dup)
 
 	filename = make_unique_filename(node->filename);
 	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
+	if (fd == ERROR)
 	{
 		perror("open");
 		exit(1);
@@ -80,6 +80,7 @@ static void	get_heredoc(t_tree_node *node, char *eof, int *stdin_dup)
 	}
 	node->filename = filename;
 	close(fd);
+	return (0);
 }
 
 int	open_heredoc(t_tree_node *node)
@@ -96,9 +97,14 @@ int	open_heredoc(t_tree_node *node)
 	}
 	if (node->type == HEREDOC)
 	{
-		get_heredoc(node, node->filename, &stdin_dup);
+		if (get_heredoc(node, node->filename, &stdin_dup) == ERROR)
+		{
+			close(stdin_dup);
+			free(node);
+			return (1);
+		}
 		dup2(stdin_dup, STDIN_FILENO);
-		if (close(stdin_dup) == -1)
+		if (close(stdin_dup) == ERROR)
 		{
 			printf("close error\n");
 			unlink(node->filename);

@@ -6,13 +6,13 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/30 19:20:19 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/30 20:37:46 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	parse_tree(t_binarytree *tree, t_token *tokens, int *index)
+static int	parse_tree(t_binarytree *tree, t_token *tokens, int *index)
 {
 	int	type;
 	int	token_count;
@@ -30,8 +30,12 @@ static void	parse_tree(t_binarytree *tree, t_token *tokens, int *index)
 		else if (type == AND || type == OR)
 			parse_and_or(tree, tokens, index);
 		if (tree->syntex_error == TRUE)
-			return ;
+		{
+			destroy_tree(&tree);
+			return (ERROR);
+		}
 	}
+	return (0);
 }
 
 t_binarytree	*parse_tokens(t_token *tokens, char **env)
@@ -52,7 +56,10 @@ t_binarytree	*parse_tokens(t_token *tokens, char **env)
 		index++;
 	}
 	index = 0;
-	parse_tree(tree, tokens, &index);
+	if (parse_tree(tree, tokens, &index) == ERROR)
+	{
+		return (NULL);
+	}
 	if (open_heredoc(tree->root) != 0)
 	{
 		return (NULL);
