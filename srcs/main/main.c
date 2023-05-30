@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/29 18:36:43 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:35:12 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int	main(int argc, char *argv[], char *envp[])
 	(void)envp;
 	if (check_argc(argc, argv))
 		return (0);
-	signal_handler();
 	exe_tool = envp_init(envp);
 	while (1)    
 	{
+		exec_signal(READLINE);
 		input = read_input(1);
 		if (input)
 		{

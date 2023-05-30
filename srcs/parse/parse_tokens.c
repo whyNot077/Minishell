@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/29 15:16:52 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/29 19:44:05 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ t_binarytree	*parse_tokens(t_token *tokens, char **env)
 {
 	t_binarytree	*tree;
 	int				index;
+	int				here_doc_flag;
 
 	index = 0;
+	here_doc_flag = 0;
 	if (!tokens)
 		return (NULL);
 	tree = create_tree();

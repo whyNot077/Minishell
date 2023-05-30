@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_heredoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:41:14 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/11 20:39:50 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:27:14 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*make_unique_filename(const char *base)
 	}
 }
 
-static void	get_heredoc(t_tree_node *node, char *eof)
+static void	get_heredoc(t_tree_node *node, char *eof, int save_stdin)
 {
 	char	*filename;
 	int		fd;
@@ -62,8 +62,10 @@ static void	get_heredoc(t_tree_node *node, char *eof)
 	if (fd == -1)
 	{
 		perror("open");
-		node->filename = strdup("heredoc_error");
+		node->filename = ft_strdup("heredoc_error");
 	}
+	save_stdin = dup(STDIN_FILENO);
+	exec_signal(HEREDOC);
 	while (1)
 	{
 		line = readline("> ");
@@ -82,6 +84,9 @@ static void	get_heredoc(t_tree_node *node, char *eof)
 
 void	open_heredoc(t_tree_node *node)
 {
+	int		save_stdin;
+
+	save_stdin = 0;
 	if (node == NULL)
 	{
 		return ;
@@ -89,7 +94,11 @@ void	open_heredoc(t_tree_node *node)
 	open_heredoc(node->left);
 	if (node->type == HEREDOC)
 	{
-		get_heredoc(node, node->filename);
+		get_heredoc(node, node->filename, save_stdin);
+		dup2(save_stdin, STDIN_FILENO);
+		close(save_stdin);
+		if (close(0) == -1)
+			return ;
 	}
 	open_heredoc(node->right);
 }

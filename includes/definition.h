@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:47:16 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/22 16:44:54 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/30 15:10:25 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ enum	e_definition
 	TRUE = 1,
 	FALSE = 0,
 	EXIST = 1,
-	NOT_EXIST = -1
+	NOT_EXIST = -1,
+	PARENT = 100,
+	CHILD = 101,
+	HEREDOE = 102,
+	READLINE = 103,
 };
 
 /*

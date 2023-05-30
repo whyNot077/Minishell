@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_apply.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/29 18:26:28 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/30 17:33:54 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 		child_process(full_path, args, exe_tool);
 	else
 	{
+		exec_signal(PARENT);
 		parent_process(exe_tool);
 		exe_tool->curr_pipe_flag = FALSE;
 		free(full_path);

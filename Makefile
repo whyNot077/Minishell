@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/05/09 16:02:48 by minkim3          ###   ########.fr        #
+#    Updated: 2023/05/30 15:18:35 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ MAIN_SRCS       = main.c read_input.c check_argc.c error.c
 MAIN            = $(addprefix $(MAIN_PATH), $(MAIN_SRCS))
 
 SIGNAL_PATH     = ./signal/
-SIGNAL_SRCS     = signal.c
+SIGNAL_SRCS     = signal.c exec_signal.c
 SIGNAL          = $(addprefix $(SIGNAL_PATH), $(SIGNAL_SRCS))
 
 TOKEN_PATH    = ./token/
