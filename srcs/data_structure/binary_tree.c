@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 12:13:17 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/30 20:01:58 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 16:16:20 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,18 @@ t_tree_node	*create_new_node(char *value, int type)
 void	free_tree_nodes(t_tree_node *node)
 {
 	if (node == NULL)
-	{
 		return ;
-	}
 	free_tree_nodes(node->left);
 	free_tree_nodes(node->right);
 	if (node->type == HEREDOC)
 	{
-		unlink(node->filename);
 		if (node->filename != NULL)
-			free(node->filename);
+			unlink(node->filename);
 	}
 	if (node->command != NULL)
-	{
 		free(node->command);
-	}
+	if (node->filename != NULL)
+		free(node->filename);
 	free(node);
 }
 

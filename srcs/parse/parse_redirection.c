@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:24:15 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/30 20:25:00 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 16:10:04 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	parse_filename(t_tree_node *new_node, char *value, int *index)
 {
-	new_node->filename = value;
+	new_node->filename = ft_strdup(value);
 	(*index)++;
 }
 
