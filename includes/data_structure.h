@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/14 13:53:11 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/28 19:02:44 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:17:26 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,5 @@ t_binarytree	*create_tree(void);
 t_tree_node		*create_new_node(char *value, int type);
 void			destroy_tree(t_binarytree **tree);
 void			free_tree_nodes(t_tree_node *node);
-
-// display
-void	display_tree(t_tree_node *node, char **env, t_execute *execute);
 
 #endif
