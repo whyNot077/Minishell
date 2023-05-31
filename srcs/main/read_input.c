@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:05:31 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/31 18:19:27 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 18:32:24 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ char	*read_input(int display_prompt)
 	}
 	if (input == NULL)
 	{
-		perror("readline");
-		exit(EXIT_FAILURE);
+		exit(0);
 	}
 	if (input && *input)
 	{
