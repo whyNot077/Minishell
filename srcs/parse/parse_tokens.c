@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/31 16:03:17 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 17:48:25 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,28 @@ static int	parse_tree(t_binarytree *tree, t_token *tokens, int *index)
 	return (0);
 }
 
+static int	fill_tree(t_binarytree *tree, t_token *tokens)
+{
+	int	index;
+
+	index = 0;
+	if (parse_tree(tree, tokens, &index) == ERROR)
+	{
+		destroy_tree(&tree);
+		return (ERROR);
+	}
+	if (open_heredoc(tree->root) != 0)
+	{
+		destroy_tree(&tree);
+		return (ERROR);
+	}
+	return (0);
+}
+
 t_binarytree	*parse_tokens(t_token *tokens, char **env)
 {
-	t_binarytree *tree;
-	int index;
+	t_binarytree	*tree;
+	int				index;
 
 	index = 0;
 	if (!tokens)
@@ -52,16 +70,7 @@ t_binarytree	*parse_tokens(t_token *tokens, char **env)
 		}
 		index++;
 	}
-	index = 0;
-	if (parse_tree(tree, tokens, &index) == ERROR)
-	{
-		destroy_tree(&tree);
+	if (fill_tree(tree, tokens) == ERROR)
 		return (NULL);
-	}
-	if (open_heredoc(tree->root) != 0)
-	{
-		destroy_tree(&tree);
-		return (NULL);
-	}
 	return (tree);
 }

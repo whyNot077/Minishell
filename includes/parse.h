@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:09:54 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/30 18:50:26 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 17:42:53 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@ int				find_pipe(t_tree_node *current);
 void			replace_env_key_to_value(char **value, char **env);
 void			remove_quotes(char *value);
 int				open_heredoc(t_tree_node *node);
+char			*make_unique_filename(const char *previous_filename);
 
 #endif

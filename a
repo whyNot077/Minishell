@@ -1,16 +1,16 @@
 total 296
-drwxr-xr-x  15 minkim3  2022_seoul    510 May 31 16:14 .
+drwxr-xr-x  15 minkim3  2022_seoul    510 May 31 16:38 .
 drwxr-xr-x  16 minkim3  2022_seoul    544 May 31 15:35 ..
-drwxr-xr-x  15 minkim3  2022_seoul    510 May 30 20:41 .git
+drwxr-xr-x  15 minkim3  2022_seoul    510 May 31 16:35 .git
 -rw-r--r--   1 minkim3  2022_seoul     56 May  9 19:07 .gitignore
 drwxr-xr-x   3 minkim3  2022_seoul    102 May 28 18:02 .vscode
 -rw-r--r--   1 minkim3  2022_seoul   4256 May 30 15:18 Makefile
 -rw-r--r--   1 minkim3  2022_seoul  36480 May  9 19:07 README.md
--rw-r--r--   1 minkim3  2022_seoul      0 May 31 16:14 a
+-rw-r--r--   1 minkim3  2022_seoul      0 May 31 16:38 a
 drwxr-xr-x   3 minkim3  2022_seoul    102 May  9 19:07 image
 drwxr-xr-x  14 minkim3  2022_seoul    476 May 30 17:31 includes
 drwxr-xr-x  16 minkim3  2022_seoul    544 May 30 17:29 libft
--rwxr-xr-x   1 minkim3  2022_seoul  91976 May 31 16:14 minishell
+-rwxr-xr-x   1 minkim3  2022_seoul  91976 May 31 16:34 minishell
 drwxr-xr-x   9 minkim3  2022_seoul    306 May  9 19:07 srcs
 -rw-r--r--   1 minkim3  2022_seoul    679 May 29 14:58 tmp.txt
 -rw-r--r--   1 minkim3  2022_seoul   1508 May  9 19:07 valgrind.rb

@@ -6,68 +6,17 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:41:14 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/31 16:33:50 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 17:48:58 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	file_exists(const char *filename)
+static int	get_heredoc_from_readline(t_tree_node *node, char *eof, \
+	int fd, char *filename)
 {
-	return (access(filename, F_OK) != -1);
-}
-
-char	*get_new_filename(const char *base, int index)
-{
-	char	*filename;
-	char	*index_str;
-	char	*underscore;
-	char	*base_index;
-
-	index_str = ft_itoa(index);
-	underscore = ft_strdup("_");
-	base_index = ft_strjoin(base, underscore);
-	filename = ft_strjoin(base_index, index_str);
-	free(base_index);
-	free(underscore);
-	free(index_str);
-	return (filename);
-}
-
-char	*make_unique_filename(const char *previous_filename)
-{
-	int		index;
-	char	*filename;
-
-	index = 0;
-	filename = NULL;
-	while (1)
-	{
-		filename = get_new_filename(previous_filename, index);
-		if (!file_exists(filename))
-		{
-			return (filename);
-		}
-		index++;
-		free(filename);
-	}
-}
-
-static int	get_heredoc(t_tree_node *node, char *eof, int *stdin_dup)
-{
-	char	*filename;
-	int		fd;
 	char	*line;
 
-	filename = make_unique_filename(node->filename);
-	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (fd == ERROR)
-	{
-		perror("open");
-		exit(1);
-	}
-	*stdin_dup = dup(STDIN_FILENO);
-	exec_signal(HEREDOE_SIG);
 	while (1)
 	{
 		line = readline("> ");
@@ -87,9 +36,26 @@ static int	get_heredoc(t_tree_node *node, char *eof, int *stdin_dup)
 	}
 }
 
+static int	get_heredoc(t_tree_node *node, char *eof, int *stdin_dup)
+{
+	char	*filename;
+	int		fd;
+
+	filename = make_unique_filename(node->filename);
+	fd = open(filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (fd == ERROR)
+	{
+		perror("open");
+		exit(1);
+	}
+	*stdin_dup = dup(STDIN_FILENO);
+	exec_signal(HEREDOE_SIG);
+	return (get_heredoc_from_readline(node, eof, fd, filename));
+}
+
 int	open_heredoc(t_tree_node *node)
 {
-	int stdin_dup;
+	int	stdin_dup;
 
 	if (node == NULL)
 		return (0);
@@ -101,7 +67,6 @@ int	open_heredoc(t_tree_node *node)
 		{
 			dup2(stdin_dup, STDIN_FILENO);
 			close(stdin_dup);
-			printf("close error\n");
 			return (1);
 		}
 		dup2(stdin_dup, STDIN_FILENO);
