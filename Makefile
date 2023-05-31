@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/05/31 17:53:13 by minkim3          ###   ########.fr        #
+#    Updated: 2023/05/31 18:20:53 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ EXEC            = minishell
 SRCS_PATH       = ./srcs/
 
 MAIN_PATH  	    = ./main/
-MAIN_SRCS       = main.c read_input.c check_argc.c error.c
+MAIN_SRCS       = main.c read_input.c check_argc.c
 MAIN            = $(addprefix $(MAIN_PATH), $(MAIN_SRCS))
 
 SIGNAL_PATH     = ./signal/
