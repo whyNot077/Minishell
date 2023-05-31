@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:41:14 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/31 16:16:03 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 16:33:50 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	*make_unique_filename(const char *previous_filename)
 		filename = get_new_filename(previous_filename, index);
 		if (!file_exists(filename))
 		{
-			free((void *)previous_filename);
 			return (filename);
 		}
 		index++;
@@ -74,10 +73,9 @@ static int	get_heredoc(t_tree_node *node, char *eof, int *stdin_dup)
 		line = readline("> ");
 		if (line == NULL || ft_strcmp(line, eof) == 0)
 		{
-			dup2(*stdin_dup, STDIN_FILENO);
-			close(*stdin_dup);
-			node->filename = filename;
 			close(fd);
+			free(node->filename);
+			node->filename = filename;
 			if (line == NULL)
 				return (ERROR);
 			free(line);
@@ -101,9 +99,13 @@ int	open_heredoc(t_tree_node *node)
 	{
 		if (get_heredoc(node, node->filename, &stdin_dup) == ERROR)
 		{
+			dup2(stdin_dup, STDIN_FILENO);
+			close(stdin_dup);
 			printf("close error\n");
 			return (1);
 		}
+		dup2(stdin_dup, STDIN_FILENO);
+		close(stdin_dup);
 	}
 	if (open_heredoc(node->right) != 0)
 		return (1);
