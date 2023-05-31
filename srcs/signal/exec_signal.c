@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:16:28 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/30 21:31:41 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 17:53:29 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	here_doc_signal(int sig)
 {
 	if (sig == SIGINT)
 	{
-		printf("\n"); 
+		printf("\n");
 		close(STDIN_FILENO);
 		g_exit_code = 130;
 	}

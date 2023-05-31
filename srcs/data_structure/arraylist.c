@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   arraylist.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:29:20 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/04/26 17:07:15 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/31 17:52:27 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_arraylist *al_init(void)
+t_arraylist	*al_init(void)
 {
-	t_arraylist *list;
-	
+	t_arraylist	*list;
+
 	list = malloc(sizeof(t_arraylist));
 	list->size = 1;
 	list->count = 0;
@@ -52,7 +52,7 @@ void	al_add_rear(t_arraylist *list, char *element)
 
 void	al_remove(t_arraylist *list, int index)
 {
-	int		i;
+	int	i;
 
 	if (index >= list->count || index < 0)
 		return ;
