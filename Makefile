@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
+#    By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/05/31 17:43:26 by minkim3          ###   ########.fr        #
+#    Updated: 2023/05/31 18:22:59 by hyojocho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ EXECUTE_SRCS    = execute.c envp_init.c\
 					./pipe/pipe_apply.c ./pipe/pipe_open.c\
 					./redirection/redirection_apply.c ./redirection/redirection_open.c \
 					child_process.c parent_process.c\
-					command_apply.c
+					command_apply.c redirect_append.c
 EXECUTE         = $(addprefix $(EXECUTE_PATH), $(EXECUTE_SRCS))
 
 BUILT_IN_PATH    = ./built_in/

@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:26:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/10 13:08:11 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:20:44 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		apply_redirect_in(t_execute *exe_tool);
 void		apply_redirect_out(t_execute *exe_tool);
 void		restore_redirect_in(t_execute *exe_tool);
 void		restore_redirect_out(t_execute *exe_tool);
+void		open_redirect_append(t_tree_node *root, t_execute *exe_tool);
 // command
 void		apply_command(char **args, t_execute *exe_tool);
 // process
