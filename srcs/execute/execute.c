@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/30 20:27:11 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 17:43:34 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ void	 execute(t_tree_node *root, t_execute *exe_tool)
 	// 	apply_or(root, exe_tool);
 	if (root->type == PIPE)
 		open_pipe(exe_tool);
-	// else if (root->type == HEREDOC)
-	// 	open_heredoc(root, exe_tool);
-	else if (root->type == REDIRECT_IN)
+	else if (root->type == REDIRECT_APPEND)
+		open_redirect_append(root, exe_tool);
+	else if (root->type == REDIRECT_IN || root->type == HEREDOC)
 		open_redirect_in(root, exe_tool);
-	else if (root->type == REDIRECT_OUT || \
-			root->type == REDIRECT_APPEND)
+	else if (root->type == REDIRECT_OUT)
 		open_redirect_out(root, exe_tool);
 	else if (root->type == BUILTIN && exe_tool->pipe_flag == FALSE)
 		built_in(root->command, exe_tool);
