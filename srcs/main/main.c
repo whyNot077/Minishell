@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/31 16:00:53 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 17:59:50 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ int	main(int argc, char *argv[], char *envp[])
 						g_exit_code = WEXITSTATUS(status);
 					else if (pid == -1)
 						break ;
+					printf("WEXITSTATUS(status) : %d\n", WEXITSTATUS(status));
+					if (WEXITSTATUS(status) == 131)
+					{
+						printf("\n");
+					}
 				}
 				init_exe_tool(exe_tool);
 			}

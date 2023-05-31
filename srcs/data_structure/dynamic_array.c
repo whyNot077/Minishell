@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:08:59 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 18:13:28 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 18:20:31 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ t_array	*create_list(size_t max_num)
 
 	list = (t_array *)malloc(sizeof(t_array));
 	if (!list)
-		error_exit("malloc error");
+	{
+		perror("malloc error");
+		exit(1);
+	}
 	list->max_count = max_num;
 	list->token_count = 0;
 	list->token = ft_calloc(max_num, sizeof(t_token));
@@ -26,7 +29,8 @@ t_array	*create_list(size_t max_num)
 	{
 		free(list);
 		list = NULL;
-		error_exit("malloc error");
+		perror("malloc error");
+		exit(1);
 	}
 	return (list);
 }
@@ -57,7 +61,10 @@ int	insert_token(t_array *list, char *value)
 		dummy = list->token;
 		list->token = ft_calloc(list->max_count * 1.5, sizeof(t_token));
 		if (!list->token)
-			error_exit("malloc error");
+		{
+			perror("malloc error");
+			exit(1);
+		}
 		ft_memcpy(list->token, dummy, sizeof(t_token) * list->max_count);
 		list->max_count *= 1.5;
 		free(dummy);

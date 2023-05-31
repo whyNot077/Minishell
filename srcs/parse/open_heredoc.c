@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:41:14 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/31 17:48:58 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 18:22:24 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	get_heredoc(t_tree_node *node, char *eof, int *stdin_dup)
 	if (fd == ERROR)
 	{
 		perror("open");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	*stdin_dup = dup(STDIN_FILENO);
 	exec_signal(HEREDOE_SIG);

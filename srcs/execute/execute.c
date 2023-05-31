@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/31 17:43:34 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/05/31 17:57:29 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	 execute(t_tree_node *root, t_execute *exe_tool)
 	// 	apply_or(root, exe_tool);
 	if (root->type == PIPE)
 		open_pipe(exe_tool);
-	else if (root->type == REDIRECT_APPEND)
-		open_redirect_append(root, exe_tool);
+	// else if (root->type == REDIRECT_APPEND)
+	// 	open_redirect_append(root, exe_tool);
 	else if (root->type == REDIRECT_IN || root->type == HEREDOC)
 		open_redirect_in(root, exe_tool);
 	else if (root->type == REDIRECT_OUT)

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:55:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/12 18:15:54 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 18:19:46 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ t_array	*special_tokens(t_array *list)
 		return (list);
 	new_list = create_list(list->token_count - count - space + 1);
 	if (new_list == NULL)
-		error_exit("malloc failed");
+	{
+		perror("malloc");
+		exit(EXIT_FAILURE);
+	}
 	new_list = copy_tokens(new_list, list->token, list->token_count, \
 			count + space);
 	destroy_list(&list);

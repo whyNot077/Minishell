@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 13:33:16 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/30 19:34:04 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/05/31 18:07:50 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	exec_signal(int flag)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
 	sa.sa_flags = 0;
 	sigemptyset(&sa.sa_mask);
@@ -24,6 +24,7 @@ void	exec_signal(int flag)
 	}
 	else if (flag == CHILD_SIG)
 	{
+		printf("child\n");
 		exec_child_signal(sa);
 	}
 	else if (flag == HEREDOE_SIG)

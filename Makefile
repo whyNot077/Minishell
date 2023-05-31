@@ -6,7 +6,11 @@
 #    By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/05/31 18:22:59 by hyojocho         ###   ########.fr        #
+=======
+#    Updated: 2023/05/31 18:20:53 by minkim3          ###   ########.fr        #
+>>>>>>> 02e42562c79d3699ae95839a9312a394b9682a13
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +30,7 @@ EXEC            = minishell
 SRCS_PATH       = ./srcs/
 
 MAIN_PATH  	    = ./main/
-MAIN_SRCS       = main.c read_input.c check_argc.c error.c
+MAIN_SRCS       = main.c read_input.c check_argc.c
 MAIN            = $(addprefix $(MAIN_PATH), $(MAIN_SRCS))
 
 SIGNAL_PATH     = ./signal/
@@ -47,7 +51,7 @@ PARSE_SRCS     = parse_tokens.c get_node_type.c parse_command_and_option.c\
 PARSE          = $(addprefix $(PARSE_PATH), $(PARSE_SRCS))
 
 UTILS_PATH      = ./data_structure/
-UTILS_SRCS      = display.c dynamic_array.c binary_tree.c arraylist.c
+UTILS_SRCS      = dynamic_array.c binary_tree.c arraylist.c
 UTILS           = $(addprefix $(UTILS_PATH), $(UTILS_SRCS))
 
 EXECUTE_PATH    = ./execute/
