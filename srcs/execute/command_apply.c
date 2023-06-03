@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/31 19:05:38 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/03 17:07:32 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 	pid = fork();
 	exe_tool->last_pid = pid;
 	if (pid == 0)
+	{
 		child_process(full_path, args, exe_tool);
+	}
 	else
 	{
 		exec_signal(PARENT_SIG);

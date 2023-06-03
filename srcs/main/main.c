@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/31 19:08:29 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/03 18:54:04 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ int	main(int argc, char *argv[], char *envp[])
 				{
 					pid = waitpid(-1, &status, 0);
 					if (exe_tool->last_pid == pid)
+					{
 						g_exit_code = WEXITSTATUS(status);
+						if (WIFSIGNALED(status))
+							printf("\n");
+					}
 					else if (pid == -1)
 						break ;
 				}
