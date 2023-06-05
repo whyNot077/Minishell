@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 18:51:35 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/29 16:11:09 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:25:12 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ int	validate_key_args(char **args, int args_idx)
 		ft_putstr_fd(args[args_idx], 2);
 		ft_putstr_fd("': not a valid identifier\n", 2);
 		g_exit_code = 1;
-	}
-	if (g_exit_code == 1)
 		return (ERROR);
+	}
 	return (SUCCESS);
 }
 
