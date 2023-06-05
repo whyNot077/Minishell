@@ -6,13 +6,13 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/05 15:35:49 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:41:27 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void 	print_fork_error(void)
+static void	print_fork_error(void)
 {
 	ft_putstr_fd("minishell: fork error\n", STDERR_FILENO);
 	exit(1);
