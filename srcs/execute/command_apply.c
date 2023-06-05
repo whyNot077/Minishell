@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/05 15:41:27 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:57:59 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	apply_command(char **args, t_execute *exe_tool)
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(args[0], STDERR_FILENO);
 		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		g_exit_code = 127;
 		i = 0;
 		while (exe_tool->paths[i])
 			free(exe_tool->paths[i++]);
@@ -95,6 +96,7 @@ void	apply_command(char **args, t_execute *exe_tool)
 		return ;
 	}
 	execute_command(full_path, args, exe_tool);
+	g_exit_code = 0;
 	i = 0;
 	while (exe_tool->paths[i])
 		free(exe_tool->paths[i++]);

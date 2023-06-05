@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:59:09 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/26 14:08:02 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/05 18:36:59 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	env(t_arraylist *envp)
 {
 	int	idx;
 
+	g_exit_code = 0;
 	idx = 0;
 	while (envp->data[idx])
 	{
