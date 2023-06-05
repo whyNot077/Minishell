@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/03 18:54:04 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/05 19:22:36 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,11 @@ int	main(int argc, char *argv[], char *envp[])
 					{
 						g_exit_code = WEXITSTATUS(status);
 						if (WIFSIGNALED(status))
+							g_exit_code = 128 + status;
+						if (WTERMSIG(status) == SIGINT)
 							printf("\n");
+						else if (WTERMSIG(status) == SIGQUIT)
+							printf("Quit: 3\n");
 					}
 					else if (pid == -1)
 						break ;

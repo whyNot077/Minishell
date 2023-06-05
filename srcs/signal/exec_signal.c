@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_signal.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:16:28 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/03 18:49:52 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/05 19:27:46 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,32 @@ void	exec_parent_signal(struct sigaction sa)
 	}
 }
 
-static void	child_signal(int sig)
-{
-	printf("Signal %d caught.\n", sig);
-	if (sig == SIGINT || sig == SIGQUIT)
-	{
-		printf("\n");
-		g_exit_code = 128 + sig;
-		exit(g_exit_code);
-	}
-}
+// static void	child_signal(int sig)
+// {
+// 	if (sig == SIGINT)
+// 	{
+// 	}
+// 	else if (sig == SIGQUIT)
+// 	{
+// 	}
+// }
 
 void	exec_child_signal(struct sigaction sa)
 {
-	sa.sa_handler = child_signal;
-	if (sigaction(SIGINT, &sa, NULL) == -1)
-	{
-		perror("sigaction");
-		exit(EXIT_FAILURE);
-	}
-	if (sigaction(SIGQUIT, &sa, NULL) == -1)
-	{
-		perror("sigaction");
-		exit(EXIT_FAILURE);
-	}
+	// signal(SIGINT, SIG_DFL);
+	// signal(SIGQUIT, SIG_DFL);
+	(void)sa;
+	// sa.sa_handler = child_signal;
+	// if (sigaction(SIGINT, &sa, NULL) == -1)
+	// {
+	// 	perror("sigaction");
+	// 	exit(EXIT_FAILURE);
+	// }
+	// if (sigaction(SIGQUIT, &sa, NULL) == -1)
+	// {
+	// 	perror("sigaction");
+	// 	exit(EXIT_FAILURE);
+	// }
 }
 
 void	exec_heredoc_signal(struct sigaction sa)

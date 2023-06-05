@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/05 17:57:59 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/05 19:20:28 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 	}
 	else
 	{
-		exec_signal(PARENT_SIG);
 		parent_process(exe_tool);
 		exe_tool->curr_pipe_flag = FALSE;
 		free(full_path);
@@ -83,6 +82,7 @@ void	apply_command(char **args, t_execute *exe_tool)
 
 	full_path = NULL;
 	exe_tool->paths = get_paths(exe_tool->env->data);
+	exec_signal(PARENT_SIG);
 	if (validate_commands(args, &full_path, exe_tool) == ERROR)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
