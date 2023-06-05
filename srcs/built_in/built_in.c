@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:06 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/05 15:17:37 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:59:55 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	built_in(char **args, t_execute *exe_tool)
 {
-	if (exe_tool->redirect_in_error == ERROR)
-		return ;
 	apply_redirect_out(exe_tool);
 	if (ft_strcmp(args[0], "echo") == 0)
 		echo(args, exe_tool);
