@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:06:14 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/03 16:46:50 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/05 15:15:55 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	child_process(char *full_path, char **args, t_execute *exe_tool)
 	}
 	if (exe_tool->built_in_flag == FALSE)
 		apply_redirect_in(exe_tool);
+	if (exe_tool->redirect_in_error == ERROR)
+		return ;
 	apply_redirect_out(exe_tool);
 	exe_tool->built_in_flag = FALSE;
 	if (exe_tool->pipe_fd[0] > 0)

@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:17:29 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/28 17:54:17 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/05 15:08:39 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	open_redirect_out(t_tree_node *root, t_execute *exe_tool)
 		ft_putstr_fd("minishell: ", STDOUT_FILENO);
 		ft_putstr_fd(root->filename, STDOUT_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDOUT_FILENO);
+		g_exit_code = 1;
 	}
 }
 
@@ -48,8 +49,10 @@ void	open_redirect_in(t_tree_node *root, t_execute *exe_tool)
 {
 	if (open_input_file(root->filename, exe_tool) == ERROR)
 	{
+		exe_tool->redirect_in_error = ERROR;
 		ft_putstr_fd("minishell: ", STDOUT_FILENO);
 		ft_putstr_fd(root->filename, STDOUT_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDOUT_FILENO);
+		g_exit_code = 1;
 	}
 }
