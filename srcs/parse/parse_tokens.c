@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/31 17:48:25 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 20:08:20 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ t_binarytree	*parse_tokens(t_token *tokens, char **env)
 	{
 		if (tokens[index].type == WORD)
 		{
-			tokens[index].type = get_node_type(tokens, index, env);
+			tokens[index].type = get_node_type(tokens, index);
+			if (tokens[index].type == WORD)
+			{
+				parse_dollar_sign(tokens, index, env);
+			}
 		}
 		index++;
 	}
