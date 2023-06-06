@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:09:54 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/06 20:08:44 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 20:32:21 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ int				open_heredoc(t_tree_node *node);
 char			*make_unique_filename(const char *previous_filename);
 void			get_rightmost_and_previous(t_binarytree *tree, \
 				t_tree_node **rightmost, t_tree_node **previous);
-void			parse_dollar_sign(t_token *tokens, int index, char **env);
+t_token	*		parse_dollar_sign(t_token *tokens, int index, char **env);
 
 #endif

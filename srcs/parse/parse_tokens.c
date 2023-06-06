@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/06 20:08:20 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 21:34:03 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,18 @@ static int	fill_tree(t_binarytree *tree, t_token *tokens)
 	return (0);
 }
 
+void	print_tokens(t_token *tokens)
+{
+	int	i;
+
+	i = 0;
+	printf("print_tokens\n");
+	while ((size_t)i < tokens->token_count)
+	{
+		printf("token[%d]: %s\n", i, tokens[i].value);
+		i++;
+	}
+}
 t_binarytree	*parse_tokens(t_token *tokens, char **env)
 {
 	t_binarytree	*tree;
@@ -69,11 +81,13 @@ t_binarytree	*parse_tokens(t_token *tokens, char **env)
 			tokens[index].type = get_node_type(tokens, index);
 			if (tokens[index].type == WORD)
 			{
-				parse_dollar_sign(tokens, index, env);
+				tokens = parse_dollar_sign(tokens, index, env);
 			}
 		}
+		printf("ok\n");
 		index++;
 	}
+	print_tokens(tokens);
 	if (fill_tree(tree, tokens) == ERROR)
 		return (NULL);
 	return (tree);
