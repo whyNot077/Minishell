@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/06 15:44:48 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:24:54 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	find_pipe(t_tree_node *current)
 {
 	t_tree_node	*dummy;
 
-	dummy = current;	
+	dummy = current;
 	while (dummy)
 	{
 		if (dummy->type == PIPE)
@@ -70,13 +70,7 @@ void	add_command_to_the_tree(t_binarytree *tree, t_tree_node *command_node)
 	}
 	else
 	{
-		current = tree->root;
-		previous = NULL;
-		while (current->right)
-		{
-			previous = current;
-			current = current->right;
-		}
+		get_rightmost_and_previous(tree, &current, &previous);
 		connect_command_node_to_tree(tree, current, previous, command_node);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:09:54 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/31 17:42:53 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:24:03 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 int				get_node_type(t_token *tokens, int index, char **env);
 t_binarytree	*parse_tokens(t_token *tokens, char **env);
-void			parse_command_and_option(t_binarytree *tree, t_token *tokens,
+void			parse_command_and_option(t_binarytree *tree, t_token *tokens, \
 					int *index);
 int				is_redirection(int type);
-void			parse_redirection(t_binarytree *tree, t_token *tokens,
+void			parse_redirection(t_binarytree *tree, t_token *tokens, \
 					int *index);
 void			parse_pipe(t_binarytree *tree, t_token *tokens, int *index);
 void			parse_command(t_binarytree *tree, char *value, int type);
@@ -31,5 +31,6 @@ void			replace_env_key_to_value(char **value, char **env);
 void			remove_quotes(char *value);
 int				open_heredoc(t_tree_node *node);
 char			*make_unique_filename(const char *previous_filename);
-
+void			get_rightmost_and_previous(t_binarytree *tree, \
+				t_tree_node **rightmost, t_tree_node **previous);
 #endif

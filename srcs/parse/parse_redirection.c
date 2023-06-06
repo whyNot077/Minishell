@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:24:15 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/06 15:57:32 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:24:28 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	parse_filename(t_tree_node *new_node, char *value, int *index)
 	(*index)++;
 }
 
-static void	connect_redirection_node(t_binarytree *tree, t_tree_node *rightmost, \
-		t_tree_node *previous, t_tree_node *redirection_node)
+static void	connect_redirection_node(t_binarytree *tree, \
+t_tree_node *rightmost, t_tree_node *previous, t_tree_node *redirection_node)
 {
 	if (find_pipe(rightmost) == TRUE)
 	{
@@ -51,13 +51,7 @@ static void	redirection_to_tree(t_binarytree *tree, t_tree_node *redirection)
 	}
 	else
 	{
-		current = tree->root;
-		previous = NULL;
-		while (current->right)
-		{
-			previous = current;
-			current = current->right;
-		}
+		get_rightmost_and_previous(tree, &current, &previous);
 		connect_redirection_node(tree, current, previous, redirection);
 	}
 }

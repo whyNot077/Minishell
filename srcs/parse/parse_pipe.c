@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:39:42 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/06 15:57:48 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:21:53 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,7 @@ static void	pipe_to_the_tree(t_binarytree *tree, t_tree_node *pipe_node, \
 	}
 	else
 	{
-		current = tree->root;
-		previous = NULL;
-		while (current->right)
-		{
-			previous = current;
-			current = current->right;
-		}
+		get_rightmost_and_previous(tree, &current, &previous);
 		if (current->type == PIPE || current->type == AND || \
 				current->type == OR)
 		{
