@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/06 18:29:02 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 18:34:03 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	execute(t_tree_node *root, t_execute *exe_tool)
 		apply_built_in(root, exe_tool);
 	else if (root->type == WORD)
 		apply_command(root->command, exe_tool);
-	if (root->type == TRUE && root->right != NULL)
+	if (root->type == PIPE && root->right != NULL)
 		exe_tool->curr_pipe_flag = FALSE;
 	execute(root->right, exe_tool);
 }
