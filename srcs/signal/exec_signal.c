@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 15:16:28 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/06 14:43:56 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 14:46:55 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,9 @@ void	exec_parent_signal(struct sigaction sa)
 
 static void	child_signal(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == SIGINT || sig == SIGQUIT)
 	{
-	}
-	else if (sig == SIGQUIT)
-	{
+		g_exit_code = 128 + sig;
 	}
 }
 
