@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 14:55:24 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/10 20:48:49 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 19:39:02 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ int	is_space_token(char *token)
 {
 	if (token == NULL)
 		return (ERROR);
-	return (token[0] == ' ');
+	return (is_space(token[0]));
 }
