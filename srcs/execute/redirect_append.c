@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_append.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 17:56:03 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/31 19:20:10 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:56:56 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	open_output_file(char *filename, t_execute *exe_tool)
 
 void	open_redirect_append(t_tree_node *root, t_execute *exe_tool)
 {
+	if (exe_tool->error == TRUE)
+		return ;
 	if (open_output_file(root->filename, exe_tool) == ERROR)
 	{
 		ft_putstr_fd("minishell: ", STDOUT_FILENO);

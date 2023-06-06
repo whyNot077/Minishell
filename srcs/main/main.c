@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/05 19:22:36 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:01:08 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	init_exe_tool(t_execute *exe_tool)
 	exe_tool->infile_fd = 0;
 	exe_tool->outfile_fd = 0;
 	exe_tool->dup_tmp = 0;
+	exe_tool->error = 0;
 }
 
 int	main(int argc, char *argv[], char *envp[])
