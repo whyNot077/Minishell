@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_apply.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/05 19:20:28 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/06 17:11:23 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	apply_command(char **args, t_execute *exe_tool)
 	int		i;
 	char	*full_path;
 
+	if (exe_tool->error == TRUE)
+		return ;
 	full_path = NULL;
 	exe_tool->paths = get_paths(exe_tool->env->data);
 	exec_signal(PARENT_SIG);

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/06 15:14:41 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 17:14:48 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	apply_built_in(t_tree_node *root, t_execute *exe_tool)
 {
+	if (exe_tool->error == TRUE)
+		return ;
 	if (root->type == BUILTIN && exe_tool->pipe_flag == FALSE)
 		built_in(root->command, exe_tool);
 	else if (root->type == BUILTIN && exe_tool->pipe_flag == TRUE)
@@ -22,6 +24,7 @@ static void	apply_built_in(t_tree_node *root, t_execute *exe_tool)
 		{
 			exe_tool->pipe_flag = FALSE;
 			exe_tool->exit_flag = TRUE;
+			built_in(root->command, exe_tool);
 		}
 		apply_built_in_pipe(root->command, exe_tool);
 	}
@@ -48,5 +51,6 @@ void	execute(t_tree_node *root, t_execute *exe_tool)
 		apply_built_in(root, exe_tool);
 	else if (root->type == WORD)
 		apply_command(root->command, exe_tool);
+	exe_tool->curr_pipe_flag = FALSE;
 	execute(root->right, exe_tool);
 }

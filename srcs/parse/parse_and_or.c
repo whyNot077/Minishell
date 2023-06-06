@@ -6,11 +6,16 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:36:02 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 18:59:56 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:55:03 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static int	is_and_or(int type)
+{
+	return (type == AND || type == OR);
+}
 
 void	parse_and_or(t_binarytree *tree, t_token *tokens, int *index)
 {
@@ -25,7 +30,7 @@ void	parse_and_or(t_binarytree *tree, t_token *tokens, int *index)
 		return ;
 	}
 	rightmost_node = find_rightmost_node(tree->root);
-	if (rightmost_node->type == AND || rightmost_node->type == OR)
+	if (is_and_or(rightmost_node->type))
 	{
 		printf("Syntax error: rightmost node is AND/OR.\n");
 		tree->syntex_error = TRUE;
