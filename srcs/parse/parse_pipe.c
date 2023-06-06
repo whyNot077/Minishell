@@ -6,34 +6,41 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:39:42 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/24 18:58:51 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 15:57:48 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static void	connect_pipe_node_to_tree(t_binarytree *tree, \
-	t_tree_node *current, t_tree_node *pipe_node)
+	t_tree_node *rightmost, t_tree_node *previous, t_tree_node *pipe_node)
 {
-	if (find_pipe(current) == TRUE)
+	if (find_pipe(rightmost) == TRUE)
 	{
 		free(pipe_node);
 		printf("Syntax error: unexpected pipe '|'\n");
 		tree->syntex_error = TRUE;
-		return ;
 	}
-	while (current->left && is_redirection(current->left->type))
+	else if (rightmost->type == WORD || rightmost->type == BUILTIN)
 	{
-		current = current->left;
+		pipe_node->left = rightmost->left;
+		rightmost->left = pipe_node;
 	}
-	pipe_node->left = current->left;
-	current->left = pipe_node;
+	else if (is_redirection(rightmost->type))
+	{
+		pipe_node->left = rightmost;
+		if (previous)
+			previous->right = pipe_node;
+		else
+			tree->root = pipe_node;
+	}
 }
 
 static void	pipe_to_the_tree(t_binarytree *tree, t_tree_node *pipe_node, \
 		int *index)
 {
 	t_tree_node	*current;
+	t_tree_node	*previous;
 
 	if (tree->root == NULL)
 	{
@@ -41,11 +48,16 @@ static void	pipe_to_the_tree(t_binarytree *tree, t_tree_node *pipe_node, \
 		printf("Syntax error: unexpected pipe '|'\n");
 		tree->syntex_error = TRUE;
 		(*index)++;
-		return ;
 	}
 	else
 	{
-		current = find_rightmost_node(tree->root);
+		current = tree->root;
+		previous = NULL;
+		while (current->right)
+		{
+			previous = current;
+			current = current->right;
+		}
 		if (current->type == PIPE || current->type == AND || \
 				current->type == OR)
 		{
@@ -55,7 +67,7 @@ static void	pipe_to_the_tree(t_binarytree *tree, t_tree_node *pipe_node, \
 			(*index)++;
 			return ;
 		}
-		connect_pipe_node_to_tree(tree, current, pipe_node);
+		connect_pipe_node_to_tree(tree, current, previous, pipe_node);
 	}
 	(*index)++;
 }

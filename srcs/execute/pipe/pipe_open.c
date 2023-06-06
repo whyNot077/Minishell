@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_open.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 17:59:54 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/25 19:27:15 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:09:01 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,5 @@ void	open_pipe(t_execute *exe_tool)
 	create_pipe(exe_tool->pipe_fd);
 	exe_tool->curr_pipe_flag = TRUE;
 	exe_tool->pipe_flag = TRUE;
+	exe_tool->error = 0;
 }

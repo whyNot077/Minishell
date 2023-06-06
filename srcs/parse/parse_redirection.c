@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:24:15 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/31 16:10:04 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 15:57:32 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,42 +18,36 @@ void	parse_filename(t_tree_node *new_node, char *value, int *index)
 	(*index)++;
 }
 
-static void	connect_redirection_node(t_binarytree *tree, t_tree_node *current, \
-		t_tree_node *previous, t_tree_node *new_node)
+static void	connect_redirection_node(t_binarytree *tree, t_tree_node *rightmost, \
+		t_tree_node *previous, t_tree_node *redirection_node)
 {
-	if (find_pipe(current) == TRUE)
+	if (find_pipe(rightmost) == TRUE)
 	{
-		current->right = new_node;
-		return ;
+		rightmost->right = redirection_node;
 	}
-	if ((current->type == WORD || current->type == BUILTIN))
+	else if ((rightmost->type == WORD || rightmost->type == BUILTIN))
 	{
-		new_node->left = current->left;
-		current->left = new_node;
+		redirection_node->left = rightmost->left;
+		rightmost->left = redirection_node;
 	}
-	else
+	else if (is_redirection(rightmost->type))
 	{
-		new_node->left = current;
+		redirection_node->left = rightmost;
 		if (previous)
-		{
-			previous->right = new_node;
-		}
+			previous->right = redirection_node;
 		else
-		{
-			tree->root = new_node;
-		}
+			tree->root = redirection_node;
 	}
 }
 
-static void	redirection_to_tree(t_binarytree *tree, t_tree_node *new_node)
+static void	redirection_to_tree(t_binarytree *tree, t_tree_node *redirection)
 {
 	t_tree_node	*current;
 	t_tree_node	*previous;
 
 	if (tree->root == NULL)
 	{
-		tree->root = new_node;
-		return ;
+		tree->root = redirection;
 	}
 	else
 	{
@@ -64,7 +58,7 @@ static void	redirection_to_tree(t_binarytree *tree, t_tree_node *new_node)
 			previous = current;
 			current = current->right;
 		}
-		connect_redirection_node(tree, current, previous, new_node);
+		connect_redirection_node(tree, current, previous, redirection);
 	}
 }
 

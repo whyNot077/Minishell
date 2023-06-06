@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/29 15:10:19 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/06 15:44:48 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,38 @@ t_tree_node	*find_rightmost_node(t_tree_node *node)
 
 int	find_pipe(t_tree_node *current)
 {
-	while (current)
+	t_tree_node	*dummy;
+
+	dummy = current;	
+	while (dummy)
 	{
-		if (current->type == PIPE)
+		if (dummy->type == PIPE)
 		{
 			return (TRUE);
 		}
-		current = current->left;
+		dummy = dummy->left;
 	}
 	return (FALSE);
 }
 
 static void	connect_command_node_to_tree(t_binarytree *tree, \
-	t_tree_node *current, t_tree_node *previous, t_tree_node *command_node)
+	t_tree_node *rightmost, t_tree_node *previous, t_tree_node *command_node)
 {
-	if (find_pipe(current) == TRUE)
+	if (find_pipe(rightmost) == TRUE)
 	{
-		current->right = command_node;
-		return ;
+		rightmost->right = command_node;
 	}
-	if ((current->type == WORD || current->type == BUILTIN))
+	else if ((rightmost->type == WORD || rightmost->type == BUILTIN))
 	{
 		free(command_node);
-		return ;
 	}
-	command_node->left = current;
-	if (previous)
+	else if (is_redirection(rightmost->type))
 	{
-		previous->right = command_node;
-	}
-	else
-	{
-		tree->root = command_node;
+		command_node->left = rightmost;
+		if (previous)
+			previous->right = command_node;
+		else
+			tree->root = command_node;
 	}
 }
 
