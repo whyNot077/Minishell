@@ -6,43 +6,19 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/06 16:24:54 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 19:46:01 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-t_tree_node	*find_rightmost_node(t_tree_node *node)
-{
-	if (node == NULL)
-		return (NULL);
-	while (node->right)
-		node = node->right;
-	return (node);
-}
-
-int	find_pipe(t_tree_node *current)
-{
-	t_tree_node	*dummy;
-
-	dummy = current;
-	while (dummy)
-	{
-		if (dummy->type == PIPE)
-		{
-			return (TRUE);
-		}
-		dummy = dummy->left;
-	}
-	return (FALSE);
-}
 
 static void	connect_command_node_to_tree(t_binarytree *tree, \
 	t_tree_node *rightmost, t_tree_node *previous, t_tree_node *command_node)
 {
 	if (find_pipe(rightmost) == TRUE)
 	{
-		rightmost->right = command_node;
+		put_it_on_the_right_of_the_rightmost_node(tree, rightmost, previous, \
+				command_node);
 	}
 	else if ((rightmost->type == WORD || rightmost->type == BUILTIN))
 	{
@@ -50,11 +26,13 @@ static void	connect_command_node_to_tree(t_binarytree *tree, \
 	}
 	else if (is_redirection(rightmost->type))
 	{
-		command_node->left = rightmost;
-		if (previous)
-			previous->right = command_node;
-		else
-			tree->root = command_node;
+		put_it_on_the_top_of_the_rightmost_node(tree, rightmost, previous, \
+				command_node);
+	}
+	else if (rightmost->type == AND || rightmost->type == OR)
+	{
+		put_it_on_the_left_of_the_rightmost_node(tree, rightmost, previous, \
+				command_node);
 	}
 }
 

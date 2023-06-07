@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/07 17:48:56 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 20:13:17 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ static t_token	*finalize_token(t_token *tokens, char **env)
 			{
 				tokens = parse_dollar_sign(tokens, index, env);
 				if (tokens == NULL)
+				{
 					return (NULL);
+				}
 			}
 			tokens[index].value = remove_quotes(tokens[index].value);
 		}

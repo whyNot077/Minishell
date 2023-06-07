@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:24:15 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/06 16:24:28 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 19:45:21 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,18 @@ t_tree_node *rightmost, t_tree_node *previous, t_tree_node *redirection_node)
 	}
 	else if ((rightmost->type == WORD || rightmost->type == BUILTIN))
 	{
-		redirection_node->left = rightmost->left;
-		rightmost->left = redirection_node;
+		put_it_on_the_left_of_the_rightmost_node(tree, rightmost, previous, \
+				redirection_node);
 	}
 	else if (is_redirection(rightmost->type))
 	{
-		redirection_node->left = rightmost;
-		if (previous)
-			previous->right = redirection_node;
-		else
-			tree->root = redirection_node;
+		put_it_on_the_top_of_the_rightmost_node(tree, rightmost, previous, \
+				redirection_node);
+	}
+	else if (rightmost->type == AND || rightmost->type == OR)
+	{
+		put_it_on_the_right_of_the_rightmost_node(tree, rightmost, previous, \
+				redirection_node);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 13:39:42 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/07 14:13:48 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 19:38:00 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static void	connect_pipe_node_to_tree(t_binarytree *tree, \
 	t_tree_node *rightmost, t_tree_node *previous, t_tree_node *pipe_node)
 {
-	if (find_pipe(rightmost) == TRUE)
+	if (find_pipe(rightmost) == TRUE || rightmost->type == AND || \
+		rightmost->type == OR)
 	{
 		free(pipe_node);
 		printf("Syntax error: unexpected pipe '|'\n");
@@ -23,16 +24,13 @@ static void	connect_pipe_node_to_tree(t_binarytree *tree, \
 	}
 	else if (rightmost->type == WORD || rightmost->type == BUILTIN)
 	{
-		pipe_node->left = rightmost->left;
-		rightmost->left = pipe_node;
+		put_it_on_the_left_of_the_rightmost_node(tree, rightmost, previous, \
+				pipe_node);
 	}
 	else if (is_redirection(rightmost->type))
 	{
-		pipe_node->left = rightmost;
-		if (previous)
-			previous->right = pipe_node;
-		else
-			tree->root = pipe_node;
+		put_it_on_the_top_of_the_rightmost_node(tree, rightmost, previous, \
+				pipe_node);
 	}
 }
 

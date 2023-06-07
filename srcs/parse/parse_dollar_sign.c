@@ -6,18 +6,30 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 20:06:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/07 17:49:29 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 20:13:03 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	parse_dollar_question_mark(char *value)
+static char *parse_dollar_question_mark_and_pid_number(char *value)
 {
-	if (ft_strcmp(value, "$?") != 0)
-		return ;
-	free(value);
-	value = ft_itoa(g_exit_code);
+	char	*new_value;
+
+	new_value = value;
+	if (ft_strcmp(new_value, "$?") != 0 && ft_strcmp(new_value, "$$") != 0)
+		return (value);
+	if (ft_strcmp(new_value, "$?") == 0)
+	{
+		free(value);
+		new_value = ft_itoa(g_exit_code);
+	}
+	else if (ft_strcmp(new_value, "$$") == 0)
+	{
+		free(value);
+		new_value = ft_itoa(getpid());
+	}
+	return (new_value);
 }
 
 static t_token	*make_new_tokens(size_t new_token_count)
@@ -73,7 +85,7 @@ t_token	*parse_dollar_sign(t_token *tokens, int index, char **env)
 	t_token	*new_tokens;
 
 	value = tokens[index].value;
-	parse_dollar_question_mark(value);
+	value = parse_dollar_question_mark_and_pid_number(value);
 	if (is_dollar_sign_in_token(value) == FALSE)
 		return (tokens);
 	replace_env_key_to_value(&value, env);
