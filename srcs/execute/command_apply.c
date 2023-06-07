@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/06 18:00:10 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 16:18:41 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,26 @@ void	apply_command(char **args, t_execute *exe_tool)
 	int		i;
 	char	*full_path;
 
-	if (exe_tool->error == TRUE)
-		return ;
 	full_path = NULL;
 	exe_tool->paths = get_paths(exe_tool->env->data);
 	exec_signal(PARENT_SIG);
 	if (validate_commands(args, &full_path, exe_tool) == ERROR)
 	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		ft_putstr_fd(args[0], STDERR_FILENO);
-		ft_putstr_fd(": command not found\n", STDERR_FILENO);
-		g_exit_code = 127;
+		if (exe_tool->open_error == FALSE)
+		{
+			ft_putstr_fd("minishell: ", STDERR_FILENO);
+			ft_putstr_fd(args[0], STDERR_FILENO);
+			ft_putstr_fd(": command not found\n", STDERR_FILENO);
+			g_exit_code = 127;
+		}
 		i = 0;
 		while (exe_tool->paths[i])
 			free(exe_tool->paths[i++]);
 		free(exe_tool->paths);
+		if (exe_tool->outfile_fd > 0)
+			close(exe_tool->outfile_fd);
+		if (exe_tool->curr_pipe_flag == TRUE)
+			close(exe_tool->pipe_fd[1]);
 		return ;
 	}
 	execute_command(full_path, args, exe_tool);

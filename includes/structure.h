@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/06 16:34:11 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 15:55:46 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_execute
 	int					outfile_fd;
 	int					dup_tmp;
 	int					pipe_fd[2];
-	int					error;
+	int					open_error;
 	pid_t				pid;
 	pid_t				last_pid;
 	t_arraylist			*env;
@@ -85,7 +85,6 @@ typedef struct tree_node
 typedef struct binarytree
 {
 	t_tree_node			*root;
-	int					heredoc_count;
 	int					syntex_error;
 }						t_binarytree;
 

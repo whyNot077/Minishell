@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:17:29 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/06 14:54:05 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 16:21:00 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,17 @@ static int	open_input_file(char *arg, t_execute *exe_tool)
 
 	fd = open(arg, O_RDONLY);
 	if (fd < 0)
+	{
+		exe_tool->open_error = TRUE;
 		return (ERROR);
+	}
 	exe_tool->infile_fd = fd;
 	return (SUCCESS);
 }
 
 void	open_redirect_out(t_tree_node *root, t_execute *exe_tool)
 {
-	if (exe_tool->error == TRUE)
+	if (exe_tool->open_error == TRUE)
 		return ;
 	if (open_output_file(root->filename, exe_tool) == ERROR)
 	{
@@ -49,14 +52,13 @@ void	open_redirect_out(t_tree_node *root, t_execute *exe_tool)
 
 void	open_redirect_in(t_tree_node *root, t_execute *exe_tool)
 {
-	if (exe_tool->error == TRUE)
+	if (exe_tool->open_error == TRUE)
 		return ;
 	if (open_input_file(root->filename, exe_tool) == ERROR)
 	{
 		ft_putstr_fd("minishell: ", STDOUT_FILENO);
 		ft_putstr_fd(root->filename, STDOUT_FILENO);
 		ft_putstr_fd(": No such file or directory\n", STDOUT_FILENO);
-		exe_tool->error = TRUE;
 		g_exit_code = 1;
 	}
 }

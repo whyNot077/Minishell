@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:06:14 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/06 18:26:07 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 16:07:29 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	print_error(char *msg)
 void	child_process(char *full_path, char **args, t_execute *exe_tool)
 {
 	exec_signal(CHILD_SIG);
-	if (exe_tool->prev_fd > 0)
+	if (exe_tool->open_error == TRUE)
+		exit(1);
+	if (exe_tool->prev_fd > 0 )
 	{
 		dup2(exe_tool->prev_fd, STDIN_FILENO);
 		close(exe_tool->prev_fd);
