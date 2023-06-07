@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/07 16:19:50 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 16:48:27 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ static void	parse_and_execute(char *input, t_execute *exe_tool)
 	}
 	free_everything(tree, tokens, input);
 }
+
+// unset PATH
+// exit 1 | exit 1
+// built in 함수가 파이프 마지막에 있을 때, error code가 안 바뀜
+// <<a | ls | wc -l
 
 int	main(int argc, char *argv[], char *envp[])
 {

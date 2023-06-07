@@ -6,15 +6,15 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 18:02:04 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/10 21:11:45 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 18:32:23 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	find_quote_from_front(char *value, size_t *start)
+static char	find_quote_from_start(char *value, size_t *start)
 {
-	int	quote;
+	char	quote;
 
 	quote = 0;
 	if (value == NULL || start == NULL)
@@ -31,61 +31,62 @@ int	find_quote_from_front(char *value, size_t *start)
 	return (quote);
 }
 
-void	find_the_quote_from_back(char *value, size_t *end, int quote)
+static void	find_the_quote_from_end(char *value, size_t *end, int quote)
 {
-	if (value == NULL || end == NULL)
+	if (value == NULL)
 		return ;
-	while (*end > 0)
+	while (value[*end])
 	{
-		(*end)--;
 		if (value[*end] == quote)
-			break ;
+		{
+			return ;
+		}
+		(*end)++;
 	}
 }
 
-void	remove_quote_from_string(char *value, size_t start, size_t end)
+static void	copy_without_quotes(char *value, char *new_value, size_t start, \
+		size_t end)
 {
-	char	*new_value;
-	size_t	i;
+	char	quote;
 	size_t	j;
 
-	if (value == NULL)
-		return ;
-	new_value = (char *)malloc(ft_strlen(value));
-	if (!new_value)
-		return ;
-	i = 0;
 	j = 0;
-	while (value[i] != '\0')
+	while (value[start])
 	{
-		if (i != start && i != end)
+		quote = find_quote_from_start(value, &start);
+		if (start > end)
 		{
-			new_value[j] = value[i];
-			j++;
+			ft_memmove(new_value + j, value + end, start - end);
+			j += start - end;
 		}
-		i++;
+		if (quote != 0)
+		{
+			end = start + 1;
+			find_the_quote_from_end(value, &end, quote);
+			ft_memmove(new_value + j, value + start + 1, end - start - 1);
+			j += end - start - 1;
+			start = end + 1;
+		}
+		end = start;
 	}
 	new_value[j] = '\0';
-	ft_memcpy(value, new_value, j + 1);
-	free(new_value);
+	free(value);
 }
 
-void	remove_quotes(char *value)
+char	*remove_quotes(char *value)
 {
-	int		quote;
 	size_t	start;
 	size_t	end;
+	char	*new_value;
 
 	if (value == NULL)
-		return ;
+		return (NULL);
+	new_value = (char *)malloc(ft_strlen(value) + 1);
+	if (!new_value)
+		return (NULL);
 	start = 0;
-	end = ft_strlen(value);
-	while (start < end)
-	{
-		quote = find_quote_from_front(value, &start);
-		if (quote == 0)
-			return ;
-		find_the_quote_from_back(value, &end, quote);
-		remove_quote_from_string(value, start, end);
-	}
+	end = 0;
+	copy_without_quotes(value, new_value, start, end);
+	return (new_value);
 }

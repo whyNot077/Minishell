@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:09:54 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/07 12:07:51 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 17:46:36 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_tree_node		*find_rightmost_node(t_tree_node *node);
 void			fill_command_structure(t_binarytree *tree, char *value);
 int				find_pipe(t_tree_node *current);
 void			replace_env_key_to_value(char **value, char **env);
-void			remove_quotes(char *value);
+char			*remove_quotes(char *value);
 int				open_heredoc(t_tree_node *node);
 char			*make_unique_filename(const char *previous_filename);
 void			get_rightmost_and_previous(t_binarytree *tree, \
@@ -36,4 +36,6 @@ void			get_rightmost_and_previous(t_binarytree *tree, \
 t_token	*		parse_dollar_sign(t_token *tokens, int index, char **env);
 void			copy_tokens_to_new_tokens(t_token *new_tokens, t_token *tokens, \
 				t_token *env_tokens, size_t index);
+
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 20:06:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/07 12:11:04 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 17:49:29 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ t_token	*parse_dollar_sign(t_token *tokens, int index, char **env)
 		return (tokens);
 	replace_env_key_to_value(&value, env);
 	tokens[index].value = value;
-	remove_quotes(value);
+	value = remove_quotes(value);
 	env_tokens = create_tokens_by_lexical_analysis(value);
+	tokens->value = value;
 	new_tokens = insert_env_tokens(tokens, index, env_tokens);
 	return (new_tokens);
 }
