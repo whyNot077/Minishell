@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 14:37:30 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/06 16:41:15 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/07 12:11:25 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	parse_and_execute(char *input, t_execute *exe_tool)
 	t_binarytree	*tree;
 
 	tokens = create_tokens_by_lexical_analysis(input);
-	tree = parse_tokens(tokens, exe_tool->env->data);
+	tree = parse_tokens(&tokens, exe_tool->env->data);
 	if (tree && tree->root && tree->syntex_error == FALSE)
 	{
 		execute(tree->root, exe_tool);
