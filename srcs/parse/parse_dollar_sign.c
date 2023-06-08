@@ -6,13 +6,13 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 20:06:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/08 11:40:33 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 16:07:57 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*parse_dollar_question_mark_and_pid_number(char *value)
+static char	*parse_dollar_question_mark(char *value)
 {
 	char	*new_value;
 
@@ -77,7 +77,8 @@ t_token	*parse_dollar_sign(t_token *tokens, int index, char **env)
 	t_token	*env_tokens;
 	t_token	*new_tokens;
 
-	value = parse_dollar_question_mark_and_pid_number(tokens[index].value);
+	value = tokens[index].value;
+	value = parse_dollar_question_mark(tokens[index].value);
 	tokens[index].value = value;
 	if (is_dollar_sign_in_token(tokens[index].value) == FALSE)
 		return (tokens);
