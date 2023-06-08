@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/08 10:23:57 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 16:48:25 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,14 @@ static t_token	*finalize_token(t_token *tokens, char **env)
 		}
 		index++;
 	}
+	if (tokens[index - 1].type == PIPE || tokens[index - 1].type == AND \
+		|| tokens[index - 1].type == OR)
+	{
+		printf("minishell: syntax error near unexpected token `%s'\n", \
+			tokens[index - 1].value);
+		tokens->syntax_error = TRUE;
+		return (tokens);
+	}
 	return (tokens);
 }
 
@@ -88,10 +96,12 @@ t_binarytree	*parse_tokens(t_token **tokens_ptr, char **env)
 	tokens = *tokens_ptr;
 	if (!tokens)
 		return (NULL);
-	tree = create_tree();
 	index = 0;
 	(void)env;
 	*tokens_ptr = finalize_token(tokens, env);
+	if (tokens->syntax_error == TRUE)
+		return (NULL);
+	tree = create_tree();
 	if (fill_tree(tree, *tokens_ptr) == ERROR)
 		return (NULL);
 	return (tree);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structure.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/08 16:18:27 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:45:59 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_token
 {
 	char				*value;
 	int					type;
+	int					syntax_error;
 	size_t				token_count;
 }						t_token;
 
