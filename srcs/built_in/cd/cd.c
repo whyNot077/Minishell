@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:05:25 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/08 17:05:52 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:28:23 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,17 @@ static void	update_pwd(t_arraylist *env, t_arraylist *export, \
 
 static int	check_home_dir(t_execute *execute)
 {
-	int	home_value;
+	int		home_value;
+	char	*home;
+	char	*pwd_value;
 
+	pwd_value = getcwd(NULL, 0);
+	if (pwd_value == NULL)
+	{
+		home = get_target_value("HOME", execute->env);
+		chdir(home);
+		return (ERROR);
+	}
 	home_value = get_env_value("HOME", execute->env);
 	if (home_value == ERROR)
 	{
