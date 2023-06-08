@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/08 11:38:01 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 13:31:21 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static void	apply_and(t_execute *exe_tool)
 static void apply_or(t_execute *exe_tool)
 {
 	if (exe_tool->open_error == FALSE && exe_tool->execute_error == FALSE)
-		exe_tool->stop = FALSE;
-	else
 		exe_tool->stop = TRUE;
+	else
+		exe_tool->stop = FALSE;
 }
 
 void	execute(t_tree_node *root, t_execute *exe_tool)

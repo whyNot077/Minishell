@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:36:02 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/07 19:49:40 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 11:39:07 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	connect_and_or_to_tree(t_binarytree *tree, \
 		printf("Syntax error: unexpected '%s'\n", and_or_node->value);
 		tree->syntex_error = TRUE;
 	}
-	else if (rightmost->type == WORD || rightmost->type == BUILTIN ||\
+	else if (rightmost->type == WORD || rightmost->type == BUILTIN || \
 		is_redirection(rightmost->type))
 	{
 		put_it_on_the_top_of_the_rightmost_node(tree, rightmost, previous, \
