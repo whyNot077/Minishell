@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/08 17:26:03 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 17:26:12 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	apply_built_in(t_tree_node *root, t_execute *exe_tool)
 {
-	if ((root->type == BUILTIN && exe_tool->pipe_flag == FALSE && exe_tool->open_error == FALSE) ||\
-	(root->type == BUILTIN && exe_tool->pipe_flag == FALSE && exe_tool->and_or_flag == TRUE))
+	if (root->type == BUILTIN && exe_tool->pipe_flag == FALSE && \
+		exe_tool->open_error == FALSE)
 	{
 		built_in(root->command, exe_tool);
 	}
@@ -32,37 +32,37 @@ static void	apply_built_in(t_tree_node *root, t_execute *exe_tool)
 
 void	infile_error(t_tree_node *root, t_execute *exe_tool)
 {
-	int type;
+	int	type;
 
 	type = root->type;
-	if ((type == PIPE && root->right != NULL) || type == BUILTIN || type == WORD)
+	if ((type == PIPE && root->right != NULL) || type == BUILTIN || \
+		type == WORD)
 		exe_tool->open_error = FALSE;
 }
 
 static void	apply_and(t_execute *exe_tool)
 {
-	if (exe_tool->open_error_for_and_or == FALSE && exe_tool->execute_error == FALSE)
+	if (exe_tool->open_error_for_and_or == FALSE && \
+		exe_tool->execute_error == FALSE)
 	{
-		exe_tool->and_or_flag = TRUE;
 		exe_tool->stop = FALSE;
 	}
 	else
 		exe_tool->stop = TRUE;
 }
 
-static void apply_or(t_execute *exe_tool)
+static void	apply_or(t_execute *exe_tool)
 {
-	if (exe_tool->open_error_for_and_or == FALSE && exe_tool->execute_error == FALSE)
+	if (exe_tool->open_error_for_and_or == TRUE && \
+		exe_tool->execute_error == TRUE)
 		exe_tool->stop = TRUE;
 	else
 	{
 		exe_tool->open_error_for_and_or = FALSE;
 		exe_tool->execute_error = FALSE;
 		exe_tool->stop = FALSE;
-		exe_tool->and_or_flag = TRUE;
 	}
 }
-
 
 void	execute(t_tree_node *root, t_execute *exe_tool)
 {
@@ -87,9 +87,6 @@ void	execute(t_tree_node *root, t_execute *exe_tool)
 		apply_built_in(root, exe_tool);
 	else if (root->type == WORD)
 		apply_command(root->command, exe_tool);
-	if (exe_tool->open_error == TRUE)
-		infile_error(root, exe_tool);
-	if (root->type == PIPE && root->right != NULL)
-		exe_tool->curr_pipe_flag = FALSE;
+	check_exceptions(root, exe_tool);
 	execute(root->right, exe_tool);
 }

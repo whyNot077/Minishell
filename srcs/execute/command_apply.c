@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:15:13 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/08 16:29:26 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/08 17:10:30 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 void	apply_command(char **args, t_execute *exe_tool)
 {
 	int		i;
-	int 	path_value;
+	int		path_value;
 	char	*full_path;
 
 	full_path = NULL;

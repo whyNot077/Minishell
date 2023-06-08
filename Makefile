@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
+#    By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/06/08 11:41:29 by minkim3          ###   ########.fr        #
+#    Updated: 2023/06/08 17:23:38 by hyojocho         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ EXECUTE_SRCS    = execute.c envp_init.c\
 					./pipe/pipe_apply.c ./pipe/pipe_open.c\
 					./redirection/redirection_apply.c ./redirection/redirection_open.c \
 					child_process.c parent_process.c\
-					command_apply.c redirect_append.c
+					command_apply.c redirect_append.c execute_extra.c
 EXECUTE         = $(addprefix $(EXECUTE_PATH), $(EXECUTE_SRCS))
 
 BUILT_IN_PATH    = ./built_in/
@@ -65,7 +65,8 @@ BUILT_IN_SRCS    = built_in.c echo.c ./export/export.c ./export/export_get_env.c
 					./export/export_print.c ./export/export_arg_validate.c\
 					./unset/unset.c ./unset/unset_apply.c\
 					env.c pwd.c command_exit.c\
-					./cd/cd.c ./cd/chdir_check.c ./cd/get_value.c
+					./cd/cd.c ./cd/chdir_check.c ./cd/get_value.c\
+					./cd/nomal_change_dir.c
 BUILT_IN         = $(addprefix $(BUILT_IN_PATH), $(BUILT_IN_SRCS))
 
 SOURCES         = $(addprefix $(SRCS_PATH), $(MAIN))\

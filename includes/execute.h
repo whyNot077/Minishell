@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:26:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/05/31 18:20:44 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/08 17:25:09 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define EXECUTE_H
 
 void		execute(t_tree_node *root, t_execute *exe_tool);
+void		check_exceptions(t_tree_node *root, t_execute *exe_tool);
 t_execute	*envp_init(char **envp);
+void		infile_error(t_tree_node *root, t_execute *exe_tool);
 // pipe
 void		open_pipe(t_execute *exe_tool);
 void		apply_built_in_pipe(char **args, t_execute *exe_tool);
