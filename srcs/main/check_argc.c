@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:41:08 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/07 15:56:06 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 11:16:23 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,6 @@ void	init_exe_tool(t_execute *exe_tool)
 	exe_tool->outfile_fd = 0;
 	exe_tool->dup_tmp = 0;
 	exe_tool->open_error = 0;
+	exe_tool->execute_error = 0;
+	exe_tool->stop = 0;
 }

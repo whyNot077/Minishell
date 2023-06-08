@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:02:24 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/07 16:17:40 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 11:38:01 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,34 @@ void	infile_error(t_tree_node *root, t_execute *exe_tool)
 		exe_tool->open_error = FALSE;
 }
 
+static void	apply_and(t_execute *exe_tool)
+{
+	if (exe_tool->open_error == TRUE && exe_tool->execute_error == TRUE)
+		exe_tool->stop = FALSE;
+	else
+		exe_tool->stop = TRUE;
+}
+
+static void apply_or(t_execute *exe_tool)
+{
+	if (exe_tool->open_error == FALSE && exe_tool->execute_error == FALSE)
+		exe_tool->stop = FALSE;
+	else
+		exe_tool->stop = TRUE;
+}
+
 void	execute(t_tree_node *root, t_execute *exe_tool)
 {
 	if (root == NULL)
 		return ;
 	execute(root->left, exe_tool);
-	// if (root->type == AND)
-	// 	apply_and(root, exe_tool);
-	// else if (root->type == OR)
-	// 	apply_or(root, exe_tool);
-	if (root->type == PIPE)
+	if (exe_tool->stop == TRUE)
+		return ;
+	else if (root->type == AND)
+		apply_and(exe_tool);
+	else if (root->type == OR)
+		apply_or(exe_tool);
+	else if (root->type == PIPE)
 		open_pipe(exe_tool);
 	else if (root->type == REDIRECT_APPEND)
 		open_redirect_append(root, exe_tool);

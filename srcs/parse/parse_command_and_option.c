@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:08:19 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/07 19:46:01 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 11:35:49 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	connect_command_node_to_tree(t_binarytree *tree, \
 	t_tree_node *rightmost, t_tree_node *previous, t_tree_node *command_node)
 {
-	if (find_pipe(rightmost) == TRUE)
+	if (find_pipe(rightmost) == TRUE || rightmost->type == AND || rightmost->type == OR)
 	{
 		put_it_on_the_right_of_the_rightmost_node(tree, rightmost, previous, \
 				command_node);
@@ -27,11 +27,6 @@ static void	connect_command_node_to_tree(t_binarytree *tree, \
 	else if (is_redirection(rightmost->type))
 	{
 		put_it_on_the_top_of_the_rightmost_node(tree, rightmost, previous, \
-				command_node);
-	}
-	else if (rightmost->type == AND || rightmost->type == OR)
-	{
-		put_it_on_the_left_of_the_rightmost_node(tree, rightmost, previous, \
 				command_node);
 	}
 }
