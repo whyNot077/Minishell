@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:58:53 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/05/29 18:21:15 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:54:51 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,15 @@ static	void	validate_arg_range(char **args)
 	}
 }
 
-static void	numbering_exit(char **args)
+static void	numbering_exit(char **args, t_execute *exe_tool)
 {
 	long long int	num;
 	long long int	key;
 
 	num = ft_atoi_extension(args[1]);
-	ft_putstr_fd("exit\n", 1);
+	printf("numbering_exit: %lld\n", num);
+	if (exe_tool->exit_flag != TRUE)
+		ft_putstr_fd("exit\n", 1);
 	key = num;
 	while (key < 0)
 		key += 256;
@@ -100,5 +102,5 @@ void	command_exit(char **args, t_execute *exe_tool)
 		return ;
 	}
 	validate_arg_range(args);
-	numbering_exit(args);
+	numbering_exit(args, exe_tool);
 }

@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 14:05:25 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/05 18:22:41 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/08 13:17:38 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	check_home_dir(t_execute *execute)
 	home_value = get_env_value("HOME", execute->env);
 	if (home_value == ERROR)
 	{
-		ft_putstr_fd("bash: cd: HOME not set\n", 2);
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		g_exit_code = 1;
 		return (ERROR);
 	}

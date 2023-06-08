@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_apply.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/07 16:18:41 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 13:40:48 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,27 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 void	apply_command(char **args, t_execute *exe_tool)
 {
 	int		i;
+	int 	path_value;
 	char	*full_path;
 
 	full_path = NULL;
-	exe_tool->paths = get_paths(exe_tool->env->data);
 	exec_signal(PARENT_SIG);
+	if (access(args[0], X_OK) == 0)
+	{
+		full_path = ft_strdup(args[0]);
+		execute_command(full_path, args, exe_tool);
+		return ;
+	}
+	path_value = get_env_value("PATH", exe_tool->env);
+	if (path_value == ERROR)
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(args[0], STDERR_FILENO);
+		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		g_exit_code = 127;
+		return ;
+	}
+	exe_tool->paths = get_paths(exe_tool->env->data);
 	if (validate_commands(args, &full_path, exe_tool) == ERROR)
 	{
 		if (exe_tool->open_error == FALSE)
