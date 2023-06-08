@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 21:09:55 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/07 16:19:18 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 15:21:59 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	apply_built_in_pipe(char **args, t_execute *exe_tool)
 		close(exe_tool->dup_tmp);
 		exe_tool->prev_fd = exe_tool->pipe_fd[0];
 		waitpid(pid, &status, 0);
+		g_exit_code = WEXITSTATUS(status);
 		exe_tool->curr_pipe_flag = FALSE;
 	}
 }
