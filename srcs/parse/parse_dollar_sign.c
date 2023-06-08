@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 20:06:32 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/08 16:07:57 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 16:19:06 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_token	*parse_dollar_sign(t_token *tokens, int index, char **env)
 	tokens[index].value = value;
 	if (is_dollar_sign_in_token(tokens[index].value) == FALSE)
 		return (tokens);
+	(void)env;
 	replace_env_key_to_value(&tokens[index].value, env);
 	value = remove_quotes(tokens[index].value);
 	tokens[index].value = value;

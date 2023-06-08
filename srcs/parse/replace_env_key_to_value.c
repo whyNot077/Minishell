@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_env_key_to_value.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 13:47:12 by minkim3           #+#    #+#             */
-/*   Updated: 2023/04/28 14:21:45 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/08 16:36:19 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static char	*get_the_key(char **value, size_t i)
 		return (NULL);
 	start = i + 1;
 	end = start;
-	while ((*value)[end] && !is_space((*value)[end]) && (*value)[end] != '$' \
-		&& (*value)[end] != '\'' && (*value)[end] != '\"')
+	while (ft_isalpha((*value)[end]))
 		end++;
 	key = (char *)malloc(end - start + 1);
 	if (!key)
@@ -95,6 +94,11 @@ void	replace_env_key_to_value(char **value, char **env)
 		if ((*value)[i] == '$' && in_single_quote == -1)
 		{
 			key = get_the_key(value, i);
+			if (ft_strcmp(key, "") == 0)
+			{
+				free(key);
+				return ;
+			}
 			env_value = get_key_value(key, env, 0);
 			replace_key_in_the_string(value, key, env_value, &i);
 			free(key);
