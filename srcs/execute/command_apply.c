@@ -5,12 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 15:55:45 by hyojocho          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/06/08 13:40:48 by hyojocho         ###   ########.fr       */
-=======
-/*   Updated: 2023/06/08 11:03:32 by minkim3          ###   ########.fr       */
->>>>>>> 1c3545f52c7f9ff76685e176028d9d3f42f0b4ba
+/*   Created: 2023/06/08 14:15:13 by hyojocho          #+#    #+#             */
+/*   Updated: 2023/06/08 14:36:46 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +109,18 @@ void	apply_command(char **args, t_execute *exe_tool)
 			g_exit_code = 127;
 			exe_tool->execute_error = TRUE;
 		}
+		i = 0;
+		while (exe_tool->paths[i])
+			free(exe_tool->paths[i++]);
+		free(exe_tool->paths);
+		if (exe_tool->outfile_fd > 0)
+			close(exe_tool->outfile_fd);
+		if (exe_tool->curr_pipe_flag == TRUE)
+			close(exe_tool->pipe_fd[1]);
+		return ;
+	}
+	if (exe_tool->execute_error == TRUE)
+	{
 		i = 0;
 		while (exe_tool->paths[i])
 			free(exe_tool->paths[i++]);
