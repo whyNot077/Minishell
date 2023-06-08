@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_apply.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:15:13 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/08 18:01:20 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 21:02:18 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@ int	validate_commands(char **args, char **full_path, \
 	int		paths_idx;
 	char	*temp_path;
 
-	if (access(args[0], X_OK) == 0)
-	{
-		*full_path = ft_strdup(args[0]);
-		return (SUCCESS);
-	}
 	if (exe_tool->paths == NULL)
 		return (ERROR);
 	paths_idx = 0;
