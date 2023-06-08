@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:26:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/08 17:25:09 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/08 18:01:35 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void		restore_redirect_out(t_execute *exe_tool);
 void		open_redirect_append(t_tree_node *root, t_execute *exe_tool);
 // command
 void		apply_command(char **args, t_execute *exe_tool);
+void		execute_command(char *full_path, char **args, t_execute *exe_tool);
+int			validate_commands(char **args, char **full_path, \
+				t_execute *exe_tool);
 // process
 void		child_process(char *full_path, char **args, t_execute *exe_tool);
 void		parent_process(t_execute *exe_tool);
