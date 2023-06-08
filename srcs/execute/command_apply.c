@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:15:13 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/08 14:36:46 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/08 15:10:40 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,14 +121,20 @@ void	apply_command(char **args, t_execute *exe_tool)
 	}
 	if (exe_tool->execute_error == TRUE)
 	{
+		printf("clear\n");
 		i = 0;
 		while (exe_tool->paths[i])
+		{
+			printf("%s\n", exe_tool->paths[i]);
 			free(exe_tool->paths[i++]);
+		} 
 		free(exe_tool->paths);
+		printf("%s\n", exe_tool->paths[i]);
 		if (exe_tool->outfile_fd > 0)
 			close(exe_tool->outfile_fd);
 		if (exe_tool->curr_pipe_flag == TRUE)
 			close(exe_tool->pipe_fd[1]);
+		free(full_path);
 		return ;
 	}
 	execute_command(full_path, args, exe_tool);
