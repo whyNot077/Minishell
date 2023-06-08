@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/08 16:48:25 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 16:55:05 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,20 @@ static t_token	*finalize_token(t_token *tokens, char **env)
 {
 	int	index;
 
-	index = 0;
-	while ((size_t)index < tokens->token_count)
+	index = -1;
+	while ((size_t)(++index) < tokens->token_count)
 	{
 		if (tokens[index].type == WORD)
 		{
 			tokens[index].type = get_node_type(tokens, index);
 			if (tokens[index].type == WORD)
 			{
-				(void)env;
 				tokens = parse_dollar_sign(tokens, index, env);
 				if (tokens == NULL)
-				{
 					return (NULL);
-				}
 			}
 			tokens[index].value = remove_quotes(tokens[index].value);
 		}
-		index++;
 	}
 	if (tokens[index - 1].type == PIPE || tokens[index - 1].type == AND \
 		|| tokens[index - 1].type == OR)
@@ -82,7 +78,6 @@ static t_token	*finalize_token(t_token *tokens, char **env)
 		printf("minishell: syntax error near unexpected token `%s'\n", \
 			tokens[index - 1].value);
 		tokens->syntax_error = TRUE;
-		return (tokens);
 	}
 	return (tokens);
 }
