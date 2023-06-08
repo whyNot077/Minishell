@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:06:14 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/08 13:15:29 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/08 15:54:08 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	child_process(char *full_path, char **args, t_execute *exe_tool)
 	exec_signal(CHILD_SIG);
 	if (exe_tool->open_error == TRUE)
 		exit(1);
-	if (exe_tool->prev_fd > 0 )
+	if (exe_tool->prev_fd > 0)
 	{
 		dup2(exe_tool->prev_fd, STDIN_FILENO);
 		close(exe_tool->prev_fd);
