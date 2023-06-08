@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/07 15:55:46 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 11:16:05 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_execute
 	int					dup_tmp;
 	int					pipe_fd[2];
 	int					open_error;
+	int					execute_error;
+	int					stop;
 	pid_t				pid;
 	pid_t				last_pid;
 	t_arraylist			*env;

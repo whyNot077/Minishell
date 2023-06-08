@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:09:54 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/07 19:41:23 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/08 11:41:12 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void			put_it_on_the_left_of_the_rightmost_node(t_binarytree *tree, \
 				t_tree_node *rightmost, t_tree_node *previous, t_tree_node *target);
 void			put_it_on_the_right_of_the_rightmost_node(t_binarytree *tree, \
 				t_tree_node *rightmost, t_tree_node *previous, t_tree_node *target);
+char			*is_str_in_the_value(char *value);
 
 
 #endif
