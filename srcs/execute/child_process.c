@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 17:06:14 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/09 11:48:00 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/09 19:22:49 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ void	child_process(char *full_path, char **args, t_execute *exe_tool)
 	print_error(args[0]);
 	print_error(": ");
 	print_error("command not found\n");
-	exit(1);
+	exit(127);
 }

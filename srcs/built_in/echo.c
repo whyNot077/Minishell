@@ -6,7 +6,7 @@
 /*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:17:23 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/05 18:06:40 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/09 20:56:13 by hyojocho         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ static void	validate_n_option(char **args, int *args_idx, int *n_option_flag, \
 	int		string_idx;
 
 	string_idx = 1;
+	if (args[1][1] == 'n' && args[1][2] != '\0')
+	{
+		*current_n_flag = 1;
+		string_idx = 3;
+		return ;
+	}
 	while (args[*args_idx][string_idx])
 	{
 		*n_option_flag = 1;
