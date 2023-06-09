@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:26:23 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/09 12:29:49 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/09 12:42:02 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ int			validate_commands(char **args, char **full_path, \
 				t_execute *exe_tool);
 void		apply_or(t_execute *exe_tool);
 void		apply_and(t_execute *exe_tool);
-
-
 // process
 void		child_process(char *full_path, char **args, t_execute *exe_tool);
 void		parent_process(t_execute *exe_tool);
