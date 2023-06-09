@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 14:15:13 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/09 11:03:10 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/09 12:23:38 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	execute_command(char *full_path, char **args, t_execute *exe_tool)
 	else
 	{
 		parent_process(exe_tool);
-		exe_tool->execute_error = FALSE;
 		exe_tool->curr_pipe_flag = FALSE;
 		free(full_path);
 		if (exe_tool->outfile_fd > 0)

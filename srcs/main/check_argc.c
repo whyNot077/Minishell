@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:41:08 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/09 11:57:47 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/09 12:22:48 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ void	init_exe_tool(t_execute *exe_tool)
 	exe_tool->outfile_fd = 0;
 	exe_tool->dup_tmp = 0;
 	exe_tool->open_error = 0;
-	exe_tool->execute_error = 0;
 	exe_tool->stop = 0;
 	exe_tool->open_error_for_and_or = 0;
-	exe_tool->and_or_flag = 0;
 	exe_tool->num_of_executed_commands = 0;
 }

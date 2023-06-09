@@ -6,7 +6,7 @@
 /*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 12:09:38 by minkim3           #+#    #+#             */
-/*   Updated: 2023/06/09 11:39:35 by minkim3          ###   ########.fr       */
+/*   Updated: 2023/06/09 12:22:50 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,7 @@ typedef struct s_execute
 	int					pipe_fd[2];
 	int					open_error;
 	int					open_error_for_and_or;
-	int					execute_error;
 	int					stop;
-	int					and_or_flag;
 	int					num_of_executed_commands;
 	pid_t				pid;
 	pid_t				last_pid;
