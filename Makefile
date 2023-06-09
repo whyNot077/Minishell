@@ -6,7 +6,7 @@
 #    By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/05 16:56:08 by minkim3           #+#    #+#              #
-#    Updated: 2023/06/08 18:01:04 by minkim3          ###   ########.fr        #
+#    Updated: 2023/06/09 12:30:04 by minkim3          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,8 @@ EXECUTE_SRCS    = execute.c envp_init.c\
 					./pipe/pipe_apply.c ./pipe/pipe_open.c\
 					./redirection/redirection_apply.c ./redirection/redirection_open.c \
 					child_process.c parent_process.c\
-					command_apply.c redirect_append.c execute_extra.c apply_command.c
+					command_apply.c redirect_append.c execute_extra.c apply_command.c \
+					apply_and_or.c
 EXECUTE         = $(addprefix $(EXECUTE_PATH), $(EXECUTE_SRCS))
 
 BUILT_IN_PATH    = ./built_in/
