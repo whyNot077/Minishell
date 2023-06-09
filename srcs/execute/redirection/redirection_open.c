@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_open.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyojocho <hyojocho@student.42.fr>          +#+  +:+       +#+        */
+/*   By: minkim3 <minkim3@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 15:17:29 by hyojocho          #+#    #+#             */
-/*   Updated: 2023/06/08 21:44:42 by hyojocho         ###   ########.fr       */
+/*   Updated: 2023/06/09 11:06:18 by minkim3          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	open_output_file(char *arg, t_execute *exe_tool)
 {
 	int	fd;
 
-	printf("here\n");
 	fd = open(arg, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
 		return (ERROR);
