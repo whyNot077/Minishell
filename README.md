@@ -16,6 +16,9 @@
 [ll]: https://en.wikipedia.org/wiki/LL_parser
 [chom]: https://en.wikipedia.org/wiki/Chomsky_hierarchy
 
+### details in blog
+[실행에 대한 자세한 내용은 블로그에서 볼 수 있습니다.](https://blog.naver.com/PostList.naver?blogId=bluedog129&from=postList&categoryNo=53)
+
 
 ### Parse command
 ```c
